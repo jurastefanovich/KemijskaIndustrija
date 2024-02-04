@@ -9,20 +9,20 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.Supplier.SupplierScene">
-    <fx:include source="NavBar.fxml" />
-    <TableView fx:id="supplierTableView" layoutX="6.0" layoutY="185.0" prefHeight="405.0" prefWidth="1189.0">
+    <fx:include source="Sidebar.fxml" />
+    <TableView fx:id="supplierTableView" layoutX="214.0" layoutY="204.0" prefHeight="386.0" prefWidth="861.0">
         <columns>
             <TableColumn fx:id="supplierNameTableColumn" prefWidth="450.0" text="Name" />
-         <TableColumn fx:id="supplierAddressTableColumn" prefWidth="737.0" text="Address" />
+         <TableColumn fx:id="supplierAddressTableColumn" prefWidth="406.0" text="Address" />
         </columns>
     </TableView>
-    <Label layoutX="14.0" layoutY="36.0" text="Suppliers">
+    <Label layoutX="210.0" layoutY="27.0" text="Suppliers">
         <font>
             <Font size="24.0" />
         </font>
     </Label>
-    <Button layoutX="14.0" layoutY="150.0" mnemonicParsing="false" onAction="#filterSupplierList" prefHeight="25.0" prefWidth="165.0" text="Search" />
-    <AnchorPane layoutX="14.0" layoutY="80.0" prefHeight="55.0" prefWidth="1167.0" style="-fx-background-color: #2A4858;">
+    <Button layoutX="210.0" layoutY="150.0" mnemonicParsing="false" onAction="#filterSupplierList" prefHeight="25.0" prefWidth="165.0" text="Search" />
+    <AnchorPane layoutX="210.0" layoutY="83.0" prefHeight="55.0" prefWidth="936.0" style="-fx-background-color: #2A4858;">
         <children>
             <TextField fx:id="searchByNameTextField" layoutX="167.0" layoutY="15.0" prefHeight="25.0" prefWidth="329.0" />
             <Label layoutX="20.0" layoutY="19.0" text="Search by name" />

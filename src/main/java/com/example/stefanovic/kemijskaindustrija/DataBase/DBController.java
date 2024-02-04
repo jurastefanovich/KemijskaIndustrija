@@ -26,16 +26,14 @@ public class DBController implements UserRepository, Hashing,  SupplierRepositor
         return con;
     }
 
-    public void deleteEntity(Long entity_id, String table_name){
-        try {
+    public static void deleteEntity(Long entity_id, String table_name) throws Exception {
+
             Connection connection = DBController.connectToDatabase();
             PreparedStatement deleteStudent = connection.prepareStatement("delete from " + table_name +" where id = ?");
             deleteStudent.setString(1, String.valueOf(entity_id));
             deleteStudent.executeUpdate();
             connection.close();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     public static List<User> getAllUsers() {return UserRepository.getAllUsers();}

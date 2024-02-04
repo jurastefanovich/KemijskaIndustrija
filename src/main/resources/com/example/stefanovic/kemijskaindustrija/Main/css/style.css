@@ -18,6 +18,7 @@ white -> #FFFFFF
     -fx-background-color: #003459;
     -fx-font-family: Roboto;
 }
+
 .login_background{
     -fx-background-color: linear-gradient(to right top,#003459, #2A4858);
 }
@@ -448,8 +449,12 @@ Dialog > *.label.content{
 .check-box:indeterminate:hover {
     -fx-background-color: #D68910; /* Hover background color when indeterminate */
 }
-
+.feedback_success_container{
+    -fx-background-color: #54c220; /* Hover background color when indeterminate */
+}
 .input_container{
     -fx-background-color:  #2A4858;
-    -fx-background-radius: 20vw;
+}
+.bold{
+    -fx-font-weight: bold;
 }

@@ -52,3 +52,22 @@ create table if not exists safety_protocol(
     name varchar(45) not null,
     primary key (id)
 );
+
+
+create table if not exists equipment(
+    id LONG GENERATED ALWAYS AS IDENTITY,
+    name varchar(45) not null,
+    description varchar(MAX) not null,
+    type varchar(45) not null,
+    primary key (id)
+);
+
+create table if not exists servis(
+    id LONG GENERATED ALWAYS AS IDENTITY,
+    name varchar(45) not null,
+    description varchar(MAX) not null,
+    date_of_servis date not null,
+    equipment_id LONG NOT NULL,
+    foreign key (equipment_id) references equipment(id),
+    primary key(id)
+);

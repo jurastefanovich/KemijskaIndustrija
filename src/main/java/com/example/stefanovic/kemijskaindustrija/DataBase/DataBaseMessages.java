@@ -7,7 +7,10 @@ public enum DataBaseMessages {
     ERROR_GETTING_SINGLE_USER("Error getting single user details"),
     ERROR_UPDATING("Error while trying to update entity"),
     ERROR_CREATING_ACCOUNT("Error creating account!"),
-    SAVE_ERROR("Failed to save item!")
+    SAVE_ERROR("Failed to save item!"),
+    UPDATE_ERROR("Failed to update entity"),
+    ERROR_GETTING_EQUIPMENT("Couldn't retrive data for equipment from database"),
+    EQUIPMENT_ID_DB_ERROR("Couldn't fetch equipment data by id"),
             ;
 
     private String message;

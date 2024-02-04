@@ -133,4 +133,22 @@ public class NavBar {
             throw new RuntimeException(e);
         }
     }
+
+    public void showEquipmentInput() {
+        try {
+            Main.showScreen("EquipementInput.fxml");
+        } catch (IOException e) {
+            System.out.println("Error showing equipment input");
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void showEquipmenList() {
+        try {
+            Main.showScreen("EquipmentList.fxml");
+        } catch (IOException e) {
+            System.out.println("Error showing equipment input");
+            throw new RuntimeException(e);
+        }
+    }
 }

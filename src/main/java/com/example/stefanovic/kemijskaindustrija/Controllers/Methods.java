@@ -3,6 +3,7 @@ package com.example.stefanovic.kemijskaindustrija.Controllers;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import org.w3c.dom.Text;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +41,14 @@ public class Methods {
     public static void checkTextField(TextField textField, Label errorLabel) throws InputException{
         if (textField.getText().isEmpty()){
             textField.setStyle("-fx-border-color: red;");
+            errorLabel.setText(InputErrorMessages.EMPTY_FIELD.getMessage());
+            throw new InputException(InputErrorMessages.EMPTY_FIELD.getMessage());
+        }
+    }
+
+    public static void checkTextArea(TextArea textArea, Label errorLabel) throws InputException{
+        if (textArea.getText().isEmpty()){
+            textArea.setStyle("-fx-border-color: red;");
             errorLabel.setText(InputErrorMessages.EMPTY_FIELD.getMessage());
             throw new InputException(InputErrorMessages.EMPTY_FIELD.getMessage());
         }

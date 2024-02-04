@@ -11,6 +11,7 @@ module com.example.stefanovic.kemijskaindustrija {
     exports com.example.stefanovic.kemijskaindustrija.Controllers.Chemical;
     exports com.example.stefanovic.kemijskaindustrija.Controllers.Users;
     exports com.example.stefanovic.kemijskaindustrija.Controllers.Supplier;
+    exports com.example.stefanovic.kemijskaindustrija.Controllers.Equipment;
     exports com.example.stefanovic.kemijskaindustrija.DataBase;
     exports com.example.stefanovic.kemijskaindustrija.Authentication;
     exports com.example.stefanovic.kemijskaindustrija.Exception;
@@ -30,4 +31,6 @@ module com.example.stefanovic.kemijskaindustrija {
     opens com.example.stefanovic.kemijskaindustrija.Controllers.Supplier to javafx.fxml;
     exports com.example.stefanovic.kemijskaindustrija.Controllers.SafetyProcotol;
     opens com.example.stefanovic.kemijskaindustrija.Controllers.SafetyProcotol to javafx.fxml;
+    opens com.example.stefanovic.kemijskaindustrija.Controllers.Equipment to javafx.fxml;
+
 }

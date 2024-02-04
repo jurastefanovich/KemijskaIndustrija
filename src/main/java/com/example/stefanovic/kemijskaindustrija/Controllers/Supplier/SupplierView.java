@@ -69,8 +69,11 @@ public class SupplierView implements SupplierRepository, DataBaseRepository {
         alert.showAndWait().ifPresent(response->{
             if ( response.getButtonData().equals(ButtonBar.ButtonData.OK_DONE))
             {
-                DBController dbController = new DBController();
-                dbController.deleteEntity(supplier.getId(), "supplier");
+                try {
+                    DBController.deleteEntity(supplier.getId(), "supplier");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 goBackToSupplierScene();
             }
         });
