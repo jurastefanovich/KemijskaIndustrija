@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="503.0" prefWidth="600.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.Users.UserProfile">
+    <fx:include source="NavBar.fxml" />
+    <AnchorPane layoutX="314.0" layoutY="91.0" prefHeight="245.0" prefWidth="573.0" style="-fx-background-color: #2A4858;">
+        <children>
+            <AnchorPane prefHeight="44.0" prefWidth="573.0">
+                <children>
+                    <Label layoutX="14.0" layoutY="14.0" text="Name:" />
+                    <Label fx:id="userFirstNameLabel" layoutX="86.0" layoutY="14.0" text="user_first_name" />
+                </children>
+            </AnchorPane>
+         <AnchorPane layoutY="44.0" prefHeight="44.0" prefWidth="573.0">
+            <children>
+               <Label layoutX="14.0" layoutY="14.0" text="Last name:" />
+               <Label fx:id="userLastNameLabel" layoutX="86.0" layoutY="14.0" text="user_last_name" />
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutY="88.0" prefHeight="44.0" prefWidth="573.0">
+            <children>
+               <Label layoutX="14.0" layoutY="14.0" text="DoB" />
+               <Label fx:id="userDoBLabel" layoutX="86.0" layoutY="14.0" text="datum_rodenja" />
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutY="132.0" prefHeight="44.0" prefWidth="573.0">
+            <children>
+               <Label layoutX="14.0" layoutY="14.0" text="E-mail" />
+               <Label fx:id="userEmailLabel" layoutX="86.0" layoutY="14.0" text="user_email" />
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutY="176.0" prefHeight="44.0" prefWidth="573.0">
+            <children>
+               <Label layoutX="14.0" layoutY="14.0" text="Username" />
+               <Label fx:id="usernameLabel" layoutX="86.0" layoutY="14.0" text="username" />
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutY="220.0" prefHeight="44.0" prefWidth="573.0">
+            <children>
+               <Label layoutX="14.0" layoutY="14.0" text="Access Level" />
+               <Label fx:id="userAccessLevelLabel1" layoutX="86.0" layoutY="14.0" text="user_access_level" />
+            </children>
+         </AnchorPane>
+        </children>
+    </AnchorPane>
+    <Label layoutX="14.0" layoutY="45.0" text="Details">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Label>
+    <Button layoutX="1067.0" layoutY="45.0" mnemonicParsing="false" onAction="#goBackToUserList" text="Back" />
+    <Button fx:id="supplierEditButton" layoutX="1128.0" layoutY="45.0" mnemonicParsing="false" onAction="#goToUserEditView" prefHeight="25.0" prefWidth="58.0" style="-fx-background-color: #05aefc;" text="Edit" textFill="WHITE" />
+
+</AnchorPane>

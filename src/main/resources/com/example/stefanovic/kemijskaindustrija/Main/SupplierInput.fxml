@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane  prefHeight="503.0" prefWidth="600.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.Supplier.SupplierInput">
+            <fx:include source="NavBar.fxml" />
+   <Button layoutX="446.0" layoutY="372.0" mnemonicParsing="false" onAction="#saveNewSupplier" prefHeight="25.0" prefWidth="245.0" text="Save" />
+   <AnchorPane layoutX="286.0" layoutY="74.0" prefHeight="287.0" prefWidth="562.0" style="-fx-background-color: #2A4858;">
+      <children>
+         <Label layoutX="9.0" layoutY="39.0" text="Name" underline="true" />
+         <Label layoutX="9.0" layoutY="95.0" text="Street" underline="true" />
+         <Label layoutX="9.0" layoutY="145.0" text="Street Number" underline="true" />
+         <TextField fx:id="supplierNameTextField" layoutX="111.0" layoutY="35.0" prefHeight="25.0" prefWidth="409.0" />
+         <TextField fx:id="supplierStreetNameTextField" layoutX="114.0" layoutY="91.0" prefHeight="25.0" prefWidth="409.0" />
+         <TextField fx:id="supplierStreetNumberTextField" layoutX="114.0" layoutY="141.0" prefHeight="25.0" prefWidth="409.0" />
+         <Label fx:id="nameErrorLabel" layoutX="112.0" layoutY="62.0" styleClass="error" text="nameErrorLabel" textFill="RED" underline="true" />
+         <Label fx:id="streetErrorLabel" layoutX="114.0" layoutY="118.0" styleClass="error" text="streetErrorLabel" textFill="RED" underline="true" />
+         <Label fx:id="streetNumberErrorLabel" layoutX="114.0" layoutY="168.0" styleClass="error" text="streetNumberErrorLabel" textFill="RED" underline="true" />
+         <Label layoutX="9.0" layoutY="210.0" text="City" underline="true" />
+         <TextField fx:id="supplierCityTextField" layoutX="114.0" layoutY="206.0" prefHeight="25.0" prefWidth="409.0" />
+         <Label fx:id="cityErrorLabel" layoutX="114.0" layoutY="233.0" styleClass="error" text="cityErrorLabel" textFill="RED" underline="true" />
+      </children>
+      <padding>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+      </padding>
+   </AnchorPane>
+   <Label fx:id="title" layoutX="20.0" layoutY="34.0" text="Add new supplier">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+   <Label fx:id="feedbackLabel" layoutX="554.0" layoutY="413.0" text="Label" />
+</AnchorPane>
