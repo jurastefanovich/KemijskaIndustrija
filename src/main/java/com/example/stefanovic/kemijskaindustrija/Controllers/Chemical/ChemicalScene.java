@@ -1,23 +1,31 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.Chemical;
 
+import com.example.stefanovic.kemijskaindustrija.Controllers.Equipment.EquipmentDetails;
 import com.example.stefanovic.kemijskaindustrija.DataBase.ChemicalRepository;
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Chemical;
-import com.example.stefanovic.kemijskaindustrija.Model.Supplier;
+import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.List;
 
-public class ChemicalScene {
+public class ChemicalScene implements ChemicalRepository {
+
+    @FXML
+    public AnchorPane root;
 
     @FXML
     public TableView<Chemical> chemicalTableView;
@@ -45,15 +53,36 @@ public class ChemicalScene {
 
     @FXML
     void initialize(){
-
-//        allChemicals = getChemicalList();
+        allChemicals = getChemicalList();
         chemicalDangerLevelTableColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getDangerLevel()));
-        chemicalSupplierTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSupplier().toString()));
         chemicalNameTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
         setTableView(allChemicals);
+        viewChemicalDetails();
     }
 
     private void setTableView(List<Chemical> chemicalList){
         chemicalTableView.setItems(FXCollections.observableList(chemicalList));
+    }
+
+    private void viewChemicalDetails(){
+        chemicalTableView.setOnMouseClicked(event ->{
+            //Add && UserRepository.isAdmin()
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 ){
+                Chemical chemical = chemicalTableView.getSelectionModel().getSelectedItem();
+                if (chemical != null ){
+                    try {
+                        FXMLLoader loader = new FXMLLoader(Main.class.getResource("ChemicalView.fxml"));
+                        Parent parent = loader.load();
+                        ChemicalView chemicalView = loader.getController();
+                        chemicalView.initialize(chemical.getId());
+                        root.getChildren().clear();
+                        root.getChildren().setAll(parent);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
+            }
+        });
     }
 }

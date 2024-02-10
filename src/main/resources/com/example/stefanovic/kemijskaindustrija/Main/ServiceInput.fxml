@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.Servis.ServisInput">
+            <fx:include source="Sidebar.fxml" />
+   <Text fill="WHITE" layoutX="223.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report a service">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Text>
+   <AnchorPane layoutX="223.0" layoutY="70.0" prefHeight="78.0" prefWidth="947.0" styleClass="input_container">
+      <children>
+         <Text fill="WHITE" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+         <TextField fx:id="serviceTitlenput" layoutX="14.0" layoutY="27.0" prefHeight="25.0" prefWidth="909.0" />
+         <Label fx:id="serviceTitleError" layoutX="13.0" layoutY="56.0" styleClass="error" text="title_error" />
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="223.0" layoutY="164.0" prefHeight="78.0" prefWidth="460.0" styleClass="input_container">
+      <children>
+         <Text fill="WHITE" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of service">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+         <Label fx:id="serviceDateError" layoutX="13.0" layoutY="56.0" styleClass="error" text="date_error" />
+         <DatePicker fx:id="serviceDateInput" layoutX="14.0" layoutY="27.0" prefHeight="25.0" prefWidth="432.0" />
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="710.0" layoutY="164.0" prefHeight="78.0" prefWidth="460.0" styleClass="input_container">
+      <children>
+         <Text fill="WHITE" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment to service">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+         <Label fx:id="serviceEquipmentError" layoutX="13.0" layoutY="56.0" styleClass="error" text="equipment_error" />
+         <ComboBox fx:id="serviceEquipmentInput" layoutX="14.0" layoutY="27.0" prefHeight="25.0" prefWidth="418.0" />
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="223.0" layoutY="261.0" prefHeight="185.0" prefWidth="947.0" styleClass="input_container">
+      <children>
+         <Text fill="WHITE" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+         <Label fx:id="serviceDescError" layoutX="12.0" layoutY="157.0" styleClass="error" text="title_error" />
+         <TextArea fx:id="serviceDescInput" layoutX="12.0" layoutY="28.0" prefHeight="123.0" prefWidth="909.0" />
+      </children>
+   </AnchorPane>
+   <AnchorPane fx:id="feedbackSuccessMessage" layoutX="567.0" layoutY="541.0" prefHeight="35.0" prefWidth="232.0" styleClass="feedback_success_container">
+      <children>
+         <Text fill="WHITE" layoutX="56.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service reported!">
+            <font>
+               <Font size="16.0" />
+            </font>
+         </Text>
+      </children>
+   </AnchorPane>
+   <AnchorPane fx:id="feedbackErrorMessage" layoutX="567.0" layoutY="489.0" prefHeight="44.0" prefWidth="232.0" styleClass="feedback_error_container">
+      <children>
+         <Text fill="WHITE" layoutX="31.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error, check connection!">
+            <font>
+               <Font size="16.0" />
+            </font>
+         </Text>
+      </children>
+   </AnchorPane>
+   <Button fx:id="saveServiceButton" layoutX="223.0" layoutY="464.0" mnemonicParsing="false" onAction="#saveNewService" prefHeight="35.0" prefWidth="206.0" text="Save" />
+</AnchorPane>

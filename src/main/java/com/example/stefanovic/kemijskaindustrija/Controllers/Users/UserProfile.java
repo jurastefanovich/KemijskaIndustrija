@@ -1,6 +1,6 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.Users;
 
-import com.example.stefanovic.kemijskaindustrija.Controllers.NavBar;
+import com.example.stefanovic.kemijskaindustrija.Controllers.Navigation.NavBar;
 import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.User;
@@ -21,7 +21,11 @@ import java.io.IOException;
 public class UserProfile  implements UserRepository {
     NavBar navBar = new NavBar();
     @FXML
-    public Button supplierEditButton;
+    public Button userEditButton;
+
+    @FXML
+    Button deleteUserButton;
+
     @FXML
     private AnchorPane root;
     @FXML
@@ -40,14 +44,18 @@ public class UserProfile  implements UserRepository {
     private User user;
 
     public void initialize(){
-        supplierEditButton.setVisible(UserRepository.isUser());
-         setUserInformation(UserRepository.getLoggedInUser());
+        setUserInformation(UserRepository.getLoggedInUser());
     }
 
 
     @FXML
     void goBackToUserList(ActionEvent event) {
         navBar.showUsersList();
+    }
+
+    @FXML
+    void deleteUser(){
+
     }
 
     @FXML

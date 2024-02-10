@@ -8,23 +8,18 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="604.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.Chemical.ChemicalScene">
-        <fx:include source="NavBar.fxml" />
-   <TableView fx:id="chemicalTableView" layoutX="19.0" layoutY="211.0" prefHeight="379.0" prefWidth="554.0">
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1200.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.Chemical.ChemicalScene">
+        <fx:include source="Sidebar.fxml" />
+   <TableView fx:id="chemicalTableView" layoutX="216.0" layoutY="226.0" prefHeight="353.0" prefWidth="956.0">
      <columns>
-       <TableColumn fx:id="chemicalNameTableColumn" prefWidth="189.0" text="Name" />
-       <TableColumn fx:id="chemicalSupplierTableColumn" prefWidth="243.0" text="Supplier" />
-         <TableColumn fx:id="chemicalDangerLevelTableColumn" prefWidth="121.0" text="Danger Level" />
+       <TableColumn fx:id="chemicalNameTableColumn" prefWidth="525.0" text="Name" />
+         <TableColumn fx:id="chemicalDangerLevelTableColumn" prefWidth="430.0" text="Danger Level" />
      </columns>
    </TableView>
-   <Label layoutX="14.0" layoutY="36.0" text="Chemicals">
-      <font>
-         <Font size="24.0" />
-      </font>
-   </Label>
-   <Button layoutX="216.0" layoutY="172.0" mnemonicParsing="false" onAction="#filterChemicalsList" prefHeight="25.0" prefWidth="165.0" text="Search" />
-   <AnchorPane layoutX="21.0" layoutY="73.0" prefHeight="91.0" prefWidth="554.0" style="-fx-background-color: #e5e5e5;">
+   <Button layoutX="216.0" layoutY="170.0" mnemonicParsing="false" onAction="#filterChemicalsList" prefHeight="25.0" prefWidth="165.0" text="Search" />
+   <AnchorPane layoutX="216.0" layoutY="62.0" prefHeight="91.0" prefWidth="956.0" styleClass="input_container">
       <children>
          <TextField fx:id="searchByNameTextField" layoutX="167.0" layoutY="15.0" prefHeight="25.0" prefWidth="205.0" />
          <Label layoutX="20.0" layoutY="19.0" text="Search by name" />
@@ -32,4 +27,9 @@
          <ComboBox fx:id="dangerLevelComboBox" layoutX="167.0" layoutY="50.0" prefWidth="150.0" promptText="Select danger level" />
       </children>
    </AnchorPane>
+   <Text fill="WHITE" layoutX="216.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="All Chemicals">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Text>
 </AnchorPane>

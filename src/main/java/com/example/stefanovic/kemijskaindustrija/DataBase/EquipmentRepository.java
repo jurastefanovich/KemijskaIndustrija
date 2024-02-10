@@ -1,7 +1,6 @@
 package com.example.stefanovic.kemijskaindustrija.DataBase;
 
-import com.example.stefanovic.kemijskaindustrija.Controllers.Equipment.EquipmentDetails;
-import com.example.stefanovic.kemijskaindustrija.Exception.SaveToDataBaseException;
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
 import com.example.stefanovic.kemijskaindustrija.Model.EquipmentType;
 
@@ -45,7 +44,6 @@ public interface EquipmentRepository  {
         return chemicalList;
     }
     private Equipment getEquipmentInfo(ResultSet rs) throws SQLException {
-
         Long id = rs.getLong("id");
         String name = rs.getString("name");
         String description = rs.getString("description");
@@ -55,44 +53,64 @@ public interface EquipmentRepository  {
 
     default void saveToDatabase(Equipment equipment) throws Exception{
         if (equipment.getId() != null){
-            try {
-                Connection connection = DBController.connectToDatabase();
-                updateEquipment(connection, equipment);
-            } catch (Exception e) {
-                throw new SaveToDataBaseException(DataBaseMessages.UPDATE_ERROR.getMessage());
-            }
+            updateEquipment( equipment);
         }
         else{
-            try {
-                Connection connection = DBController.connectToDatabase();
-                saveNewEquipment(connection, equipment);
-            } catch (Exception e) {
-                throw new SaveToDataBaseException(DataBaseMessages.SAVE_ERROR.getMessage());
-            }
+            saveNewEquipment(equipment);
         }
     }
 
-    default void updateEquipment(Connection connection, Equipment equipment) throws SQLException{
+    default void updateEquipment(Equipment equipment) {
         String sql = "UPDATE equipment SET name = ?, description = ?, type = ? WHERE id = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, equipment.getName());
-        preparedStatement.setString(2, equipment.getDescription());
-        preparedStatement.setString(3, String.valueOf(equipment.getType()));
-        preparedStatement.setLong(4, equipment.getId() );
-        preparedStatement.executeUpdate();
-        connection.close();
+        try {
+            Connection connection = DBController.connectToDatabase();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, equipment.getName());
+            preparedStatement.setString(2, equipment.getDescription());
+            preparedStatement.setString(3, String.valueOf(equipment.getType()));
+            preparedStatement.setLong(4, equipment.getId() );
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        SerializationRepository.writeToTxtFile(Main.EQUIPMENT_FILE, equipment);
     }
 
-    private static void saveNewEquipment(Connection connection, Equipment equipment) throws SQLException {
+    private static void saveNewEquipment(Equipment equipment)  {
         String SQL_INSERT = "INSERT INTO equipment (name, description,type) VALUES(?, ?,?)";
-        PreparedStatement stmt = connection.prepareStatement(SQL_INSERT);
-        exequteEquipmentQuerry(stmt, equipment);
-        stmt.executeUpdate();
-        connection.close();
+        try {
+            Connection connection = DBController.connectToDatabase();
+            PreparedStatement stmt = connection.prepareStatement(SQL_INSERT);
+            exequteEquipmentQuerry(stmt, equipment);
+            stmt.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        SerializationRepository.writeToTxtFile(Main.EQUIPMENT_FILE, equipment);
+
     }
     private static void exequteEquipmentQuerry(PreparedStatement stmt, Equipment equipment) throws SQLException{
         stmt.setString(1, equipment.getName());
         stmt.setString(2, equipment.getDescription());
         stmt.setString(3, String.valueOf(equipment.getType()));
+    }
+
+    default void deleteEquipmentFromDB(long equipmentId) throws Exception {
+        Connection connection = DBController.connectToDatabase();
+        PreparedStatement deleteService = connection.prepareStatement("DELETE FROM service WHERE EQUIPMENT_ID = ?");
+        PreparedStatement deleteEquipment = connection.prepareStatement("DELETE FROM equipment WHERE ID = ?");
+        connection.setAutoCommit(false);
+
+        deleteService.setLong(1, equipmentId);
+        deleteService.executeUpdate();
+
+        deleteEquipment.setLong(1, equipmentId);
+        deleteEquipment.executeUpdate();
+
+        connection.commit();
     }
 }

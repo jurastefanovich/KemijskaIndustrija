@@ -1,4 +1,4 @@
-package com.example.stefanovic.kemijskaindustrija.Controllers;
+package com.example.stefanovic.kemijskaindustrija.Controllers.HomePage;
 
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import javafx.event.EventHandler;
@@ -17,18 +17,9 @@ public class HomePage {
     public ImageView supplierImage;
 
     public void initialize(){
-        supplierImage.addEventHandler(MouseEvent.MOUSE_CLICKED, gotToSupplierListView);
         chemicalImage.addEventHandler(MouseEvent.MOUSE_CLICKED, gotToChemicalListView);
     }
 
-    EventHandler<MouseEvent> gotToSupplierListView = event -> {
-        try {
-            Main.showScreen("SupplierScene.fxml");
-        } catch (IOException e) {
-            System.out.println("Error showing supplier list");
-            throw new RuntimeException(e);
-        }
-    };
 
     EventHandler<MouseEvent> gotToChemicalListView = event -> {
         try {

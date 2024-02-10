@@ -1,7 +1,7 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.Equipment;
 
-import com.example.stefanovic.kemijskaindustrija.Controllers.InputErrorMessages;
-import com.example.stefanovic.kemijskaindustrija.Controllers.Methods;
+import com.example.stefanovic.kemijskaindustrija.Controllers.utils.InputErrorMessages;
+import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.EquipmentRepository;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
@@ -57,6 +57,7 @@ public class EquipmentInput implements EquipmentRepository {
     private Equipment equipment;
     ObservableList<EquipmentType> data = FXCollections.observableArrayList(EquipmentType.values());
     public void initialize(){
+        selectedType.setText("");
         equipmentIdLabel.setText("");
         equipemntIdLabelTitle.setText("");
         successMessage.setVisible(false);
@@ -85,29 +86,47 @@ public class EquipmentInput implements EquipmentRepository {
 
     private void resetErrors(){
         Methods.resetErorrs(nameErrorLabel,descErrorLabel,equipmenetErrorLabel);
+        Methods.resetOutlines(equipmentnameTextField,equipmentTypeSearch,equipmenetDescTextField);
     }
     @FXML
     void saveNewEquipement() {
         resetErrors();
         var id = getId();
+
         try{
-            Equipment equipment1 = new Equipment(equipmentnameTextField.getText(), equipmenetDescTextField.getText(), EquipmentType.valueOf(selectedType.getText()));
+            checkForErrors();
+            Equipment equipment1 = new Equipment(Methods.capitalizeFirstLetter(equipmentnameTextField.getText()),
+                    Methods.capitalizeFirstLetter(equipmenetDescTextField.getText()),
+                    EquipmentType.valueOf(selectedType.getText()));
+
             if (id != null){
                 equipment1.setId((Long) id);
             }
-            checkForErrors(equipment1.getType());
-            saveToDatabase(equipment1);
-            successMessage.setVisible(true);
-        }catch (InputException e){
-            //
+
+            confirmation(equipment1);
+
         }catch (IllegalArgumentException e){
-            equipmentTypeSearch.setStyle("-fx-background-color: red");
-            equipmenetErrorLabel.setText(InputErrorMessages.EMPTY_FIELD.getMessage());
-        } catch (Exception e) {
-            errorMessage.setVisible(true);
-//            throw new RuntimeException(e);/
+//            ADD LOGGER
         }
+
+
     }
+
+    private void confirmation(Equipment equipment) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Potvrdite unos podataka: " + equipment.toString(), ButtonType.OK, ButtonType.CANCEL );
+        alert.showAndWait().ifPresent(response ->{
+            if (response.getButtonData().equals(ButtonBar.ButtonData.OK_DONE)){
+                try {
+                    saveToDatabase(equipment);
+                    successMessage.setVisible(true);
+                } catch (Exception e) {
+                    errorMessage.setVisible(true);
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
     private Object getId(){
         if (equipmentIdLabel.getText().isEmpty()){
             return null;
@@ -116,13 +135,15 @@ public class EquipmentInput implements EquipmentRepository {
             return Long.valueOf(equipmentIdLabel.getText());
         }
     }
-    private void checkForErrors(EquipmentType type) throws InputException {
-        Methods.checkTextField(equipmentnameTextField, nameErrorLabel);
-        Methods.checkTextArea(equipmenetDescTextField, descErrorLabel);
-        if (type == null){
-            equipmentTypeSearch.setStyle("-fx-border-color: red");
-            equipmenetErrorLabel.setText(InputErrorMessages.EMPTY_FIELD.getMessage());
+    private void checkForErrors() {
+        try {
+            Methods.checkTextField(equipmentnameTextField, nameErrorLabel);
+            Methods.checkTextArea(equipmenetDescTextField, descErrorLabel);
+            Methods.checkSearch(selectedType, equipmenetErrorLabel,equipmentTypeSearch);
+        } catch (InputException e) {
+//            ADD LOGGER
         }
+
     }
 
 
@@ -131,13 +152,15 @@ public class EquipmentInput implements EquipmentRepository {
             equipment = getEquipmentById(id);
             equipmentIdLabel.setText(String.valueOf(id));
             equipmentIdLabel.setVisible(false);
+            successMessage.setVisible(false);
+            errorMessage.setVisible(false);
             equipmentnameTextField.setText(equipment.getName());
             equipmenetDescTextField.setText(equipment.getDescription());
             selectedType.setText(String.valueOf(equipment.getType()));
             equipmentInputTitle.setText("Update " + equipment.getName());
-            interactionButton.setText("update");
+            interactionButton.setText("Update");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+//            ADD LOGGER
         }
     }
 

@@ -1,26 +1,19 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.Users;
 
 import com.example.stefanovic.kemijskaindustrija.Authentication.AccessLevel;
-import com.example.stefanovic.kemijskaindustrija.Controllers.Methods;
-import com.example.stefanovic.kemijskaindustrija.Controllers.NavBar;
+import com.example.stefanovic.kemijskaindustrija.Controllers.Navigation.NavBar;
 import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.User;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -63,7 +56,7 @@ public class UsersScene implements UserRepository {
 
     @FXML
     void initialize(){
-        allUsers = UserRepository.getAllUsers();
+        allUsers = UserRepository.getAllUsers().stream().filter(user -> !user.getId().equals(UserRepository.getUserID())).toList();
         userAccessLevelTableColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getAccount().accessLevel()));
         userFullNameTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFullName()));
         userDateOfBirthTableColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getDateOfBirth()));

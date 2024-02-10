@@ -46,6 +46,8 @@ public class Equipment extends Entitet {
         this.type = type;
     }
 
+
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -58,5 +60,10 @@ public class Equipment extends Entitet {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), description, type);
+    }
+
+    @Override
+    public String toString() {
+        return getName() +" "+ description +" "+ type;
     }
 }

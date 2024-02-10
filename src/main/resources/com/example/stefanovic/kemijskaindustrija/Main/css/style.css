@@ -137,13 +137,13 @@ TextField,TextArea{
 
 /*TABLE VIEW EDIT*/
 .table-view,.table-view:focused{
-    -fx-background-color: transparent;
+    -fx-background-color: #2A4858;
 }
 .table-view .column-header-background{
-    -fx-background-color: transparent;
+    -fx-background-color: #2A4858;
 }
 .table-view .column-header-background .label{
-    -fx-background-color: transparent;
+    -fx-background-color: #2A4858;
     -fx-text-fill: #FFFFFF;
 }
 .table-view .column-header {
@@ -450,7 +450,10 @@ Dialog > *.label.content{
     -fx-background-color: #D68910; /* Hover background color when indeterminate */
 }
 .feedback_success_container{
-    -fx-background-color: #54c220; /* Hover background color when indeterminate */
+    -fx-background-color: #3e9614; /* Hover background color when indeterminate */
+}
+.feedback_error_container{
+    -fx-background-color: #c70606; /* Hover background color when indeterminate */
 }
 .input_container{
     -fx-background-color:  #2A4858;

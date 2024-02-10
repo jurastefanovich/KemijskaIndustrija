@@ -1,11 +1,7 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.SafetyProcotol;
-
-import com.example.stefanovic.kemijskaindustrija.Controllers.Supplier.SupplierView;
 import com.example.stefanovic.kemijskaindustrija.DataBase.SafetyProtocolRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocol;
-import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocolStep;
-import com.example.stefanovic.kemijskaindustrija.Model.Supplier;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;

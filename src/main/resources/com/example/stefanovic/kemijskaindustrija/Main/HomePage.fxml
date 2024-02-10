@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.HomePage">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.HomePage.HomePage">
 <!--    <fx:include source="NavBar.fxml" />-->
    <fx:include source="Sidebar.fxml"/>
    <AnchorPane layoutX="200.0" layoutY="117.0" prefHeight="367.0" prefWidth="800.0">

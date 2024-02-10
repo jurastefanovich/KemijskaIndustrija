@@ -40,6 +40,7 @@ public class SafetyProtocolStep extends Entitet{
     @Override
     public String toString() {
         return "SafetyProtocolStep{" +
+                getId() + " " +
                 "description='" + description + '\'' +
                 ", isCritical=" + isCritical +
                 '}';

@@ -1,8 +1,7 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.AuthControllers;
 
 import com.example.stefanovic.kemijskaindustrija.Authentication.*;
-import com.example.stefanovic.kemijskaindustrija.Controllers.Methods;
-import com.example.stefanovic.kemijskaindustrija.DataBase.DBController;
+import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Exception.AccountException;
 import com.example.stefanovic.kemijskaindustrija.Exception.EmailException;
@@ -56,7 +55,9 @@ public final class SignUp extends Credentials implements AuthRepository {
 
     @FXML private AnchorPane frame;
     @FXML
-    public void initialize(){}
+    public void initialize(){
+        Methods.resetErorrs(accountCreatedLabel, userNameErrorLabel, emailErrorLabel, passwordErrorLabel, confirmPassErrrorLabel,datumRodjenjaErrorLabel,imeErrorLabel,lastNameErrorLabel);
+    }
 
     public void signUp()  {
         Methods.resetErorrs(accountCreatedLabel, userNameErrorLabel, emailErrorLabel, passwordErrorLabel, confirmPassErrrorLabel,datumRodjenjaErrorLabel,imeErrorLabel,lastNameErrorLabel);

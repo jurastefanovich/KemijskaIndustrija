@@ -2,7 +2,11 @@ package com.example.stefanovic.kemijskaindustrija.DataBase;
 
 import com.example.stefanovic.kemijskaindustrija.Authentication.AccessLevel;
 import com.example.stefanovic.kemijskaindustrija.Authentication.Account;
+import com.example.stefanovic.kemijskaindustrija.Authentication.AuthMessages;
 import com.example.stefanovic.kemijskaindustrija.Exception.AccountException;
+import com.example.stefanovic.kemijskaindustrija.Exception.EmailException;
+import com.example.stefanovic.kemijskaindustrija.Exception.UsernameTakenException;
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.User;
 import org.slf4j.MDC;
 
@@ -19,7 +23,7 @@ public interface UserRepository {
         try{
             Connection con = DBController.connectToDatabase();
             Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery("select * from KORISNIK");
+            ResultSet rs = statement.executeQuery("select * from KORISNIK ");
             while (rs.next()){
                 User user  = getUserInfo(rs);
                 userList.add(user);
@@ -28,7 +32,6 @@ public interface UserRepository {
         } catch (Exception e) {
 //            logger.error("Error getting users from DB!");
         }
-
         return userList;
     }
     static User getUserInfo(ResultSet rs){
@@ -116,39 +119,64 @@ public interface UserRepository {
         return loggedInUser;
     }
 
-    static User getUserByEmail(String email){
-        User user = null;
-        try {
-            Connection con = DBController.connectToDatabase();
-            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM KORISNIK WHERE EMAIL = ?");
-            pstmt.setString(1, email);
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                user  = getUserInfo(rs);
+    /**
+     * Method checks if a username is already stored in a database for any user that isn't current
+     * @param username username we want to check
+     * @param user_id id of the user we want to exclude from the search
+     */
+    static void checkIfUsernamCanBeEdited(String username, Long user_id) throws UsernameTakenException{
+        String sqlQuery = "SELECT * FROM KORISNIK WHERE username = ? AND id <> ?";
+        try{
+            Connection connection = DBController.connectToDatabase();
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement.setString(1,username);
+            preparedStatement.setLong(2,user_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                throw new UsernameTakenException(AuthMessages.USERNAME_TAKEN.getMessage());
             }
-            con.close();
-        } catch (Exception e) {
-//            logger.error("Error getting logged in user");
+        }catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return user;
+    }
+
+    /**
+     * Method checks if an email is already stored in a database for any user that isn't current
+     * @param email email we want to check
+     * @param user_id id of the user we want to exclude from the search
+     */
+    static void checkIfEmailCanBeEdited(String email, Long user_id) throws EmailException {
+        String sqlQuery = "SELECT * FROM KORISNIK WHERE email = ? AND id <> ?";
+        try{
+            Connection connection = DBController.connectToDatabase();
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement.setString(1,email);
+            preparedStatement.setLong(2,user_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                throw new EmailException(AuthMessages.EMAIL_TAKEN.getMessage());
+            }
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     static void createAccount(User user){
+        String sqlQuery = "insert into KORISNIK (name,last_name, date_of_birth,email,password, username,access_level) values(?,?,?,?,?,?,?)";
         try{
             Connection con = DBController.connectToDatabase();
-            PreparedStatement pstmt = con.prepareStatement(
-                    "insert into KORISNIK (name,last_name, date_of_birth,email,password, username,access_level) values(?,?,?,?,?,?,?)");
+            PreparedStatement pstmt = con.prepareStatement(sqlQuery);
             pstmt.setString(1,user.getName());
             pstmt.setString(2,user.getLastName());
             pstmt.setDate(3, Date.valueOf(user.getDateOfBirth()));
             pstmt.setString(4, user.getAccount().email());
             pstmt.setString(5, user.getAccount().password());
             pstmt.setString(6,user.getAccount().userName());
-            pstmt.setString(7, "USER");
+            pstmt.setString(7, String.valueOf(user.getAccount().accessLevel()));
 
             pstmt.executeUpdate();
             con.close();
-
+            SerializationRepository.writeToTxtFile(Main.USERS_FILE, user);
         } catch (RuntimeException e){
             System.out.println("error serializing to file + " + e.getMessage());
             e.printStackTrace();
@@ -159,7 +187,19 @@ public interface UserRepository {
         }
     }
 
-    static void updateUserInformation(User user, User selectedUser){
+    static boolean isUserPressent(String email){
+        try{
+            Connection connection = DBController.connectToDatabase();
+            PreparedStatement preparedStatement = connection.prepareStatement("Select * from korisnik where email = ?");
+            preparedStatement.setString(1, email);
+            ResultSet rs = preparedStatement.executeQuery();
+            return rs.next();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    static void updateUserInformation(User user)  {
         try {
             Connection connection = DBController.connectToDatabase();
             PreparedStatement preparedStatement = connection.prepareStatement("update KORISNIK set " +
@@ -180,12 +220,12 @@ public interface UserRepository {
             preparedStatement.setString(7, String.valueOf(user.getAccount().accessLevel()));
             preparedStatement.setLong(8, user.getId());
             preparedStatement.executeUpdate();
-
             connection.close();
-        }catch (RuntimeException e){
-            System.out.println("Error serializing user file " + e.getMessage() );
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            //ADD logger -> error updating user information for user
+//            throw new RuntimeException(e);
         }
+
+        SerializationRepository.writeToTxtFile(Main.USERS_FILE, user);
     }
 }

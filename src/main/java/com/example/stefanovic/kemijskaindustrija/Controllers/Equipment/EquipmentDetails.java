@@ -1,12 +1,10 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.Equipment;
 
-import com.example.stefanovic.kemijskaindustrija.Controllers.NavBar;
+import com.example.stefanovic.kemijskaindustrija.Controllers.Navigation.NavBar;
 import com.example.stefanovic.kemijskaindustrija.DataBase.DBController;
 import com.example.stefanovic.kemijskaindustrija.DataBase.EquipmentRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
-import com.example.stefanovic.kemijskaindustrija.Model.EquipmentType;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -80,9 +78,9 @@ public class EquipmentDetails implements EquipmentRepository {
             if ( response.getButtonData().equals(ButtonBar.ButtonData.OK_DONE))
             {
                 try {
-                    DBController.deleteEntity(Long.valueOf(equipmentIdText.getText()), "equipment");
+                   deleteEquipmentFromDB(Long.parseLong(equipmentIdText.getText()));
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+//                    ADD LOGGER                    throw new RuntimeException(e);
                 }
                 goToEquipmentListView();
             }

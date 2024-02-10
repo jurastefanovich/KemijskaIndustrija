@@ -1,7 +1,7 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.SafetyProcotol;
 
-import com.example.stefanovic.kemijskaindustrija.Controllers.InputErrorMessages;
-import com.example.stefanovic.kemijskaindustrija.Controllers.Methods;
+import com.example.stefanovic.kemijskaindustrija.Controllers.utils.InputErrorMessages;
+import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.SafetyProtocolRepository;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Exception.SaveToDataBaseException;
@@ -77,23 +77,19 @@ public class SafetyProtocolInput implements SafetyProtocolRepository {
     }
 
     @FXML
-    void saveSafetyProtocol(ActionEvent event) {
+    void saveSafetyProtocol() {
         resetErrors();
-        SafetyProtocol safetyProtocol1 = new SafetyProtocol(Methods.getTextFieldString(safetyProtocolNameTextField), steps);
+        SafetyProtocol safetyProtocol1 = new SafetyProtocol(safetyProtocolNameTextField.getText(), steps);
         try {
             checkForErrors();
-            safeSafetyProtocol(safetyProtocol1);
-        } catch (InputException | SaveToDataBaseException e) {
-//            throw new RuntimeException(e);
-            if (e instanceof SafetyProtocolRepository){
-                //
-            }
-            else{
-
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm adding new safety protocol.", ButtonType.OK, ButtonType.CANCEL);
+            alert.showAndWait().ifPresent(respose->{
+                if (respose.getButtonData().equals(ButtonBar.ButtonData.OK_DONE)){
+                    safeSafetyProtocol(safetyProtocol1);
+                }
+            });
+        } catch (InputException e) {
+            //ADD LOGGER -> couldn't save empty protocol steps
         }
     }
     private void resetErrors(){

@@ -4,55 +4,77 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" prefHeight="503.0" prefWidth="600.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.Users.UserProfile">
-    <fx:include source="NavBar.fxml" />
-    <AnchorPane layoutX="314.0" layoutY="91.0" prefHeight="245.0" prefWidth="573.0" style="-fx-background-color: #2A4858;">
-        <children>
-            <AnchorPane prefHeight="44.0" prefWidth="573.0">
-                <children>
-                    <Label layoutX="14.0" layoutY="14.0" text="Name:" />
-                    <Label fx:id="userFirstNameLabel" layoutX="86.0" layoutY="14.0" text="user_first_name" />
-                </children>
-            </AnchorPane>
-         <AnchorPane layoutY="44.0" prefHeight="44.0" prefWidth="573.0">
-            <children>
-               <Label layoutX="14.0" layoutY="14.0" text="Last name:" />
-               <Label fx:id="userLastNameLabel" layoutX="86.0" layoutY="14.0" text="user_last_name" />
-            </children>
-         </AnchorPane>
-         <AnchorPane layoutY="88.0" prefHeight="44.0" prefWidth="573.0">
-            <children>
-               <Label layoutX="14.0" layoutY="14.0" text="DoB" />
-               <Label fx:id="userDoBLabel" layoutX="86.0" layoutY="14.0" text="datum_rodenja" />
-            </children>
-         </AnchorPane>
-         <AnchorPane layoutY="132.0" prefHeight="44.0" prefWidth="573.0">
-            <children>
-               <Label layoutX="14.0" layoutY="14.0" text="E-mail" />
-               <Label fx:id="userEmailLabel" layoutX="86.0" layoutY="14.0" text="user_email" />
-            </children>
-         </AnchorPane>
-         <AnchorPane layoutY="176.0" prefHeight="44.0" prefWidth="573.0">
-            <children>
-               <Label layoutX="14.0" layoutY="14.0" text="Username" />
-               <Label fx:id="usernameLabel" layoutX="86.0" layoutY="14.0" text="username" />
-            </children>
-         </AnchorPane>
-         <AnchorPane layoutY="220.0" prefHeight="44.0" prefWidth="573.0">
-            <children>
-               <Label layoutX="14.0" layoutY="14.0" text="Access Level" />
-               <Label fx:id="userAccessLevelLabel1" layoutX="86.0" layoutY="14.0" text="user_access_level" />
-            </children>
-         </AnchorPane>
-        </children>
-    </AnchorPane>
-    <Label layoutX="14.0" layoutY="45.0" text="Details">
-        <font>
-            <Font size="24.0" />
-        </font>
-    </Label>
-    <Button layoutX="1067.0" layoutY="45.0" mnemonicParsing="false" onAction="#goBackToUserList" text="Back" />
-    <Button fx:id="supplierEditButton" layoutX="1128.0" layoutY="45.0" mnemonicParsing="false" onAction="#goToUserEditView" prefHeight="25.0" prefWidth="58.0" style="-fx-background-color: #05aefc;" text="Edit" textFill="WHITE" />
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1200.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.Users.UserProfile">
+    <fx:include source="Sidebar.fxml" />
+    <Button layoutX="220.0" layoutY="28.0" mnemonicParsing="false" onAction="#goBackToUserList" styleClass="secondary_button" text="Back" />
+    <Button fx:id="userEditButton" layoutX="218.0" layoutY="407.0" mnemonicParsing="false" onAction="#goToUserEditView" prefHeight="35.0" prefWidth="225.0" text="Edit" textFill="WHITE" />
+   <AnchorPane layoutX="220.0" layoutY="160.0" prefHeight="68.0" prefWidth="447.0" styleClass="input_container">
+      <children>
+         <Label fx:id="userFirstNameLabel" layoutX="14.0" layoutY="38.0" text="user_first_name" />
+         <Text fill="WHITE" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Name">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="220.0" layoutY="237.0" prefHeight="68.0" prefWidth="447.0" styleClass="input_container">
+      <children>
+         <Label fx:id="userLastNameLabel" layoutX="14.0" layoutY="34.0" text="user_last_name" />
+         <Text fill="WHITE" layoutX="14.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Last name">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="220.0" layoutY="315.0" prefHeight="68.0" prefWidth="447.0" styleClass="input_container">
+      <children>
+         <Label fx:id="userDoBLabel" layoutX="14.0" layoutY="34.0" text="datum_rodenja" />
+         <Text fill="WHITE" layoutX="12.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Date of birth">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="701.0" layoutY="160.0" prefHeight="68.0" prefWidth="447.0" styleClass="input_container">
+      <children>
+         <Label fx:id="userEmailLabel" layoutX="14.0" layoutY="34.0" text="user_email" />
+         <Text fill="WHITE" layoutX="15.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="E-mail">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="701.0" layoutY="237.0" prefHeight="68.0" prefWidth="447.0" styleClass="input_container">
+      <children>
+         <Label fx:id="usernameLabel" layoutX="15.0" layoutY="34.0" text="username" />
+         <Text fill="WHITE" layoutX="13.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Username">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="701.0" layoutY="315.0" prefHeight="68.0" prefWidth="447.0" styleClass="input_container">
+      <children>
+         <Label fx:id="userAccessLevelLabel1" layoutX="14.0" layoutY="34.0" text="user_access_level" />
+         <Text fill="WHITE" layoutX="13.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Access Level">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+      </children>
+   </AnchorPane>
+   <Text fill="WHITE" layoutX="226.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="User details">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Text>
+   <Button fx:id="deleteUserButton" layoutX="451.0" layoutY="407.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="35.0" prefWidth="214.0" styleClass="deleteButton" text="Delete" textFill="WHITE" />
 
 </AnchorPane>

@@ -1,4 +1,4 @@
-package com.example.stefanovic.kemijskaindustrija.Controllers;
+package com.example.stefanovic.kemijskaindustrija.Controllers.Navigation;
 
 import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -15,10 +16,12 @@ public class NavBar {
 
     @FXML
     private MenuItem AdminView;
-
+    @FXML
+    private Text chemSafeLogo;
     @FXML
     public void initialize(){
 //        AdminView.setVisible(UserRepository.isAdmin());
+        chemSafeLogo.setOnMouseClicked(event -> showHomeScreen());
     }
 
     public void showSingUpScreen() throws IOException{
@@ -55,14 +58,7 @@ public class NavBar {
         }
     }
 
-    public void showSupplierList() {
-        try {
-            Main.showScreen("SupplierScene.fxml");
-        } catch (IOException e) {
-            System.out.println("Error showing supplier scene");
-            throw new RuntimeException(e);
-        }
-    }
+
 
     public void showMyProfile() {
         try {
@@ -97,6 +93,15 @@ public class NavBar {
             throw new RuntimeException(e);
         }
     }
+    public void showUserProfile(){
+        try {
+            Main.showScreen("UserProfile.fxml");
+        } catch (IOException e) {
+            System.out.println("Error showing user profile");
+            throw new RuntimeException(e);
+        }
+    }
+
     public void showAddChemical() {
         try {
             Main.showScreen("ChemicalInput.fxml");
@@ -106,14 +111,7 @@ public class NavBar {
         }
     }
 
-    public void showAddSupplier(){
-        try {
-            Main.showScreen("SupplierInput.fxml");
-        } catch (IOException e) {
-            System.out.println("Error showing supplier input");
-            throw new RuntimeException(e);
-        }
-    }
+
 
 
     public void addProtocol() {
@@ -146,6 +144,24 @@ public class NavBar {
     public void showEquipmenList() {
         try {
             Main.showScreen("EquipmentList.fxml");
+        } catch (IOException e) {
+            System.out.println("Error showing equipment input");
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void goToServiceInput() {
+        try {
+            Main.showScreen("ServiceInput.fxml");
+        } catch (IOException e) {
+            System.out.println("Error showing service input");
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void goToAllServices() {
+        try {
+            Main.showScreen("ServiceList.fxml");
         } catch (IOException e) {
             System.out.println("Error showing equipment input");
             throw new RuntimeException(e);

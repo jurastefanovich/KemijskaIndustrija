@@ -7,73 +7,110 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="503.0" prefWidth="600.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.Users.UserEdit">
-    <fx:include source="NavBar.fxml" />
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1200.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.Users.UserEdit">
+    <fx:include source="Sidebar.fxml" />
 
-    <Button layoutX="129.0" layoutY="357.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="245.0" text="Save" />
-    <AnchorPane layoutX="116.0" layoutY="60.0" prefHeight="289.0" prefWidth="582.0">
+    <Button layoutX="229.0" layoutY="548.0" mnemonicParsing="false" onAction="#saveUpdatedUser" prefHeight="25.0" prefWidth="245.0" text="Save" />
+    <AnchorPane layoutX="229.0" layoutY="74.0" prefHeight="430.0" prefWidth="429.0" styleClass="input_container">
         <children>
-            <AnchorPane layoutY="14.0" prefHeight="52.0" prefWidth="562.0">
+            <AnchorPane layoutY="62.0" prefHeight="94.0" prefWidth="409.0">
                 <children>
-                    <TextField fx:id="nameTextField" layoutX="118.0" layoutY="2.0" prefHeight="25.0" prefWidth="409.0" />
-                    <Label fx:id="nameErrorLabel" layoutX="118.0" layoutY="32.0" styleClass="error" text="nameErrorLabel" textFill="RED" underline="true" />
-                    <Label layoutX="14.0" layoutY="6.0" text="Name" underline="true" />
+                    <TextField fx:id="nameTextField" layoutX="14.0" layoutY="33.0" prefHeight="25.0" prefWidth="230.0" />
+                    <Label fx:id="nameErrorLabel" layoutX="14.0" layoutY="63.0" styleClass="error" text="nameErrorLabel" textFill="RED" underline="true" />
+               <Text fill="WHITE" layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Text>
                 </children>
             </AnchorPane>
-            <AnchorPane fx:id="acceessLevelAnchorPane" layoutY="230.0" prefHeight="52.0" prefWidth="562.0">
+            <AnchorPane fx:id="acceessLevelAnchorPane" layoutY="344.0" prefHeight="94.0" prefWidth="409.0">
                 <children>
-                    <Label layoutX="14.0" layoutY="18.0" text="Access Level" underline="true" />
-                    <ComboBox fx:id="accessLevelComboBox" layoutX="120.0" layoutY="14.0" prefHeight="25.0" prefWidth="143.0" />
+                    <ComboBox fx:id="accessLevelComboBox" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="143.0" />
+               <Text fill="WHITE" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Access Level">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Text>
+               <Label fx:id="accessLevelErrorLabel" layoutX="14.0" layoutY="60.0" styleClass="error" text="accessLevelError" textFill="RED" underline="true" />
                 </children>
             </AnchorPane>
-         <AnchorPane layoutY="86.0" prefHeight="52.0" prefWidth="562.0">
+         <AnchorPane layoutY="156.0" prefHeight="94.0" prefWidth="409.0">
             <children>
-               <TextField fx:id="lastNameTextField" layoutX="118.0" layoutY="2.0" prefHeight="25.0" prefWidth="409.0" />
-               <Label fx:id="lastNameErrorLabel" layoutX="118.0" layoutY="32.0" styleClass="error" text="nameErrorLabel" textFill="RED" underline="true" />
-               <Label layoutX="14.0" layoutY="6.0" text="Last Name" underline="true" />
+               <TextField fx:id="lastNameTextField" layoutX="14.0" layoutY="33.0" prefHeight="25.0" prefWidth="230.0" />
+               <Label fx:id="lastNameErrorLabel" layoutX="14.0" layoutY="63.0" styleClass="error" text="lastNameErrorLabel" textFill="RED" underline="true" />
+               <Text fill="WHITE" layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastname">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Text>
             </children>
          </AnchorPane>
-         <AnchorPane layoutY="164.0" prefHeight="52.0" prefWidth="562.0">
+         <AnchorPane layoutY="250.0" prefHeight="94.0" prefWidth="409.0">
             <children>
-               <TextField fx:id="userNameTextField" layoutX="118.0" layoutY="2.0" prefHeight="25.0" prefWidth="409.0" />
-               <Label fx:id="userNameErrorLabel" layoutX="118.0" layoutY="32.0" styleClass="error" text="nameErrorLabel" textFill="RED" underline="true" />
-               <Label layoutX="14.0" layoutY="6.0" text="Username" underline="true" />
+               <TextField fx:id="userNameTextField" layoutX="14.0" layoutY="33.0" prefHeight="25.0" prefWidth="230.0" />
+               <Label fx:id="userNameErrorLabel" layoutX="14.0" layoutY="63.0" styleClass="error" text="userNameErrorLabel" textFill="RED" underline="true" />
+               <Text fill="WHITE" layoutX="15.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Text>
             </children>
          </AnchorPane>
+         <Label fx:id="title1" layoutX="14.0" layoutY="14.0" styleClass="bold" text="General information">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Label>
         </children>
-        <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
-        </padding>
     </AnchorPane>
-    <Label fx:id="title" layoutX="20.0" layoutY="34.0" text="Edit Profile">
+    <Label fx:id="title" layoutX="229.0" layoutY="24.0" styleClass="bold" text="Edit Profile">
         <font>
-            <Font size="20.0" />
+            <Font size="24.0" />
         </font>
     </Label>
-   <AnchorPane layoutX="698.0" layoutY="64.0" prefHeight="234.0" prefWidth="562.0">
+   <AnchorPane layoutX="711.0" layoutY="72.0" prefHeight="438.0" prefWidth="445.0" styleClass="input_container">
       <children>
-         <AnchorPane layoutY="7.0" prefHeight="52.0" prefWidth="562.0">
+         <AnchorPane layoutY="67.0" prefHeight="94.0" prefWidth="445.0">
             <children>
-               <TextField fx:id="emailTextField" layoutX="118.0" layoutY="2.0" prefHeight="25.0" prefWidth="409.0" />
-               <Label fx:id="emailErrorLabel" layoutX="118.0" layoutY="32.0" styleClass="error" text="nameErrorLabel" textFill="RED" underline="true" />
-               <Label layoutX="14.0" layoutY="6.0" text="E-mail" underline="true" />
+               <TextField fx:id="emailTextField" layoutX="14.0" layoutY="33.0" prefHeight="25.0" prefWidth="259.0" />
+               <Label fx:id="emailErrorLabel" layoutX="14.0" layoutY="63.0" styleClass="error" text="emailErrorLabel" textFill="RED" underline="true" />
+               <Text fill="WHITE" layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Text>
             </children>
          </AnchorPane>
-         <AnchorPane layoutY="165.0" prefHeight="52.0" prefWidth="562.0">
+         <AnchorPane fx:id="confirmPasswordAnchorPane" layoutY="278.0" prefHeight="94.0" prefWidth="445.0">
             <children>
-               <TextField fx:id="passwordTextField" layoutX="118.0" layoutY="2.0" prefHeight="25.0" prefWidth="409.0" />
-               <Label fx:id="passwordErrorLabel" layoutX="118.0" layoutY="32.0" styleClass="error" text="passwordErrorLabel" textFill="RED" underline="true" />
-               <Label layoutX="14.0" layoutY="6.0" text="New password" underline="true" />
+               <Text fill="WHITE" layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm password">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Text>
+               <TextField fx:id="confirmPasswordTextField" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="259.0" />
+               <Label fx:id="confirmPasswordErrorLabel" layoutX="14.0" layoutY="60.0" styleClass="error" text="passwordErrorLabel" textFill="RED" underline="true" />
             </children>
          </AnchorPane>
-         <AnchorPane layoutY="83.0" prefHeight="52.0" prefWidth="562.0">
+         <AnchorPane fx:id="passwordAnchorPane" layoutY="172.0" prefHeight="94.0" prefWidth="445.0">
             <children>
-               <TextField fx:id="confirmPasswordTextField" layoutX="118.0" layoutY="2.0" prefHeight="25.0" prefWidth="409.0" />
-               <Label fx:id="confirmPasswordErrorLabel" layoutX="118.0" layoutY="32.0" styleClass="error" text="passwordErrorLabel" textFill="RED" underline="true" />
-               <Label layoutX="14.0" layoutY="6.0" text="Confirm pass" underline="true" />
+               <Text fill="WHITE" layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Text>
+               <TextField fx:id="passwordTextField" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="259.0" />
+               <Label fx:id="passwordErrorLabel" layoutX="14.0" layoutY="60.0" styleClass="error" text="passwordErrorLabel" textFill="RED" underline="true" />
             </children>
          </AnchorPane>
+         <Label fx:id="title11" layoutX="14.0" layoutY="14.0" styleClass="bold" text="Account information">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Label>
       </children>
    </AnchorPane>
    <padding>

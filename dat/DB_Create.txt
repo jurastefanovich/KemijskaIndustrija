@@ -11,31 +11,15 @@ CREATE TABLE IF NOT EXISTS KORISNIK (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS SUPPLIER (
-  id LONG GENERATED ALWAYS AS IDENTITY,
-  name VARCHAR(255) NOT NULL,
-  city VARCHAR(45) NOT NULL,
-  street VARCHAR(45) NOT NULL,
-  street_number INT NOT NULL,
-  PRIMARY KEY (id)
-);
 
 CREATE TABLE IF NOT EXISTS CHEMICAL (
   id LONG GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(255) NOT NULL,
-  quantity VARCHAR(45) NULL,
-  quantity_unit VARCHAR(45) NULL,
+  name VARCHAR(255) NOT NULL,
+  quantity double NOT NULL,
+  quantity_unit VARCHAR(45) NOT NULL,
   instructions VARCHAR(45) NULL,
   danger_level DOUBLE NULL,
   PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS SUPPLIER_HAS_CHEMICAL (
-  supplier_id LONG NOT NULL,
-  chemical_id LONG NOT NULL,
-  PRIMARY KEY (supplier_id, chemical_id),
-  FOREIGN KEY (supplier_id) REFERENCES SUPPLIER(ID),
-  FOREIGN KEY (chemical_id) REFERENCES CHEMICAL(ID)
 );
 
 
@@ -62,11 +46,11 @@ create table if not exists equipment(
     primary key (id)
 );
 
-create table if not exists servis(
+create table if not exists service(
     id LONG GENERATED ALWAYS AS IDENTITY,
-    name varchar(45) not null,
+    title varchar(45) not null,
     description varchar(MAX) not null,
-    date_of_servis date not null,
+    date_of_service date not null,
     equipment_id LONG NOT NULL,
     foreign key (equipment_id) references equipment(id),
     primary key(id)
