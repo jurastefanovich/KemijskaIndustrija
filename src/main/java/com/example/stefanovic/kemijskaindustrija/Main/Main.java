@@ -20,10 +20,14 @@ public class Main extends Application {
     public static final String CHEMICALS_FILE = "dat/chemicals.txt";
     public static final String EQUIPMENT_FILE = "dat/equipment.txt";
     public static final String SAFETY_PROTOCOL_FILE = "dat/safetyProtocols.txt";
+    public static final String SAFETY_PROTOCOL_STEP_FILE = "dat/safetyProtocolSteps.txt";
     public static final String SERVICES_FILE = "dat/services.txt";
     public static final String USERS_FILE = "dat/userChanges.txt";
-
-    public static final String PRODUCT_SERIAL_FILE = "dat/serializedProducts.dat";
+    public static final String SERIALIZE_CHEMICAL = "dat/chemical.dat";
+    public static final String SERIALIZE_EQUIPMENT = "dat/equipment.dat";
+    public static final String SERIALIZE_SERVICE = "dat/service.dat";
+    public static final String SERIALIZE_SAFETY_PROTOCOL = "dat/safetyProtocol.dat";
+    public static final String SERIALIZE_SAFETY_PROTOCOL_STEP = "dat/safetyProtocolStep.dat";
     public static final String USERS_SERIAL_FILE = "dat/serializedUsers.dat";
 
     @Override

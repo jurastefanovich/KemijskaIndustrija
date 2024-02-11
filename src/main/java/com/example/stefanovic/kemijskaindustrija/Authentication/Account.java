@@ -7,7 +7,7 @@ public record Account(String email, String password, String userName, AccessLeve
     private static final long serialVersionUID = 649655804818955045L;
 
     public String toString() {
-        return email + ',' + password + ',' + userName + ',' +accessLevel;
+        return email + " " + password + " " + userName + " " +accessLevel;
     }
 
 }

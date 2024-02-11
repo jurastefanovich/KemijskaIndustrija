@@ -5,8 +5,10 @@ import com.example.stefanovic.kemijskaindustrija.Authentication.Account;
 import com.example.stefanovic.kemijskaindustrija.Authentication.AuthInput;
 import com.example.stefanovic.kemijskaindustrija.Controllers.AuthControllers.SignUp;
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
+import com.example.stefanovic.kemijskaindustrija.DataBase.SerializationRepository;
 import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Exception.*;
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -141,7 +143,14 @@ public class UserEdit implements UserRepository, UserFunctionlities{
             alert.showAndWait().ifPresent(response->{
                 if ( response.getButtonData().equals(ButtonBar.ButtonData.YES))
                 {
+                    Optional<User> optionalUser = UserRepository.getSingleUser(updated.getId());
+                    Account oldAccount = new Account(optionalUser.get().getAccount().email(), optionalUser.get().getAccount().password(), optionalUser.get().getAccount().userName(),  optionalUser.get().getAccount().accessLevel());
+                    User oldUser = new User(optionalUser.get().getId(), optionalUser.get().getName(), optionalUser.get().getLastName(), optionalUser.get().getDateOfBirth(),oldAccount );
+
+                    SerializationRepository.writeToTxtFile(Main.USERS_FILE,oldUser);
                     UserRepository.updateUserInformation(updated);
+                    SerializationRepository.writeToTxtFile(Main.USERS_FILE, updated);
+                    SerializationRepository.prepareUserForSerialization();
                 }
             });
 

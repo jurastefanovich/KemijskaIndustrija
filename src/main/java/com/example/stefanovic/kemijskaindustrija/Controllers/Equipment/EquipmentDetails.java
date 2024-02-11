@@ -61,7 +61,7 @@ public class EquipmentDetails implements EquipmentRepository {
 
     public void initialize(long id){
         try {
-            equipment = getEquipmentById(id);
+            equipment = EquipmentRepository.getEquipmentById(id);
             equipmentNameText.setText(equipment.getName());
             equipmentIdText.setText(String.valueOf(equipment.getId()));
             equipmentDescriptionText.setText(equipment.getDescription());

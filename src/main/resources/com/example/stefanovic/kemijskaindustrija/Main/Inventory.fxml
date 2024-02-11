@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Files.InventroyController">
+            <fx:include source="Sidebar.fxml" />
+   <Text fill="WHITE" layoutX="228.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Inventory">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Text>
+   <TableView fx:id="inventoryTableView" layoutX="228.0" layoutY="66.0" prefHeight="518.0" prefWidth="945.0">
+     <columns>
+       <TableColumn fx:id="inventoryIdTableColumn" prefWidth="46.0" text="Id" />
+       <TableColumn fx:id="inventoryAuthorOfChangeTableColumn" prefWidth="148.0" text="Author of change" />
+         <TableColumn fx:id="inventoryDateOfChangeTableColumn" prefWidth="134.0" text="Date of change" />
+         <TableColumn fx:id="inventoryObjectChange" prefWidth="119.0" text="Object" />
+         <TableColumn fx:id="inventoryInventoryTableColumn" prefWidth="496.0" text="Inventory" />
+     </columns>
+   </TableView>
+</AnchorPane>

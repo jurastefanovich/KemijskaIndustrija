@@ -186,5 +186,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
+      <Hyperlink layoutX="72.0" layoutY="450.0" onAction="#showInventory" text="Inventory" />
    </children>
 </AnchorPane>

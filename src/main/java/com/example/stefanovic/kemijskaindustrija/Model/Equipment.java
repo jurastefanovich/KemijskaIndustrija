@@ -6,7 +6,7 @@ public class Equipment extends Entitet {
 
     private String description;
     private EquipmentType type;
-
+    private Integer healthBar;
     public Equipment(String description, EquipmentType type) {
         this.description = description;
         this.type = type;
@@ -58,12 +58,8 @@ public class Equipment extends Entitet {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), description, type);
-    }
+    public int hashCode() { return Objects.hash(super.hashCode(), description, type); }
 
     @Override
-    public String toString() {
-        return getName() +" "+ description +" "+ type;
-    }
+    public String toString() { return getId() +" "+ getName() +" "+ description +" "+ type; }
 }

@@ -15,6 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ChemicalRepository extends DataBaseRepository{
+
+    /**
+     * Method gives back Chemical object from a single line in a file
+     * @param line line from a file representing Chemical data
+     * @return Chemical
+     */
+    static Chemical getChemicalObject(String line) {
+        String[] split = line.split(" ");
+        return new Chemical(Long.parseLong(split[0]), split[1], Double.valueOf(split[2]),split[3],split[4], new BigDecimal(split[5]));
+    }
+
     default   Chemical getChemicalById(Long chem_id){
         Chemical chemical = null;
         try {
@@ -34,8 +45,6 @@ public interface ChemicalRepository extends DataBaseRepository{
 
         return chemical;
     }
-
-
 
     default List<Chemical> getChemicalList(){
         List<Chemical> chemicalList = new ArrayList<>();
@@ -85,11 +94,12 @@ public interface ChemicalRepository extends DataBaseRepository{
 
     default void saveChemical(Chemical chemical)  {
         if (chemical.getId() != null){
+            SerializationRepository.writeToTxtFile(Main.CHEMICALS_FILE, getChemicalById(chemical.getId()));
             updateChemical(chemical);
             SerializationRepository.writeToTxtFile(Main.CHEMICALS_FILE, chemical);
+            SerializationRepository.prepareChemicalsForSerialization();
         }else{
             saveToDatabase(chemical);
-            SerializationRepository.writeToTxtFile(Main.CHEMICALS_FILE, chemical);
         }
     }
 

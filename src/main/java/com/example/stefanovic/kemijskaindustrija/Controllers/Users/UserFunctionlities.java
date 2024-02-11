@@ -6,7 +6,7 @@ public interface UserFunctionlities {
 
     /**
      * Method checks if the logged in user is viewing their own profile
-     * @param user_id id of the user profile being viewed
+     * @param viewedUserId id of the user profile being viewed
      * @return boolean
      */
     default boolean checkIfEditingLoggedInUser(Long viewedUserId){

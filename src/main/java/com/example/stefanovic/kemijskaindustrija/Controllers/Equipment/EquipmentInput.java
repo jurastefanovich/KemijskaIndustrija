@@ -149,7 +149,7 @@ public class EquipmentInput implements EquipmentRepository {
 
     public void initialize(long id){
         try {
-            equipment = getEquipmentById(id);
+            equipment = EquipmentRepository.getEquipmentById(id);
             equipmentIdLabel.setText(String.valueOf(id));
             equipmentIdLabel.setVisible(false);
             successMessage.setVisible(false);

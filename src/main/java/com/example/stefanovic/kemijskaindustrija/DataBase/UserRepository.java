@@ -7,11 +7,13 @@ import com.example.stefanovic.kemijskaindustrija.Exception.AccountException;
 import com.example.stefanovic.kemijskaindustrija.Exception.EmailException;
 import com.example.stefanovic.kemijskaindustrija.Exception.UsernameTakenException;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
+import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
 import com.example.stefanovic.kemijskaindustrija.Model.User;
 import org.slf4j.MDC;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -227,5 +229,11 @@ public interface UserRepository {
         }
 
         SerializationRepository.writeToTxtFile(Main.USERS_FILE, user);
+    }
+
+    static User getUserFromLine(String line) {
+        String[] lines = line.split(" ");
+        Account account = new Account(lines[4], lines[5],lines[6],AccessLevel.valueOf(lines[7]));
+        return new User(Long.valueOf(lines[0]), lines[1], lines[2], LocalDate.parse(lines[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")), account);
     }
 }

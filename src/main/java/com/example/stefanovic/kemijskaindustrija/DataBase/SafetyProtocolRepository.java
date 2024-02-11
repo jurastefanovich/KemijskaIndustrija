@@ -1,5 +1,6 @@
 package com.example.stefanovic.kemijskaindustrija.DataBase;
 
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocol;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocolStep;
 
@@ -11,6 +12,26 @@ import java.util.List;
 
 public interface SafetyProtocolRepository{
 
+
+    static SafetyProtocol getSafetyProtocolFromString(String line) {
+        String[] lines = line.split(" ");
+        String[] name = new String[lines.length-1];
+        for(int i = 1; i< lines.length;i++){
+            name[i-1] = lines[i];
+        }
+        String concatenatedString = String.join(" ", name);
+        return  new SafetyProtocol(Long.valueOf(lines[0]), concatenatedString);
+    }
+
+    static SafetyProtocolStep getSafetyProtocolStepFromString(String line) {
+        String[] lines = line.split(" ");
+        String[] description = new String[lines.length-2];
+        for(int i = 1; i< lines.length-1;i++){
+            description[i-1] = lines[i];
+        }
+        String concatenatedString = String.join(" ", description);
+        return new SafetyProtocolStep(Long.valueOf(lines[0]), concatenatedString, Boolean.valueOf(lines[2]));
+    }
 
     default SafetyProtocol getSafetyProtocolByIdWithSteps(long protocolId)  {
         SafetyProtocol safetyProtocol = null;
@@ -83,14 +104,32 @@ public interface SafetyProtocolRepository{
         }
         return safetyProtocol;
     }
+    default SafetyProtocolStep getSafetyProtocolStepById(Long id){
+        String query = "SELECT * FROM SAFETY_PROTOCOL_STEP where id =  ?";
+        SafetyProtocolStep safetyProtocol = null;
+        try {
+            Connection connection = DBController.connectToDatabase();
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1,id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                safetyProtocol = getSafetyProtocolStep(rs);
+            }
+            connection.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return safetyProtocol;
+    }
 
     default List<SafetyProtocolStep> getSafetyProtocolSteps(Long id){
         List<SafetyProtocolStep> safetyProtocolSteps = new ArrayList<>();
+        String query = "select  * from safety_protocol_step where safety_protocol_id = ?";
         try {
             Connection connection = DBController.connectToDatabase();
-            Statement statement = connection.createStatement();
-
-            ResultSet rs = statement.executeQuery("select  * from safety_protocol_step where safety_protocol_id = " + id);
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1,id);
+            ResultSet rs = statement.executeQuery();
             while (rs.next()){
                 SafetyProtocolStep safetyProtocol = getSafetyProtocolStep(rs);
                 safetyProtocolSteps.add(safetyProtocol);
@@ -111,6 +150,7 @@ public interface SafetyProtocolRepository{
             Boolean isCritical = resultSet.getBoolean("is_critical");
             return new SafetyProtocolStep(id,desc,isCritical);
         }catch (SQLException e){
+            e.printStackTrace();
             //ADD LOGGER
         }
         return safetyProtocolStep;
@@ -144,6 +184,8 @@ public interface SafetyProtocolRepository{
     }
 
     default void updateSafetyProcolName(SafetyProtocol safetyProtocol) {
+        SafetyProtocol safetyProtocol1 = getSafetyProtocolByIdWithSteps(safetyProtocol.getId());
+        SerializationRepository.writeToTxtFile(Main.SAFETY_PROTOCOL_FILE, safetyProtocol1);
         String sqlQuery = "UPDATE safety_protocol SET name = ? where id =?";
         try {
             Connection connection = DBController.connectToDatabase();
@@ -151,6 +193,7 @@ public interface SafetyProtocolRepository{
             preparedStatement.setString(1, safetyProtocol.getName());
             preparedStatement.setLong(2, safetyProtocol.getId());
             preparedStatement.executeUpdate();
+            SerializationRepository.writeToTxtFile(Main.SAFETY_PROTOCOL_FILE, safetyProtocol);
         } catch (Exception e) {
 //            throw new RuntimeException(e);
             //Add logger
@@ -249,6 +292,9 @@ public interface SafetyProtocolRepository{
     }
 
     default void updateSafetyProtocolStep(String description, boolean isCritical, Long id){
+        SafetyProtocolStep oldStep = getSafetyProtocolStepById(id);
+        SerializationRepository.writeToTxtFile(Main.SAFETY_PROTOCOL_STEP_FILE,oldStep);
+
         String updateString = "UPDATE SAFETY_PROTOCOL_STEP  SET description = ?, is_critical = ? where id = ?";
         try {
             Connection connection = DBController.connectToDatabase();
@@ -258,8 +304,11 @@ public interface SafetyProtocolRepository{
             preparedStatement.setLong(3, id);
             preparedStatement.executeUpdate();
             connection.close();
+            SerializationRepository.writeToTxtFile(Main.SAFETY_PROTOCOL_STEP_FILE, new SafetyProtocolStep(id, description, isCritical));
+
         }catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
 }

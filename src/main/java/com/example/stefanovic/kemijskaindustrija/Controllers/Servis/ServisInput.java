@@ -112,7 +112,7 @@ public class ServisInput implements EquipmentRepository, ServisRepository {
             checkErrors();
             Service service = new Service(serviceTitlenput.getText().toUpperCase(),
                 serviceDescInput.getText().toUpperCase(),
-                getEquipmentById(getEquipmentId(serviceEquipmentInput.getValue())),
+                EquipmentRepository.getEquipmentById(getEquipmentId(serviceEquipmentInput.getValue())),
                 serviceDateInput.getValue());
 
                 CustomAlert alert = new CustomAlert(Alert.AlertType.CONFIRMATION,

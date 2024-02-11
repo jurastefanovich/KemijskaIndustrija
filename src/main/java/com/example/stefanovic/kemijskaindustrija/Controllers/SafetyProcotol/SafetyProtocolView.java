@@ -3,6 +3,7 @@ package com.example.stefanovic.kemijskaindustrija.Controllers.SafetyProcotol;
 import com.example.stefanovic.kemijskaindustrija.Controllers.Navigation.NavBar;
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.SafetyProtocolRepository;
+import com.example.stefanovic.kemijskaindustrija.DataBase.SerializationRepository;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocol;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocolStep;
@@ -85,6 +86,7 @@ public class SafetyProtocolView implements SafetyProtocolRepository {
                 if(response.getButtonData().equals(ButtonBar.ButtonData.YES)){
                     updateSafetyProtocolStep(Methods.capitalizeFirstLetter(descriptionInput),selected, id);
                     viewSafetyProtocolDetails(safetyProtocol.getId());
+                    SerializationRepository.prepareSafetyProtocolStep();
                 }
             });
         }
@@ -173,6 +175,7 @@ public class SafetyProtocolView implements SafetyProtocolRepository {
                     if ( response.getButtonData().equals(ButtonBar.ButtonData.YES)) {
                         updateSafetyProcolName(safetyProtocol);
                         viewSafetyProtocolDetails(safetyProtocol.getId());
+                        SerializationRepository.prepareSafetyProtocol();
                     }
                 });
             } catch (InputException e) {

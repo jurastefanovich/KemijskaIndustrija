@@ -36,6 +36,6 @@ public class Chemical extends Entitet {
 
     @Override
     public String toString() {
-        return getName() + " " + quantity + " " +  quantityUnit + " " + instructions + " " + dangerLevel;
+        return getId() + " " + getName() + " " + quantity + " " +  quantityUnit + " " + instructions + " " + dangerLevel;
     }
 }

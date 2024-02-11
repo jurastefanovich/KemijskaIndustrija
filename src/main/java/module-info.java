@@ -6,7 +6,6 @@ module com.example.stefanovic.kemijskaindustrija {
 
 
     exports com.example.stefanovic.kemijskaindustrija.Main;
-//    exports com.example.stefanovic.kemijskaindustrija.Controllers;
     exports com.example.stefanovic.kemijskaindustrija.Controllers.AuthControllers;
     exports com.example.stefanovic.kemijskaindustrija.Controllers.Chemical;
     exports com.example.stefanovic.kemijskaindustrija.Controllers.Users;
@@ -14,15 +13,13 @@ module com.example.stefanovic.kemijskaindustrija {
     exports com.example.stefanovic.kemijskaindustrija.DataBase;
     exports com.example.stefanovic.kemijskaindustrija.Authentication;
     exports com.example.stefanovic.kemijskaindustrija.Exception;
-    exports com.example.stefanovic.kemijskaindustrija.Files;
+
     exports com.example.stefanovic.kemijskaindustrija.Model;
 
     opens com.example.stefanovic.kemijskaindustrija.DataBase to javafx.fxml;
-//    opens com.example.stefanovic.kemijskaindustrija.Controllers to javafx.fxml;
     opens com.example.stefanovic.kemijskaindustrija.Main to javafx.fxml;
     opens com.example.stefanovic.kemijskaindustrija.Authentication to javafx.fxml;
     opens com.example.stefanovic.kemijskaindustrija.Exception to javafx.fxml;
-    opens com.example.stefanovic.kemijskaindustrija.Files to javafx.fxml;
     opens com.example.stefanovic.kemijskaindustrija.Model to javafx.fxml;
     opens com.example.stefanovic.kemijskaindustrija.Controllers.AuthControllers to javafx.fxml;
     opens com.example.stefanovic.kemijskaindustrija.Controllers.Chemical to javafx.fxml;
@@ -38,4 +35,6 @@ module com.example.stefanovic.kemijskaindustrija {
     opens com.example.stefanovic.kemijskaindustrija.Controllers.utils to javafx.fxml;
     exports com.example.stefanovic.kemijskaindustrija.Controllers.Servis;
     opens com.example.stefanovic.kemijskaindustrija.Controllers.Servis to javafx.fxml;
+    exports com.example.stefanovic.kemijskaindustrija.Files;
+    opens com.example.stefanovic.kemijskaindustrija.Files to javafx.fxml;
 }

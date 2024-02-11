@@ -19,6 +19,12 @@ public class SafetyProtocol  extends Entitet{
         this.steps = steps;
     }
 
+    public SafetyProtocol(Long id, String name) {
+        super(id, name);
+    }
+
+
+
     public void addProtocolStep(SafetyProtocolStep protocolStep) {
         this.steps.add(protocolStep);
     }
@@ -33,8 +39,6 @@ public class SafetyProtocol  extends Entitet{
 
     @Override
     public String toString() {
-        return "SafetyProtocol{" +
-                "steps=" + steps +
-                '}';
+        return getId() + " " + getName();
     }
 }

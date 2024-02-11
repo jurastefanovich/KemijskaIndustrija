@@ -58,7 +58,14 @@ public class NavBar {
         }
     }
 
-
+    public void showInventory(){
+        try {
+            Main.showScreen("Inventory.fxml");
+        } catch (IOException e) {
+            System.out.println("Error showing inventory list");
+            throw new RuntimeException(e);
+        }
+    }
 
     public void showMyProfile() {
         try {

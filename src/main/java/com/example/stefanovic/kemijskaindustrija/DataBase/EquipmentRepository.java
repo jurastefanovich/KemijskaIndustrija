@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface EquipmentRepository  {
-    default Equipment getEquipmentById(long id) throws Exception{
+    static Equipment getEquipmentFromLine(String line) {
+        String[] lines = line.split(" ");
+        return new Equipment(Long.valueOf(lines[0]),lines[1], lines[2], EquipmentType.valueOf(lines[3]));
+    }
+
+    static Equipment getEquipmentById(long id) {
         Equipment equipment = null;
         try {
             Connection con = DBController.connectToDatabase();
@@ -21,7 +26,7 @@ public interface EquipmentRepository  {
             }
             con.close();
         } catch (Exception e) {
-            throw new Exception(DataBaseMessages.EQUIPMENT_ID_DB_ERROR.getMessage());
+            //ADD LOGGER DataBaseMessages.EQUIPMENT_ID_DB_ERROR.getMessage();
         }
         return equipment;
     }
@@ -43,7 +48,7 @@ public interface EquipmentRepository  {
 
         return chemicalList;
     }
-    private Equipment getEquipmentInfo(ResultSet rs) throws SQLException {
+    static Equipment getEquipmentInfo(ResultSet rs) throws SQLException {
         Long id = rs.getLong("id");
         String name = rs.getString("name");
         String description = rs.getString("description");
@@ -53,7 +58,10 @@ public interface EquipmentRepository  {
 
     default void saveToDatabase(Equipment equipment) throws Exception{
         if (equipment.getId() != null){
-            updateEquipment( equipment);
+            SerializationRepository.writeToTxtFile(Main.EQUIPMENT_FILE, getEquipmentById(equipment.getId()));
+            updateEquipment(equipment);
+            SerializationRepository.writeToTxtFile(Main.EQUIPMENT_FILE, equipment);
+            SerializationRepository.prepareEquipmentForSerialization();
         }
         else{
             saveNewEquipment(equipment);

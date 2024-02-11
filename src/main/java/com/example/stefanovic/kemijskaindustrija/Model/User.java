@@ -77,10 +77,6 @@ public class User extends Entitet  {
 
     @Override
     public String toString() {
-        return "User{" +
-                "lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", account=" + account +
-                '}';
+        return getId() + " " + getName() + " " + getLastName() + " " + getDateOfBirth() + " " + getAccount();
     }
 }
