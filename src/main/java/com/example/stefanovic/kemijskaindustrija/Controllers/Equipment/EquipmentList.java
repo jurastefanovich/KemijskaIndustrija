@@ -1,19 +1,13 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.Equipment;
 
-import com.example.stefanovic.kemijskaindustrija.Controllers.SafetyProcotol.SafetyProtocolView;
 import com.example.stefanovic.kemijskaindustrija.DataBase.EquipmentRepository;
-import com.example.stefanovic.kemijskaindustrija.Exception.SaveToDataBaseException;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
-import com.example.stefanovic.kemijskaindustrija.Model.EquipmentType;
-import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocol;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;

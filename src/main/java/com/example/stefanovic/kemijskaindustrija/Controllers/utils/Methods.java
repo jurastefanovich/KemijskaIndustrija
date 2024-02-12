@@ -14,6 +14,16 @@ import java.util.Objects;
  * Class designed to hold a list of general use methods that can be called and used in all classes
  */
 public class Methods {
+
+    public static String concatenateWithUnderscore(String string){
+        String[] split = string.split(" ");
+        return String.join("_", split);
+    }
+    public static String concatenateWithSpaces(String string){
+        String[] split = string.split("_");
+        return String.join(" ", split);
+    }
+
     /**
      * Method for re-setting a list of error labels
      * @param labels list of labels

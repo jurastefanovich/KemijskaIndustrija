@@ -1,18 +1,23 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.Equipment;
 
-import com.example.stefanovic.kemijskaindustrija.Controllers.utils.InputErrorMessages;
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.EquipmentRepository;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
-import com.example.stefanovic.kemijskaindustrija.Model.EquipmentType;
+import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.Glassware;
+import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.Miscellaneous;
+import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.TitranosEquipment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class EquipmentInput implements EquipmentRepository {
 
@@ -28,7 +33,7 @@ public class EquipmentInput implements EquipmentRepository {
     public Label equipmenetErrorLabel;
 
     @FXML
-    public ListView<EquipmentType> equipmentTypeListView;
+    public ListView<String> equipmentTypeListView;
 
     @FXML
     public TextField equipmentTypeSearch;
@@ -55,7 +60,10 @@ public class EquipmentInput implements EquipmentRepository {
     @FXML
     public Label equipemntIdLabelTitle;
     private Equipment equipment;
-    ObservableList<EquipmentType> data = FXCollections.observableArrayList(EquipmentType.values());
+    ObservableList<String> data = FXCollections.observableArrayList(getAllEquipmentTypes());
+
+
+
     public void initialize(){
         selectedType.setText("");
         equipmentIdLabel.setText("");
@@ -63,10 +71,23 @@ public class EquipmentInput implements EquipmentRepository {
         successMessage.setVisible(false);
         errorMessage.setVisible(false);
         resetErrors();
-        initializeSearch();
+//        initializeSearch();
         equipmentTypeListView.setItems(data);
         setSelectedType();
 
+    }
+
+    private List<String> getAllEquipmentTypes() {
+        List<String> equipmentTypes = new ArrayList<>();
+        Glassware[] glassware = Glassware.values();
+        Miscellaneous[] miscellaneous = Miscellaneous.values();
+        TitranosEquipment[] titranosEquipments = TitranosEquipment.values();
+
+        equipmentTypes.addAll(Arrays.stream(glassware).map(Enum::toString).collect(Collectors.toSet()));
+        equipmentTypes.addAll(Arrays.stream(miscellaneous).map(Enum::toString).collect(Collectors.toSet()));
+        equipmentTypes.addAll(Arrays.stream(titranosEquipments).map(Enum::toString).collect(Collectors.toSet()));
+
+        return equipmentTypes;
     }
 
     private void setSelectedType() {
@@ -77,12 +98,12 @@ public class EquipmentInput implements EquipmentRepository {
 
     }
 
-    private void initializeSearch() {
-        equipmentTypeSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            FilteredList<EquipmentType> filteredData = data.filtered(option -> option.getEquipmentType().toLowerCase().contains(newValue.toLowerCase()));
-            equipmentTypeListView.setItems(filteredData);
-        });
-    }
+//    private void initializeSearch() {
+//        equipmentTypeSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+//            FilteredList<String> filteredData = data.filtered(option -> option.getEquipmentType().toLowerCase().contains(newValue.toLowerCase()));
+//            equipmentTypeListView.setItems(filteredData);
+//        });
+//    }
 
     private void resetErrors(){
         Methods.resetErorrs(nameErrorLabel,descErrorLabel,equipmenetErrorLabel);
@@ -97,7 +118,7 @@ public class EquipmentInput implements EquipmentRepository {
             checkForErrors();
             Equipment equipment1 = new Equipment(Methods.capitalizeFirstLetter(equipmentnameTextField.getText()),
                     Methods.capitalizeFirstLetter(equipmenetDescTextField.getText()),
-                    EquipmentType.valueOf(selectedType.getText()));
+                    selectedType.getText());
 
             if (id != null){
                 equipment1.setId((Long) id);

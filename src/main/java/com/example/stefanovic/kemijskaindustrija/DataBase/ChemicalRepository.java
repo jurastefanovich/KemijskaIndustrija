@@ -1,5 +1,6 @@
 package com.example.stefanovic.kemijskaindustrija.DataBase;
 
+import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.Exception.SaveToDataBaseException;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Address;
@@ -23,7 +24,9 @@ public interface ChemicalRepository extends DataBaseRepository{
      */
     static Chemical getChemicalObject(String line) {
         String[] split = line.split(" ");
-        return new Chemical(Long.parseLong(split[0]), split[1], Double.valueOf(split[2]),split[3],split[4], new BigDecimal(split[5]));
+        return new Chemical(Long.parseLong(split[0]), Methods.concatenateWithSpaces(split[1]),
+                Double.valueOf(split[2]),split[3],Methods.concatenateWithUnderscore(split[4]),
+                new BigDecimal(split[5]));
     }
 
     default   Chemical getChemicalById(Long chem_id){

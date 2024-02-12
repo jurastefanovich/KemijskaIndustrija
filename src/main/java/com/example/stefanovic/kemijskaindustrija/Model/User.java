@@ -1,5 +1,7 @@
 package com.example.stefanovic.kemijskaindustrija.Model;
 import com.example.stefanovic.kemijskaindustrija.Authentication.Account;
+import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
+
 import java.time.LocalDate;
 
 public class User extends Entitet  {
@@ -77,6 +79,6 @@ public class User extends Entitet  {
 
     @Override
     public String toString() {
-        return getId() + " " + getName() + " " + getLastName() + " " + getDateOfBirth() + " " + getAccount();
+        return getId() + " " + Methods.concatenateWithUnderscore(getName()) + " " + Methods.concatenateWithUnderscore(getLastName()) + " " + getDateOfBirth() + " " + getAccount();
     }
 }

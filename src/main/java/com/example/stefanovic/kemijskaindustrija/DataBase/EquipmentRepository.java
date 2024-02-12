@@ -1,8 +1,8 @@
 package com.example.stefanovic.kemijskaindustrija.DataBase;
 
+import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
-import com.example.stefanovic.kemijskaindustrija.Model.EquipmentType;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.List;
 public interface EquipmentRepository  {
     static Equipment getEquipmentFromLine(String line) {
         String[] lines = line.split(" ");
-        return new Equipment(Long.valueOf(lines[0]),lines[1], lines[2], EquipmentType.valueOf(lines[3]));
+        return new Equipment(Long.valueOf(lines[0]), Methods.concatenateWithSpaces(lines[1]), Methods.concatenateWithSpaces(lines[2]), lines[3]);
     }
 
     static Equipment getEquipmentById(long id) {
@@ -52,7 +52,7 @@ public interface EquipmentRepository  {
         Long id = rs.getLong("id");
         String name = rs.getString("name");
         String description = rs.getString("description");
-        EquipmentType type = EquipmentType.valueOf(rs.getString("type"));
+        String type = rs.getString("type");
         return new Equipment(id, name, description, type);
     }
 
@@ -97,9 +97,6 @@ public interface EquipmentRepository  {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        SerializationRepository.writeToTxtFile(Main.EQUIPMENT_FILE, equipment);
-
     }
     private static void exequteEquipmentQuerry(PreparedStatement stmt, Equipment equipment) throws SQLException{
         stmt.setString(1, equipment.getName());

@@ -1,30 +1,31 @@
 package com.example.stefanovic.kemijskaindustrija.Model;
 
+import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
+
 import java.util.Objects;
 
-public class Equipment extends Entitet {
-
+public class Equipment <T>  extends Entitet {
     private String description;
-    private EquipmentType type;
+    private T type;
     private Integer healthBar;
-    public Equipment(String description, EquipmentType type) {
+    public Equipment(String description, T type) {
         this.description = description;
         this.type = type;
     }
 
-    public Equipment(Long id, String description, EquipmentType type) {
+    public Equipment(Long id, String description, T type) {
         super(id);
         this.description = description;
         this.type = type;
     }
 
-    public Equipment(String name, String description, EquipmentType type) {
+    public Equipment(String name, String description, T type) {
         super(name);
         this.description = description;
         this.type = type;
     }
 
-    public Equipment(Long id, String name, String description, EquipmentType type) {
+    public Equipment(Long id, String name, String description, T type) {
         super(id, name);
         this.description = description;
         this.type = type;
@@ -38,11 +39,11 @@ public class Equipment extends Entitet {
         this.description = description;
     }
 
-    public EquipmentType getType() {
+    public T getType() {
         return type;
     }
 
-    public void setType(EquipmentType type) {
+    public void setType(T type) {
         this.type = type;
     }
 
@@ -61,5 +62,5 @@ public class Equipment extends Entitet {
     public int hashCode() { return Objects.hash(super.hashCode(), description, type); }
 
     @Override
-    public String toString() { return getId() +" "+ getName() +" "+ description +" "+ type; }
+    public String toString() { return getId() +" "+ Methods.concatenateWithUnderscore(getName()) +" "+ Methods.concatenateWithUnderscore(description) +" "+ type; }
 }

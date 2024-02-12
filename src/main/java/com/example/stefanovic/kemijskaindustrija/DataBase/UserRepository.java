@@ -3,6 +3,7 @@ package com.example.stefanovic.kemijskaindustrija.DataBase;
 import com.example.stefanovic.kemijskaindustrija.Authentication.AccessLevel;
 import com.example.stefanovic.kemijskaindustrija.Authentication.Account;
 import com.example.stefanovic.kemijskaindustrija.Authentication.AuthMessages;
+import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.Exception.AccountException;
 import com.example.stefanovic.kemijskaindustrija.Exception.EmailException;
 import com.example.stefanovic.kemijskaindustrija.Exception.UsernameTakenException;
@@ -19,6 +20,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository {
+
+    static User getUserFromLine(String line) {
+        String[] lines = line.split(" ");
+        Account account = new Account(lines[4], lines[5],lines[6],AccessLevel.valueOf(lines[7]));
+        return new User(Long.valueOf(lines[0]), Methods.concatenateWithUnderscore( lines[1]), Methods.concatenateWithUnderscore(lines[2]), LocalDate.parse(lines[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")), account);
+    }
 
     static List<User> getAllUsers(){
         List<User> userList = new ArrayList<>();
@@ -231,9 +238,5 @@ public interface UserRepository {
         SerializationRepository.writeToTxtFile(Main.USERS_FILE, user);
     }
 
-    static User getUserFromLine(String line) {
-        String[] lines = line.split(" ");
-        Account account = new Account(lines[4], lines[5],lines[6],AccessLevel.valueOf(lines[7]));
-        return new User(Long.valueOf(lines[0]), lines[1], lines[2], LocalDate.parse(lines[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")), account);
-    }
+
 }
