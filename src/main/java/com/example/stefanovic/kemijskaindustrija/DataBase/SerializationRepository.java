@@ -7,6 +7,8 @@ import com.example.stefanovic.kemijskaindustrija.Model.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -24,6 +26,9 @@ public interface SerializationRepository {
             System.err.println(e);
         }
     }
+
+
+
     default List<ToSerializable> getAllDeserializedChanges(){
         List<ToSerializable> toSerializableList = new ArrayList<>();
         List<String> filePaths = Arrays.asList(Main.SERIALIZE_CHEMICAL,Main.SERIALIZE_EQUIPMENT, Main.SERIALIZE_SERVICE,

@@ -23,19 +23,6 @@ public final class AuthInput {
 
 //    Logger logger = LoggerFactory.getLogger(Glavna.class);
 
-//    static boolean checkIfUserIsBanned(String email) throws BlackListException {
-//        try{
-//            List<BlackList> blackLists = DataBaseController.getBlackListedUsers();
-//            if(blackLists.stream().anyMatch(blackList -> blackList.getUser().get().getAccount().email().equals(email))){
-//                throw new BlackListException(AuthMessages.BAN.getMessage());
-//            }
-//        }catch (BlackListException e){
-//            System.out.println("No blacklisted users");
-//        }
-//
-//        return true;
-//    }
-
     public static boolean checkLoginCredetials(Map<String, String> loginCredentails, String email, String password) throws PasswordException, AccountException {
         if(loginCredentails.containsKey(email)){
             try {

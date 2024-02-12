@@ -3,6 +3,7 @@ package com.example.stefanovic.kemijskaindustrija.Controllers.Equipment;
 import com.example.stefanovic.kemijskaindustrija.DataBase.EquipmentRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -20,21 +21,25 @@ import java.util.List;
 public class EquipmentList implements EquipmentRepository {
 
     @FXML
-    public AnchorPane root;
-    @FXML
-    public TableColumn<Equipment, String > equipmentDescriptionTC;
+    AnchorPane root;
 
     @FXML
-    public TableColumn<Equipment, String > equipmentNameTC;
+    TableColumn<Equipment, String > equipmentDescriptionTC;
 
     @FXML
-    public TableView<Equipment> equipmentTableView;
+    TableColumn<Equipment, Double > equipmentHealthTC;
 
     @FXML
-    public TableColumn<Equipment, String > equipmentTypeTC;
+    TableColumn<Equipment, String > equipmentNameTC;
 
     @FXML
-    public TextField nameTextField;
+    TableView<Equipment> equipmentTableView;
+
+    @FXML
+    TableColumn<Equipment, String > equipmentTypeTC;
+
+    @FXML
+    TextField nameTextField;
 
     private List<Equipment> equipment;
     public void initialize(){
@@ -44,6 +49,7 @@ public class EquipmentList implements EquipmentRepository {
             equipmentNameTC.setCellValueFactory(data->new SimpleStringProperty(data.getValue().getName()));
             equipmentDescriptionTC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescription()));
             equipmentTypeTC.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getType())));
+            equipmentHealthTC.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getHealthBar()));
             showDetails();
         } catch (Exception e) {
             System.out.println(e.getMessage());

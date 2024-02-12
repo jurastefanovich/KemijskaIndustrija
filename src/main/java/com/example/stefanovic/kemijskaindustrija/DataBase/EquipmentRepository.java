@@ -11,7 +11,7 @@ import java.util.List;
 public interface EquipmentRepository  {
     static Equipment getEquipmentFromLine(String line) {
         String[] lines = line.split(" ");
-        return new Equipment(Long.valueOf(lines[0]), Methods.concatenateWithSpaces(lines[1]), Methods.concatenateWithSpaces(lines[2]), lines[3]);
+        return new Equipment(Long.valueOf(lines[0]), Methods.concatenateWithSpaces(lines[1]), Methods.concatenateWithSpaces(lines[2]), lines[3], Double.valueOf(lines[4]));
     }
 
     static Equipment getEquipmentById(long id) {
@@ -30,7 +30,7 @@ public interface EquipmentRepository  {
         }
         return equipment;
     }
-    default List<Equipment> getAllEquipmenet() throws Exception {
+    default List<Equipment> getAllEquipmenet() {
         List<Equipment> chemicalList = new ArrayList<>();
         Connection connection = null;
         try {
@@ -43,7 +43,8 @@ public interface EquipmentRepository  {
             }
             connection.close();
         } catch (Exception e) {
-            throw new Exception(DataBaseMessages.ERROR_GETTING_EQUIPMENT.getMessage());
+            //ADD LOGGER
+            e.printStackTrace();
         }
 
         return chemicalList;
@@ -53,10 +54,16 @@ public interface EquipmentRepository  {
         String name = rs.getString("name");
         String description = rs.getString("description");
         String type = rs.getString("type");
-        return new Equipment(id, name, description, type);
+        Double health = rs.getDouble("health");
+        Equipment equipment = new Equipment(id, name, description, type,health);
+
+        if (equipment.getHealthBar() == null){
+            equipment.setHealthBar(100.0);
+        }
+        return equipment;
     }
 
-    default void saveToDatabase(Equipment equipment) throws Exception{
+    default void saveToDatabase(Equipment equipment){
         if (equipment.getId() != null){
             SerializationRepository.writeToTxtFile(Main.EQUIPMENT_FILE, getEquipmentById(equipment.getId()));
             updateEquipment(equipment);
@@ -69,14 +76,16 @@ public interface EquipmentRepository  {
     }
 
     default void updateEquipment(Equipment equipment) {
-        String sql = "UPDATE equipment SET name = ?, description = ?, type = ? WHERE id = ?";
+        String sql = "UPDATE equipment SET name = ?, description = ?, type = ?, health = ? WHERE id = ?";
         try {
             Connection connection = DBController.connectToDatabase();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, equipment.getName());
             preparedStatement.setString(2, equipment.getDescription());
             preparedStatement.setString(3, String.valueOf(equipment.getType()));
-            preparedStatement.setLong(4, equipment.getId() );
+            preparedStatement.setDouble(4, equipment.getHealthBar());
+            preparedStatement.setLong(5, equipment.getId() );
+
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
@@ -87,7 +96,7 @@ public interface EquipmentRepository  {
     }
 
     private static void saveNewEquipment(Equipment equipment)  {
-        String SQL_INSERT = "INSERT INTO equipment (name, description,type) VALUES(?, ?,?)";
+        String SQL_INSERT = "INSERT INTO equipment (name, description,type, health) VALUES(?, ?,?,?)";
         try {
             Connection connection = DBController.connectToDatabase();
             PreparedStatement stmt = connection.prepareStatement(SQL_INSERT);
@@ -102,6 +111,8 @@ public interface EquipmentRepository  {
         stmt.setString(1, equipment.getName());
         stmt.setString(2, equipment.getDescription());
         stmt.setString(3, String.valueOf(equipment.getType()));
+        stmt.setDouble(4, 100.0);
+
     }
 
     default void deleteEquipmentFromDB(long equipmentId) throws Exception {

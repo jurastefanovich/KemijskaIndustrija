@@ -21,7 +21,7 @@ public interface ServisRepository extends EquipmentRepository{
         return new Service(Long.parseLong(lines[0]), lines[1], lines[2],equipment, LocalDate.parse(lines[4], DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
-    default List<Service> getAllServices(){
+    static List<Service> getAllServices(){
         List<Service> services = new ArrayList<>();
         try {
             Connection connection = DBController.connectToDatabase();
@@ -41,7 +41,7 @@ public interface ServisRepository extends EquipmentRepository{
         return services;
     }
 
-    default Service getServiceInfo(ResultSet rs) throws Exception {
+    static Service getServiceInfo(ResultSet rs) throws Exception {
         Service service = new Service();
         service.setId(rs.getLong("id"));
         service.setTitle(rs.getString("title"));

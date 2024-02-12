@@ -56,12 +56,8 @@ public class ChemicalView implements ChemicalRepository, UserRepository {
         Alert alert = new Alert(Alert.AlertType.WARNING, "If you delete this entity you can not get it back!", ButtonType.OK, ButtonType.CANCEL );
         alert.showAndWait().ifPresent(response ->{
             if (response.getButtonData().equals(ButtonBar.ButtonData.OK_DONE)){
-                try {
-                    DBController.deleteEntity(this.chemical.getId(), "chemical");
-                    goBackToChemicalsScene();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                DBController.deleteEntity(this.chemical.getId(), "chemical");
+                goBackToChemicalsScene();
             }
         });
     }

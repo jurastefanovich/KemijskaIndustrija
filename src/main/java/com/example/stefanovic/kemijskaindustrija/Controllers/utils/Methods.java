@@ -5,15 +5,22 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Class designed to hold a list of general use methods that can be called and used in all classes
  */
 public class Methods {
+
+    public static <T> T getRandomItemFromList(List<T> list){
+        Random random = new Random();
+        int randomIndex = 0;
+        if (!list.isEmpty()){
+            randomIndex = random.nextInt(list.size());
+            return list.get(randomIndex);
+        }
+        return list.get(randomIndex);
+    }
 
     public static String concatenateWithUnderscore(String string){
         String[] split = string.split(" ");

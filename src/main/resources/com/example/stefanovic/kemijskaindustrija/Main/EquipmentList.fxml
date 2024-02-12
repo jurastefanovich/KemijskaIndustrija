@@ -27,7 +27,8 @@
      <columns>
        <TableColumn fx:id="equipmentNameTC" prefWidth="202.0" text="Name" />
        <TableColumn fx:id="equipmentTypeTC" minWidth="0.0" prefWidth="146.0" text="Type" />
-         <TableColumn fx:id="equipmentDescriptionTC" minWidth="0.0" prefWidth="605.0" text="Description" />
+         <TableColumn fx:id="equipmentHealthTC" minWidth="0.0" prefWidth="87.0" text="Health" />
+         <TableColumn fx:id="equipmentDescriptionTC" minWidth="0.0" prefWidth="521.0" text="Description" />
      </columns>
    </TableView>
 </AnchorPane>

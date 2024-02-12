@@ -118,7 +118,7 @@ public class EquipmentInput implements EquipmentRepository {
             checkForErrors();
             Equipment equipment1 = new Equipment(Methods.capitalizeFirstLetter(equipmentnameTextField.getText()),
                     Methods.capitalizeFirstLetter(equipmenetDescTextField.getText()),
-                    selectedType.getText());
+                    selectedType.getText(), equipment.getHealthBar());
 
             if (id != null){
                 equipment1.setId((Long) id);
@@ -170,7 +170,7 @@ public class EquipmentInput implements EquipmentRepository {
 
     public void initialize(long id){
         try {
-            equipment = EquipmentRepository.getEquipmentById(id);
+            this.equipment = EquipmentRepository.getEquipmentById(id);
             equipmentIdLabel.setText(String.valueOf(id));
             equipmentIdLabel.setVisible(false);
             successMessage.setVisible(false);

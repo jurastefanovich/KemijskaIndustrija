@@ -43,7 +43,7 @@ public class ServisList implements ServisRepository, EquipmentRepository {
             servicesTitleTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTitle()));
             servicesDateTableColumn.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getDateOfService())));
             servicesEquipmentTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEquipment().getName() + " " + data.getValue().getEquipment().getType() ));
-            servicesTableView.setItems(FXCollections.observableList(getAllServices()));
+            servicesTableView.setItems(FXCollections.observableList(ServisRepository.getAllServices()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

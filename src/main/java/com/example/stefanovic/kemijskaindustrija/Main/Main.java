@@ -4,11 +4,18 @@ import com.example.stefanovic.kemijskaindustrija.Authentication.AccessLevel;
 import com.example.stefanovic.kemijskaindustrija.Authentication.Account;
 import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Model.User;
+import com.example.stefanovic.kemijskaindustrija.Threads.EquipmentHealthbarThread;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -30,6 +37,9 @@ public class Main extends Application {
     public static final String SERIALIZE_SAFETY_PROTOCOL_STEP = "dat/safetyProtocolStep.dat";
     public static final String USERS_SERIAL_FILE = "dat/serializedUsers.dat";
 
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
+
+
     @Override
     public void start(Stage stage) throws IOException {
         mainStage = stage;
@@ -39,6 +49,11 @@ public class Main extends Application {
         stage.setTitle("Kemijska Industrija");
         stage.setScene(scene);
         stage.show();
+
+
+        var healthBarThread = new Timeline(new KeyFrame(Duration.seconds(5), e-> Platform.runLater(new EquipmentHealthbarThread())));
+        healthBarThread.setCycleCount(Timeline.INDEFINITE);
+        healthBarThread.play();
 
     }
     public static void showScreen(String screenPath) throws IOException{
