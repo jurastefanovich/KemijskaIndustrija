@@ -1,6 +1,10 @@
 package com.example.stefanovic.kemijskaindustrija.Model;
 
+import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
+
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 public class Chemical extends Entitet {
     private Double quantity;
@@ -28,14 +32,15 @@ public class Chemical extends Entitet {
     public String getQuantityUnit() {return quantityUnit;}
     public Double getQuantity() {return quantity;}
 
-//    Maybe this should be added to a DB and able to be edited
-    public String[] getQuantityUnitList(){
+    public List<String> getQuantityUnitList(){
         String[] quantityUnits = {"m","kg","s","mol","cd","m²","m³","L","g","mm","ml","mg"};
-        return quantityUnits;
+        return Arrays.stream(quantityUnits).toList();
     }
 
     @Override
     public String toString() {
-        return getId() + " " + getName() + " " + quantity + " " +  quantityUnit + " " + instructions + " " + dangerLevel;
+        return getId() + " " + Methods.concatenateWithUnderscore(getName()) + " "
+                + quantity + " " +  quantityUnit + " "
+                + Methods.concatenateWithUnderscore(instructions) + " " + dangerLevel;
     }
 }
