@@ -3,6 +3,7 @@ package com.example.stefanovic.kemijskaindustrija.Controllers.Chemical;
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.ChemicalRepository;
 import com.example.stefanovic.kemijskaindustrija.Exception.ChemicalInputFormatException;
+import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Exception.SaveToDataBaseException;
 import com.example.stefanovic.kemijskaindustrija.Model.Chemical;
@@ -104,6 +105,8 @@ public class ChemicalInput implements ChemicalRepository {
         catch (ChemicalInputFormatException e) {
             nameErrorLabel.setText(e.getMessage());
             chemicalNameTextField.setStyle("-fx-border-color: red;");
+        } catch (IllegalStringLengthException | InputException e) {
+            //ADD LOGGER
         }
 
     }
@@ -124,15 +127,13 @@ public class ChemicalInput implements ChemicalRepository {
 
     }
 
-    private void checkForErrors()  {
-        try {
-            Methods.checkTextField(chemicalNameTextField, nameErrorLabel);
-            Methods.checkTextField(quantityTextField, quanitityErrorLabel);
-            Methods.checkTextField(quantityUnitTextField, quantityUnitErrorLabel);
-            Methods.checkComboBox(dangerLevelComboBox, dangerLevelErrorLabel);
-        } catch (InputException e) {
-            //dodat logger
-        }
+    private void checkForErrors() throws InputException, IllegalStringLengthException {
+        Methods.checkTextField(chemicalNameTextField, nameErrorLabel);
+        Methods.checkTextField(quantityTextField, quanitityErrorLabel);
+        Methods.checkTextField(quantityUnitTextField, quantityUnitErrorLabel);
+        Methods.checkComboBox(dangerLevelComboBox, dangerLevelErrorLabel);
+        Methods.checkStringLength(chemicalNameTextField, nameErrorLabel);
+
     }
 
 

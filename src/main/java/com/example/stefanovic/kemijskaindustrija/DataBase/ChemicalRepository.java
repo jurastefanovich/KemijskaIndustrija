@@ -2,9 +2,11 @@ package com.example.stefanovic.kemijskaindustrija.DataBase;
 
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.Exception.SaveToDataBaseException;
+import com.example.stefanovic.kemijskaindustrija.Files.ToSerializable;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Address;
 import com.example.stefanovic.kemijskaindustrija.Model.Chemical;
+import com.example.stefanovic.kemijskaindustrija.Threads.SerializeFiles;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,22 +14,20 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface ChemicalRepository extends DataBaseRepository{
 
-    /**
-     * Method gives back Chemical object from a single line in a file
-     * @param line line from a file representing Chemical data
-     * @return Chemical
-     */
-    static Chemical getChemicalObject(String line) {
-        String[] split = line.split(" ");
-        return new Chemical(Long.parseLong(split[0]), Methods.concatenateWithSpaces(split[1]),
-                Double.valueOf(split[2]),split[3],Methods.concatenateWithUnderscore(split[4]),
-                new BigDecimal(split[5]));
-    }
+//    static Chemical getChemicalObject(String line) {
+//        String[] split = line.split(" ");
+//        return new Chemical(Long.parseLong(split[0]), Methods.concatenateWithSpaces(split[1]),
+//                Double.valueOf(split[2]),split[3],split[4],
+//                new BigDecimal(split[5]));
+//    }
 
     default   Chemical getChemicalById(Long chem_id){
         Chemical chemical = null;
@@ -86,21 +86,18 @@ public interface ChemicalRepository extends DataBaseRepository{
     }
     default BigDecimal getAverageDangerLevel(){
         List<Chemical> chemicals = getChemicalList();
-
         BigDecimal totalDangerLevel = chemicals.stream()
                 .map(Chemical::getDangerLevel)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-
         return totalDangerLevel.divide(BigDecimal.valueOf(chemicals.size()), 2, BigDecimal.ROUND_HALF_UP);
     };
 
 
     default void saveChemical(Chemical chemical)  {
         if (chemical.getId() != null){
-            SerializationRepository.writeToTxtFile(Main.CHEMICALS_FILE, getChemicalById(chemical.getId()));
+            SerializationRepository.prepareObjectForSerialization(getChemicalById(chemical.getId()));
             updateChemical(chemical);
-            SerializationRepository.writeToTxtFile(Main.CHEMICALS_FILE, chemical);
-            SerializationRepository.prepareChemicalsForSerialization();
+            SerializationRepository.prepareObjectForSerialization(chemical);
         }else{
             saveToDatabase(chemical);
         }

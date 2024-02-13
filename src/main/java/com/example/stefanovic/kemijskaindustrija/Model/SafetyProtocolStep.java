@@ -1,9 +1,12 @@
 package com.example.stefanovic.kemijskaindustrija.Model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class SafetyProtocolStep extends Entitet{
-   String description;
+public class SafetyProtocolStep extends Entitet implements Serializable {
+
+    private static final long serialVersionUID = 1534917998583010237L;
+    String description;
    Boolean isCritical;
     public SafetyProtocolStep(){}
     public SafetyProtocolStep(String description, Boolean isCritical) {

@@ -1,5 +1,6 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.utils;
 
+import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -22,10 +23,10 @@ public class Methods {
         return list.get(randomIndex);
     }
 
-    public static String concatenateWithUnderscore(String string){
-        String[] split = string.split(" ");
-        return String.join("_", split);
-    }
+//    public static String concatenateWithUnderscore(String string){
+//        String[] split = string.split(" ");
+//        return String.join("_", split);
+//    }
     public static String concatenateWithSpaces(String string){
         String[] split = string.split("_");
         return String.join(" ", split);
@@ -137,5 +138,13 @@ public class Methods {
     public static void addPadding(Control... controls) {
         List<Control> controlList = Arrays.asList(controls);
         controlList.forEach(control -> control.setStyle("-fx-padding: 5px"));
+    }
+
+    public static void checkStringLength(TextField equipmentnameTextField, Label nameErrorLabel) throws IllegalStringLengthException {
+        if (equipmentnameTextField.getText().length() > 40){
+            nameErrorLabel.setText("Text too long");
+            nameErrorLabel.setStyle("-fx-border-color: red;");
+            throw new IllegalStringLengthException("Text too long");
+        }
     }
 }

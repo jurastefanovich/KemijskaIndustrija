@@ -175,7 +175,7 @@ public class SafetyProtocolView implements SafetyProtocolRepository {
                     if ( response.getButtonData().equals(ButtonBar.ButtonData.YES)) {
                         updateSafetyProcolName(safetyProtocol);
                         viewSafetyProtocolDetails(safetyProtocol.getId());
-                        SerializationRepository.prepareSafetyProtocol();
+                        SerializationRepository.prepareObjectForSerialization(safetyProtocol);
                     }
                 });
             } catch (InputException e) {

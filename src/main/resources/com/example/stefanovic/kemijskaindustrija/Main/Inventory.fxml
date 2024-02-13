@@ -15,7 +15,6 @@
    </Text>
    <TableView fx:id="inventoryTableView" layoutX="228.0" layoutY="66.0" prefHeight="518.0" prefWidth="945.0">
      <columns>
-       <TableColumn fx:id="inventoryIdTableColumn" prefWidth="46.0" text="Id" />
        <TableColumn fx:id="inventoryAuthorOfChangeTableColumn" prefWidth="148.0" text="Author of change" />
          <TableColumn fx:id="inventoryDateOfChangeTableColumn" prefWidth="134.0" text="Date of change" />
          <TableColumn fx:id="inventoryObjectChange" prefWidth="119.0" text="Object" />

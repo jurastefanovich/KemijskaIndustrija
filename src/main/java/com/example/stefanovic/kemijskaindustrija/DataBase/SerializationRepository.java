@@ -3,6 +3,7 @@ package com.example.stefanovic.kemijskaindustrija.DataBase;
 import com.example.stefanovic.kemijskaindustrija.Files.ToSerializable;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.*;
+import com.example.stefanovic.kemijskaindustrija.Threads.SerializeFiles;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -12,6 +13,7 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.ScheduledExecutorService;
 
 public interface SerializationRepository {
 
@@ -20,7 +22,6 @@ public interface SerializationRepository {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filePath));
             out.writeObject(toSerializableList);
             out.close();
-            System.out.println("Serializtion successful");
         } catch (IOException e) {
             //ADD LOGGER
             System.err.println(e);
@@ -29,15 +30,16 @@ public interface SerializationRepository {
 
 
 
-    default List<ToSerializable> getAllDeserializedChanges(){
-        List<ToSerializable> toSerializableList = new ArrayList<>();
-        List<String> filePaths = Arrays.asList(Main.SERIALIZE_CHEMICAL,Main.SERIALIZE_EQUIPMENT, Main.SERIALIZE_SERVICE,
-                Main.USERS_SERIAL_FILE,Main.SERIALIZE_SAFETY_PROTOCOL_STEP, Main.SERIALIZE_SAFETY_PROTOCOL);
-        filePaths.forEach(s -> {
-            getDesirialized(s).forEach(toSerializable -> toSerializableList.add(toSerializable));
-        });
-        return toSerializableList;
-    }
+//    default List<ToSerializable> getAllDeserializedChanges(){
+//        List<ToSerializable> toSerializableList = new ArrayList<>();
+//        List<String> filePaths = Arrays.asList(Main.SERIALIZE_CHEMICAL,Main.SERIALIZE_EQUIPMENT, Main.SERIALIZE_SERVICE,
+//                Main.USERS_SERIAL_FILE,Main.SERIALIZE_SAFETY_PROTOCOL_STEP, Main.SERIALIZE_SAFETY_PROTOCOL);
+//        filePaths.forEach(s -> {
+//            getDesirialized(s).forEach(toSerializable -> toSerializableList.add(toSerializable));
+//        });
+//        return toSerializableList;
+//    }
+
     default List<ToSerializable> getDesirialized(String filepath){
         List<ToSerializable> readObject = new ArrayList<>();
         try {
@@ -69,108 +71,117 @@ public interface SerializationRepository {
         }
     }
 
-    static void prepareChemicalsForSerialization(){
-        List<ToSerializable> toSerializableList = new ArrayList<>();
-        try(BufferedReader reader = Files.newBufferedReader(Path.of(Main.CHEMICALS_FILE))){
-            String line;
-            while ((line = reader.readLine()) != null){
-                Chemical chemical = ChemicalRepository.getChemicalObject(line);
-                LocalDateTime timeOfChange = LocalDateTime.parse(reader.readLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
-                String authorOfChange = reader.readLine();
-
-                Map<LocalDateTime, Chemical> chemicalMap = new HashMap<>();
-                chemicalMap.put(timeOfChange, chemical);
-
-                toSerializableList.add(new ToSerializable<>(chemicalMap, chemical.getId(), authorOfChange, chemical.getClass().getSimpleName()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        serializeToFile(toSerializableList, Main.SERIALIZE_CHEMICAL);
-
+    static <T> void prepareObjectForSerialization(T object){
+        SerializeFiles serializeFiles = new SerializeFiles();
+        Map<LocalDateTime, T> map = new HashMap<>();
+        map.put(LocalDateTime.now(), object);
+        ToSerializable toSerializable = new ToSerializable<>(map, UserRepository.getLoggedInUser().getAccount().email(), object.getClass().getSimpleName());
+        serializeFiles.serialize(toSerializable);
     }
 
 
-    static void prepareEquipmentForSerialization(){
-        List<ToSerializable> toSerializableList = new ArrayList<>();
-        try(BufferedReader reader = Files.newBufferedReader(Path.of(Main.EQUIPMENT_FILE))){
-            String line;
-            while ((line = reader.readLine()) != null){
-                Equipment equipment = EquipmentRepository.getEquipmentFromLine(line);
-                LocalDateTime timeOfChange = LocalDateTime.parse(reader.readLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
-                String authorOfChange = reader.readLine();
+//    static void prepareChemicalsForSerialization(){
+//        List<ToSerializable> toSerializableList = new ArrayList<>();
+//        try(BufferedReader reader = Files.newBufferedReader(Path.of(Main.CHEMICALS_FILE))){
+//            String line;
+//            while ((line = reader.readLine()) != null){
+//                Chemical chemical = ChemicalRepository.getChemicalObject(line);
+//                LocalDateTime timeOfChange = LocalDateTime.parse(reader.readLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
+//                String authorOfChange = reader.readLine();
+//
+//                Map<LocalDateTime, Chemical> chemicalMap = new HashMap<>();
+//                chemicalMap.put(timeOfChange, chemical);
+//
+//                toSerializableList.add(new ToSerializable<>(chemicalMap, chemical.getId(), authorOfChange, chemical.getClass().getSimpleName()));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        serializeToFile(toSerializableList, Main.SERIALIZE_CHEMICAL);
+//
+//    }
 
-                Map<LocalDateTime, Equipment> equipmentMap = new HashMap<>();
-                equipmentMap.put(timeOfChange, equipment);
 
-                toSerializableList.add(new ToSerializable<>(equipmentMap, equipment.getId(), authorOfChange,equipment.getClass().getSimpleName()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        serializeToFile(toSerializableList, Main.SERIALIZE_EQUIPMENT);
-    }
+//    static void prepareEquipmentForSerialization(){
+//        List<ToSerializable> toSerializableList = new ArrayList<>();
+//        try(BufferedReader reader = Files.newBufferedReader(Path.of(Main.EQUIPMENT_FILE))){
+//            String line;
+//            while ((line = reader.readLine()) != null){
+//                Equipment equipment = EquipmentRepository.getEquipmentFromLine(line);
+//                LocalDateTime timeOfChange = LocalDateTime.parse(reader.readLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
+//                String authorOfChange = reader.readLine();
+//
+//                Map<LocalDateTime, Equipment> equipmentMap = new HashMap<>();
+//                equipmentMap.put(timeOfChange, equipment);
+//
+//                toSerializableList.add(new ToSerializable<>(equipmentMap, equipment.getId(), authorOfChange,equipment.getClass().getSimpleName()));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        serializeToFile(toSerializableList, Main.SERIALIZE_EQUIPMENT);
+//    }
 
-    static void prepareUserForSerialization(){
-        List<ToSerializable> toSerializableList = new ArrayList<>();
-        try(BufferedReader reader = Files.newBufferedReader(Path.of(Main.USERS_FILE))){
-            String line;
-            while ((line = reader.readLine()) != null){
-                User user = UserRepository.getUserFromLine(line);
-                LocalDateTime timeOfChange = LocalDateTime.parse(reader.readLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
-                String authorOfChange = reader.readLine();
+//    static void prepareUserForSerialization(){
+//        List<ToSerializable> toSerializableList = new ArrayList<>();
+//        try(BufferedReader reader = Files.newBufferedReader(Path.of(Main.USERS_FILE))){
+//            String line;
+//            while ((line = reader.readLine()) != null){
+//                User user = UserRepository.getUserFromLine(line);
+//                LocalDateTime timeOfChange = LocalDateTime.parse(reader.readLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
+//                String authorOfChange = reader.readLine();
+//
+//                Map<LocalDateTime, User> userMap = new HashMap<>();
+//                userMap.put(timeOfChange, user);
+//
+//                toSerializableList.add(new ToSerializable<>(userMap, user.getId(), authorOfChange, user.getClass().getSimpleName()));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        serializeToFile(toSerializableList, Main.USERS_SERIAL_FILE);
+//    }
 
-                Map<LocalDateTime, User> userMap = new HashMap<>();
-                userMap.put(timeOfChange, user);
+//    static void prepareServiceForSerialization(){
+//        List<ToSerializable> toSerializableList = new ArrayList<>();
+//        try(BufferedReader reader = Files.newBufferedReader(Path.of(Main.SERVICES_FILE))){
+//            String line;
+//            while ((line = reader.readLine()) != null){
+//                Service service = ServisRepository.getServiceFromLine(line);
+//                LocalDateTime timeOfChange = LocalDateTime.parse(reader.readLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
+//                String authorOfChange = reader.readLine();
+//
+//                Map<LocalDateTime, Service> serviceMap = new HashMap<>();
+//                serviceMap.put(timeOfChange, service);
+//
+//                toSerializableList.add(new ToSerializable<>(serviceMap, service.getId(), authorOfChange, service.getClass().getSimpleName()));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        serializeToFile(toSerializableList, Main.SERIALIZE_SERVICE);
+//    }
 
-                toSerializableList.add(new ToSerializable<>(userMap, user.getId(), authorOfChange, user.getClass().getSimpleName()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        serializeToFile(toSerializableList, Main.USERS_SERIAL_FILE);
-    }
-
-    static void prepareServiceForSerialization(){
-        List<ToSerializable> toSerializableList = new ArrayList<>();
-        try(BufferedReader reader = Files.newBufferedReader(Path.of(Main.SERVICES_FILE))){
-            String line;
-            while ((line = reader.readLine()) != null){
-                Service service = ServisRepository.getServiceFromLine(line);
-                LocalDateTime timeOfChange = LocalDateTime.parse(reader.readLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
-                String authorOfChange = reader.readLine();
-
-                Map<LocalDateTime, Service> serviceMap = new HashMap<>();
-                serviceMap.put(timeOfChange, service);
-
-                toSerializableList.add(new ToSerializable<>(serviceMap, service.getId(), authorOfChange, service.getClass().getSimpleName()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        serializeToFile(toSerializableList, Main.SERIALIZE_SERVICE);
-    }
-
-    static void prepareSafetyProtocol(){
-        List<ToSerializable> toSerializableList = new ArrayList<>();
-        try(BufferedReader reader = Files.newBufferedReader(Path.of(Main.SAFETY_PROTOCOL_FILE))){
-            String line;
-            while ((line = reader.readLine()) != null){
-                SafetyProtocol safetyProtocol = SafetyProtocolRepository.getSafetyProtocolFromString(line);
-                LocalDateTime timeOfChange = LocalDateTime.parse(reader.readLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
-                String authorOfChange = reader.readLine();
-
-                Map<LocalDateTime, SafetyProtocol> safetyProtocolHashMap = new HashMap<>();
-                safetyProtocolHashMap.put(timeOfChange, safetyProtocol);
-
-                toSerializableList.add(new ToSerializable<>(safetyProtocolHashMap, safetyProtocol.getId(), authorOfChange, safetyProtocol.getClass().getSimpleName()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        serializeToFile(toSerializableList, Main.SERIALIZE_SAFETY_PROTOCOL);
-    }
+//    static void prepareSafetyProtocol(){
+//        List<ToSerializable> toSerializableList = new ArrayList<>();
+//        try(BufferedReader reader = Files.newBufferedReader(Path.of(Main.SAFETY_PROTOCOL_FILE))){
+//            String line;
+//            while ((line = reader.readLine()) != null){
+//                SafetyProtocol safetyProtocol = SafetyProtocolRepository.getSafetyProtocolFromString(line);
+//                LocalDateTime timeOfChange = LocalDateTime.parse(reader.readLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
+//                String authorOfChange = reader.readLine();
+//
+//                Map<LocalDateTime, SafetyProtocol> safetyProtocolHashMap = new HashMap<>();
+//                safetyProtocolHashMap.put(timeOfChange, safetyProtocol);
+//
+//                toSerializableList.add(new ToSerializable<>(safetyProtocolHashMap, safetyProtocol.getId(), authorOfChange, safetyProtocol.getClass().getSimpleName()));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        serializeToFile(toSerializableList, Main.SERIALIZE_SAFETY_PROTOCOL);
+//    }
 
     static void prepareSafetyProtocolStep(){
         List<ToSerializable> toSerializableList = new ArrayList<>();

@@ -147,10 +147,9 @@ public class UserEdit implements UserRepository, UserFunctionlities{
                     Account oldAccount = new Account(optionalUser.get().getAccount().email(), optionalUser.get().getAccount().password(), optionalUser.get().getAccount().userName(),  optionalUser.get().getAccount().accessLevel());
                     User oldUser = new User(optionalUser.get().getId(), optionalUser.get().getName(), optionalUser.get().getLastName(), optionalUser.get().getDateOfBirth(),oldAccount );
 
-                    SerializationRepository.writeToTxtFile(Main.USERS_FILE,oldUser);
+                    SerializationRepository.prepareObjectForSerialization(oldUser);
                     UserRepository.updateUserInformation(updated);
-                    SerializationRepository.writeToTxtFile(Main.USERS_FILE, updated);
-                    SerializationRepository.prepareUserForSerialization();
+                    SerializationRepository.prepareObjectForSerialization(updated);
                 }
             });
 

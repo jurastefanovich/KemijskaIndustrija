@@ -2,6 +2,7 @@ package com.example.stefanovic.kemijskaindustrija.Controllers.Equipment;
 
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.EquipmentRepository;
+import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
 import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.Glassware;
@@ -60,6 +61,8 @@ public class EquipmentInput implements EquipmentRepository {
     @FXML
     public Label equipemntIdLabelTitle;
     private Equipment equipment;
+    private Double healthBar;
+    private Boolean isInService;
     ObservableList<String> data = FXCollections.observableArrayList(getAllEquipmentTypes());
 
 
@@ -118,7 +121,7 @@ public class EquipmentInput implements EquipmentRepository {
             checkForErrors();
             Equipment equipment1 = new Equipment(Methods.capitalizeFirstLetter(equipmentnameTextField.getText()),
                     Methods.capitalizeFirstLetter(equipmenetDescTextField.getText()),
-                    selectedType.getText(), equipment.getHealthBar());
+                    selectedType.getText(), healthBar,isInService);
 
             if (id != null){
                 equipment1.setId((Long) id);
@@ -126,7 +129,7 @@ public class EquipmentInput implements EquipmentRepository {
 
             confirmation(equipment1);
 
-        }catch (IllegalArgumentException e){
+        }catch (IllegalArgumentException | IllegalStringLengthException | InputException e){
 //            ADD LOGGER
         }
 
@@ -156,15 +159,11 @@ public class EquipmentInput implements EquipmentRepository {
             return Long.valueOf(equipmentIdLabel.getText());
         }
     }
-    private void checkForErrors() {
-        try {
-            Methods.checkTextField(equipmentnameTextField, nameErrorLabel);
-            Methods.checkTextArea(equipmenetDescTextField, descErrorLabel);
-            Methods.checkSearch(selectedType, equipmenetErrorLabel,equipmentTypeSearch);
-        } catch (InputException e) {
-//            ADD LOGGER
-        }
-
+    private void checkForErrors() throws InputException, IllegalStringLengthException {
+        Methods.checkTextField(equipmentnameTextField, nameErrorLabel);
+        Methods.checkTextArea(equipmenetDescTextField, descErrorLabel);
+        Methods.checkSearch(selectedType, equipmenetErrorLabel,equipmentTypeSearch);
+        Methods.checkStringLength(equipmentnameTextField, nameErrorLabel);
     }
 
 
@@ -180,6 +179,8 @@ public class EquipmentInput implements EquipmentRepository {
             selectedType.setText(String.valueOf(equipment.getType()));
             equipmentInputTitle.setText("Update " + equipment.getName());
             interactionButton.setText("Update");
+            this.healthBar = equipment.getHealthBar();
+            this.isInService = equipment.getInService();
         } catch (Exception e) {
 //            ADD LOGGER
         }

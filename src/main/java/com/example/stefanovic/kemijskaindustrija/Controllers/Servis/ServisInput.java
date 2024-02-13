@@ -4,6 +4,7 @@ import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.CustomComponent.CustomAlert;
 import com.example.stefanovic.kemijskaindustrija.DataBase.EquipmentRepository;
 import com.example.stefanovic.kemijskaindustrija.DataBase.ServisRepository;
+import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Exception.ServiceBookedForDateException;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
@@ -56,11 +57,11 @@ public class ServisInput implements EquipmentRepository, ServisRepository {
     @FXML
     public TextField serviceTitlenput;
     DateTimeFormatter customDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    public void initialize(){
+        public void initialize(){
         removeFeedbacks();
         clearErrors();
         try {
-            List<Equipment> equipmentList = getAllEquipmenet();
+            List<Equipment> equipmentList = getAllEquipmenet().stream().filter(equipment -> !equipment.getInService()).toList();
             serviceEquipmentInput.setItems(FXCollections.observableList(getEquipment(equipmentList)));
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -149,11 +150,17 @@ public class ServisInput implements EquipmentRepository, ServisRepository {
         return Long.parseLong(value.split(" ")[0]);
     }
 
-    private void checkErrors() throws InputException {
-           Methods.checkTextField(serviceTitlenput, serviceTitleError);
-           Methods.checkTextArea(serviceDescInput, serviceDescError);
-           Methods.checkDateField(serviceDateInput,serviceDateError);
-           Methods.checkComboBox(serviceEquipmentInput, serviceEquipmentError);
+    private void checkErrors()  {
+        try {
+            Methods.checkTextField(serviceTitlenput, serviceTitleError);
+            Methods.checkTextArea(serviceDescInput, serviceDescError);
+            Methods.checkDateField(serviceDateInput,serviceDateError);
+            Methods.checkComboBox(serviceEquipmentInput, serviceEquipmentError);
+            Methods.checkStringLength(serviceTitlenput, serviceTitleError);
+        } catch (InputException | IllegalStringLengthException e) {
+            //ADD LOGGER
+        }
+
     }
 
 }

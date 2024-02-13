@@ -11,7 +11,10 @@ import java.util.List;
 public interface EquipmentRepository  {
     static Equipment getEquipmentFromLine(String line) {
         String[] lines = line.split(" ");
-        return new Equipment(Long.valueOf(lines[0]), Methods.concatenateWithSpaces(lines[1]), Methods.concatenateWithSpaces(lines[2]), lines[3], Double.valueOf(lines[4]));
+
+        return new Equipment(Long.valueOf(lines[0]), Methods.concatenateWithSpaces(lines[1]),
+                Methods.concatenateWithSpaces(lines[2]), lines[3],
+                Double.valueOf(lines[4]), Boolean.valueOf(lines[5]));
     }
 
     static Equipment getEquipmentById(long id) {
@@ -55,7 +58,8 @@ public interface EquipmentRepository  {
         String description = rs.getString("description");
         String type = rs.getString("type");
         Double health = rs.getDouble("health");
-        Equipment equipment = new Equipment(id, name, description, type,health);
+        Boolean isInService = rs.getBoolean("is_in_service");
+        Equipment equipment = new Equipment(id, name, description, type,health,isInService);
 
         if (equipment.getHealthBar() == null){
             equipment.setHealthBar(100.0);
@@ -65,10 +69,9 @@ public interface EquipmentRepository  {
 
     default void saveToDatabase(Equipment equipment){
         if (equipment.getId() != null){
-            SerializationRepository.writeToTxtFile(Main.EQUIPMENT_FILE, getEquipmentById(equipment.getId()));
+            SerializationRepository.prepareObjectForSerialization(getEquipmentById(equipment.getId()));
             updateEquipment(equipment);
-            SerializationRepository.writeToTxtFile(Main.EQUIPMENT_FILE, equipment);
-            SerializationRepository.prepareEquipmentForSerialization();
+            SerializationRepository.prepareObjectForSerialization(equipment);
         }
         else{
             saveNewEquipment(equipment);
@@ -76,7 +79,7 @@ public interface EquipmentRepository  {
     }
 
     default void updateEquipment(Equipment equipment) {
-        String sql = "UPDATE equipment SET name = ?, description = ?, type = ?, health = ? WHERE id = ?";
+        String sql = "UPDATE equipment SET name = ?, description = ?, type = ?, health = ?, is_in_service=? WHERE id = ?";
         try {
             Connection connection = DBController.connectToDatabase();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -84,7 +87,8 @@ public interface EquipmentRepository  {
             preparedStatement.setString(2, equipment.getDescription());
             preparedStatement.setString(3, String.valueOf(equipment.getType()));
             preparedStatement.setDouble(4, equipment.getHealthBar());
-            preparedStatement.setLong(5, equipment.getId() );
+            preparedStatement.setBoolean(5, equipment.getInService());
+            preparedStatement.setLong(6, equipment.getId() );
 
             preparedStatement.executeUpdate();
             connection.close();
@@ -92,7 +96,6 @@ public interface EquipmentRepository  {
             throw new RuntimeException(e);
         }
 
-        SerializationRepository.writeToTxtFile(Main.EQUIPMENT_FILE, equipment);
     }
 
     private static void saveNewEquipment(Equipment equipment)  {

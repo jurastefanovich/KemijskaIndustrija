@@ -3,6 +3,7 @@ package com.example.stefanovic.kemijskaindustrija.Controllers.SafetyProcotol;
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.InputErrorMessages;
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.SafetyProtocolRepository;
+import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Exception.SaveToDataBaseException;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocol;
@@ -88,7 +89,7 @@ public class SafetyProtocolInput implements SafetyProtocolRepository {
                     safeSafetyProtocol(safetyProtocol1);
                 }
             });
-        } catch (InputException e) {
+        } catch (InputException | IllegalStringLengthException e) {
             //ADD LOGGER -> couldn't save empty protocol steps
         }
     }
@@ -102,13 +103,15 @@ public class SafetyProtocolInput implements SafetyProtocolRepository {
         safetyProcotolTableView.setItems(FXCollections.observableList(steps));
     }
 
-    private void checkForErrors() throws InputException{
+    private void checkForErrors() throws InputException, IllegalStringLengthException {
         Methods.checkTextField(safetyProtocolNameTextField, safetyProtocolNameErrorLabel);
         if(Methods.isTableViewEmpty(safetyProcotolTableView)){
             safetyProtocolStepErrorLabel.setText(InputErrorMessages.EMPTY_FIELD.getMessage());
             safteProcotolStepDescTextField.setStyle("-fx-border-color: red;");
             throw new InputException(InputErrorMessages.EMPTY_FIELD.getMessage());
         }
+        Methods.checkStringLength(safetyProtocolNameTextField, safetyProtocolNameErrorLabel);
+
     }
 
 

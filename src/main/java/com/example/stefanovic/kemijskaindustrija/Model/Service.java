@@ -1,9 +1,12 @@
 package com.example.stefanovic.kemijskaindustrija.Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Service extends Entitet{
+public class Service extends Entitet implements Serializable {
+
+    private static final long serialVersionUID = 9094773718535369688L;
     private String title;
     private String description;
     private Equipment equipment;

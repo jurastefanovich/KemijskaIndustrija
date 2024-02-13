@@ -53,11 +53,12 @@ public interface ServisRepository extends EquipmentRepository{
     }
 
     default void saveService(Service service) throws Exception {
+        Equipment equipment = service.getEquipment();
         if (service.getId() != null){
-            SerializationRepository.writeToTxtFile(Main.SERVICES_FILE, getServiceById(service.getId()));
+            SerializationRepository.prepareObjectForSerialization(getServiceById(service.getId()));
             updateService(service);
-            SerializationRepository.writeToTxtFile(Main.SERVICES_FILE, service);
-            SerializationRepository.prepareServiceForSerialization();
+            SerializationRepository.prepareObjectForSerialization(service);
+            saveToDatabase(equipment);
         }
         else{
             if(isDateIsBooked(service.getDateOfService()))
@@ -65,7 +66,9 @@ public interface ServisRepository extends EquipmentRepository{
                 throw new ServiceBookedForDateException("Termin rezerviran, izaberite drugi");
             }
             saveNewService(service);
-            SerializationRepository.writeToTxtFile(Main.SERVICES_FILE, service);
+            SerializationRepository.prepareObjectForSerialization(service);
+            equipment.setInService(true);
+            saveToDatabase(equipment);
         }
     }
 

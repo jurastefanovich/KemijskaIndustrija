@@ -21,11 +21,11 @@ import java.util.Optional;
 
 public interface UserRepository {
 
-    static User getUserFromLine(String line) {
-        String[] lines = line.split(" ");
-        Account account = new Account(lines[4], lines[5],lines[6],AccessLevel.valueOf(lines[7]));
-        return new User(Long.valueOf(lines[0]), Methods.concatenateWithUnderscore( lines[1]), Methods.concatenateWithUnderscore(lines[2]), LocalDate.parse(lines[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")), account);
-    }
+//    static User getUserFromLine(String line) {
+//        String[] lines = line.split(" ");
+//        Account account = new Account(lines[4], lines[5],lines[6],AccessLevel.valueOf(lines[7]));
+//        return new User(Long.valueOf(lines[0]), Methods.concatenateWithUnderscore( lines[1]), Methods.concatenateWithUnderscore(lines[2]), LocalDate.parse(lines[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")), account);
+//    }
 
     static List<User> getAllUsers(){
         List<User> userList = new ArrayList<>();

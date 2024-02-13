@@ -3,9 +3,9 @@ package com.example.stefanovic.kemijskaindustrija.Model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Entitet implements Serializable {
+public abstract class Entitet {
 
-    private static final long serialVersionUID = 1518259537920038558L;
+
     private String name;
     private Long id;
 

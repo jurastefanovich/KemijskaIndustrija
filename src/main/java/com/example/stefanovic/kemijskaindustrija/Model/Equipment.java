@@ -2,13 +2,17 @@ package com.example.stefanovic.kemijskaindustrija.Model;
 
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Random;
 
-public class Equipment <T>  extends Entitet implements HealthBarInterface{
+public class Equipment <T>  extends Entitet implements HealthBarInterface, Serializable {
+
+    private static final long serialVersionUID = -7064329956452093883L;
     private String description;
     private T type;
     private Double healthBar;
+    private Boolean isInService;
     public Equipment(String description, T type, Double healthBar) {
         this.description = description;
         this.type = type;
@@ -43,6 +47,45 @@ public class Equipment <T>  extends Entitet implements HealthBarInterface{
         this.type = type;
         this.healthBar = healthBar;
 
+    }
+
+    public Equipment(String description, T type, Double healthBar, Boolean isInService) {
+        this.description = description;
+        this.type = type;
+        this.healthBar = healthBar;
+        this.isInService = isInService;
+    }
+
+    public Equipment(Long id, String description, T type, Double healthBar, Boolean isInService) {
+        super(id);
+        this.description = description;
+        this.type = type;
+        this.healthBar = healthBar;
+        this.isInService = isInService;
+    }
+
+    public Equipment(String name, String description, T type, Double healthBar, Boolean isInService) {
+        super(name);
+        this.description = description;
+        this.type = type;
+        this.healthBar = healthBar;
+        this.isInService = isInService;
+    }
+
+    public Equipment(Long id, String name, String description, T type, Double healthBar, Boolean isInService) {
+        super(id, name);
+        this.description = description;
+        this.type = type;
+        this.healthBar = healthBar;
+        this.isInService = isInService;
+    }
+
+    public Boolean getInService() {
+        return isInService;
+    }
+
+    public void setInService(Boolean inService) {
+        isInService = inService;
     }
 
     public String getDescription() {
@@ -83,9 +126,9 @@ public class Equipment <T>  extends Entitet implements HealthBarInterface{
 
     @Override
     public String toString() { return getId() +" "
-            + Methods.concatenateWithUnderscore(getName())
-            +" "+ Methods.concatenateWithUnderscore(description)
-            +" "+ type + " " + healthBar; }
+            + getName()
+            +" "+ description
+            +" "+ type + " " + healthBar +" "+ isInService;  }
 
     @Override
     public void reduceHealth() {
