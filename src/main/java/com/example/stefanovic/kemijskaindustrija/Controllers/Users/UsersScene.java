@@ -1,6 +1,7 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.Users;
 
 import com.example.stefanovic.kemijskaindustrija.Authentication.AccessLevel;
+import com.example.stefanovic.kemijskaindustrija.Authentication.Account;
 import com.example.stefanovic.kemijskaindustrija.Controllers.Navigation.NavBar;
 import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
@@ -48,11 +49,16 @@ public class UsersScene implements UserRepository {
     }
     @FXML
     void filterUsersList() {
-        var filtrirano = allUsers.stream()
-                .filter(user -> user.getAccount().accessLevel().equals(accessLevelComboBox.getValue()))
-                .filter(user -> user.getFullName().contains(searchByNameTextField.getText())).toList();
+        String fullName = searchByNameTextField.getText();
+        AccessLevel accessLevel = accessLevelComboBox.getValue();
+
+        var filtrirano = allUsers.stream().filter(user ->
+                (fullName == null || fullName.isEmpty() || user.getFullName().toLowerCase().contains(fullName.toLowerCase())) &&
+                (accessLevel == null  || user.getAccount().accessLevel().equals(accessLevel))
+        ).toList();
         setUsersTableView(filtrirano);
     }
+
 
     @FXML
     void initialize(){
@@ -85,7 +91,8 @@ public class UsersScene implements UserRepository {
                     root.getChildren().setAll(parent);
 
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        Main.logger.info("Exception occurred trying to view user profile");
+                        Main.logger.error(e.getMessage());
                     }
 
                 }

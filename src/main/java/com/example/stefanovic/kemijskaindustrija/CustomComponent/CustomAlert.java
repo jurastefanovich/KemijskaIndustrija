@@ -8,6 +8,7 @@ import javafx.stage.StageStyle;
 import java.io.File;
 import java.net.MalformedURLException;
 
+//This component isn't currently in use
 public class CustomAlert extends Alert {
     public CustomAlert(AlertType alertType) {
         super(alertType);

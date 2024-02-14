@@ -3,8 +3,10 @@ package com.example.stefanovic.kemijskaindustrija.Controllers.SafetyProcotol;
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.InputErrorMessages;
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.SafetyProtocolRepository;
+import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Exception.SaveToDataBaseException;
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocol;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocolStep;
 import javafx.beans.property.SimpleObjectProperty;
@@ -88,8 +90,8 @@ public class SafetyProtocolInput implements SafetyProtocolRepository {
                     safeSafetyProtocol(safetyProtocol1);
                 }
             });
-        } catch (InputException e) {
-            //ADD LOGGER -> couldn't save empty protocol steps
+        } catch (InputException | IllegalStringLengthException e) {
+            Main.logger.error("Couldn't save empty protocol steps");
         }
     }
     private void resetErrors(){
@@ -102,13 +104,15 @@ public class SafetyProtocolInput implements SafetyProtocolRepository {
         safetyProcotolTableView.setItems(FXCollections.observableList(steps));
     }
 
-    private void checkForErrors() throws InputException{
+    private void checkForErrors() throws InputException, IllegalStringLengthException {
         Methods.checkTextField(safetyProtocolNameTextField, safetyProtocolNameErrorLabel);
         if(Methods.isTableViewEmpty(safetyProcotolTableView)){
             safetyProtocolStepErrorLabel.setText(InputErrorMessages.EMPTY_FIELD.getMessage());
             safteProcotolStepDescTextField.setStyle("-fx-border-color: red;");
             throw new InputException(InputErrorMessages.EMPTY_FIELD.getMessage());
         }
+        Methods.checkStringLength(safetyProtocolNameTextField, safetyProtocolNameErrorLabel);
+
     }
 
 

@@ -168,7 +168,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Hyperlink onAction="#showUsersList" text="All Users" GridPane.columnIndex="1" />
+                              <Hyperlink fx:id="allUsersLink" onAction="#showUsersList" text="All Users" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                      </children>
@@ -186,6 +186,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Hyperlink layoutX="72.0" layoutY="450.0" onAction="#showInventory" text="Inventory" />
+      <Hyperlink fx:id="inventoryLink" layoutX="72.0" layoutY="450.0" onAction="#showInventory" text="Inventory" />
    </children>
 </AnchorPane>

@@ -35,6 +35,12 @@ public class ToSerializable <K,V> implements Serializable {
         this.emailOfAuthor = emailOfAuthor;
     }
 
+    public ToSerializable(Map<K, V> genericMap, String className, String emailOfAuthor) {
+        this.genericMap = genericMap;
+        this.className = className;
+        this.dateOfEntry = dateOfEntry;
+        this.emailOfAuthor = emailOfAuthor;
+    }
 
     public LocalDateTime getDateOfEntry() {
         return dateOfEntry;

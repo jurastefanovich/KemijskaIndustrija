@@ -1,5 +1,6 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.SafetyProcotol;
 import com.example.stefanovic.kemijskaindustrija.DataBase.SafetyProtocolRepository;
+import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocol;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,13 +10,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+
 
 import java.io.IOException;
 import java.util.List;
 
 public class SafetyProtocolList implements SafetyProtocolRepository {
+
     @FXML
     public AnchorPane root;
     @FXML
@@ -28,10 +32,11 @@ public class SafetyProtocolList implements SafetyProtocolRepository {
     public TableView<SafetyProtocol> safetyProtocolTableColumn;
 
     private List<SafetyProtocol> safetyProtocolList;
-
+    @FXML
+    private TextField safetyProtocolSearchField;
     @FXML
     public void initialize(){
-        safetyProtocolList = getAllSafetyProcotols();
+        this.safetyProtocolList = getAllSafetyProcotols();
         safetyProtocolNameTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
         safetyProtocolNumberOfStepsTableColumn.setCellValueFactory(data ->new SimpleStringProperty(String.valueOf(data.getValue().getSteps().size())));
         safetyProtocolTableColumn.setItems(FXCollections.observableList(safetyProtocolList));
@@ -40,8 +45,7 @@ public class SafetyProtocolList implements SafetyProtocolRepository {
 
     private void showSupplierDetails() {
         safetyProtocolTableColumn.setOnMouseClicked(event ->{
-            //Add && UserRepository.isAdmin()
-            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 ){
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && UserRepository.isAdmin()){
                 SafetyProtocol safetyProtocol = safetyProtocolTableColumn.getSelectionModel().getSelectedItem();
                 if (safetyProtocol != null ){
                     try {
@@ -51,13 +55,24 @@ public class SafetyProtocolList implements SafetyProtocolRepository {
                         safetyProtocolView.viewSafetyProtocolDetails(safetyProtocol.getId());
                         root.getChildren().clear();
                         root.getChildren().setAll(parent);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                    } catch (IOException | NullPointerException e) {
+                        Main.logger.info("Error trying to show details of protocol");
+                        Main.logger.error(e.getMessage());
                     }
 
                 }
             }
         });
     }
-
+    @FXML
+    void searchSafetyProtocol() {
+        try {
+            String name = safetyProtocolSearchField.getText();
+            var equipmentFilter = safetyProtocolList.stream().filter(protocol -> name == null || name.isEmpty() || protocol.getName().toLowerCase().contains(name.toLowerCase())).toList();
+            safetyProtocolTableColumn.setItems(FXCollections.observableList(equipmentFilter));
+        } catch (NullPointerException e) {
+            logger.info("Error trying to filter an service list");
+            logger.error(e.getMessage());
+        }
+    }
 }

@@ -2,11 +2,12 @@ package com.example.stefanovic.kemijskaindustrija.Model;
 import com.example.stefanovic.kemijskaindustrija.Authentication.Account;
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class User extends Entitet  {
+public class User extends Entitet  implements Serializable {
 
-
+    private static final long serialVersionUID = 2153013226270915132L;
     private String lastName;
     private LocalDate dateOfBirth;
     private Account account;
@@ -79,6 +80,6 @@ public class User extends Entitet  {
 
     @Override
     public String toString() {
-        return getId() + " " + Methods.concatenateWithUnderscore(getName()) + " " + Methods.concatenateWithUnderscore(getLastName()) + " " + getDateOfBirth() + " " + getAccount();
+        return getId() + " " + getName() + " " + getLastName()+ " " + getDateOfBirth() + " " + getAccount();
     }
 }

@@ -2,13 +2,16 @@ package com.example.stefanovic.kemijskaindustrija.Controllers.Equipment;
 
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.EquipmentRepository;
+import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
 import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.Glassware;
 import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.Miscellaneous;
 import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.TitranosEquipment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -60,7 +63,9 @@ public class EquipmentInput implements EquipmentRepository {
     @FXML
     public Label equipemntIdLabelTitle;
     private Equipment equipment;
-    ObservableList<String> data = FXCollections.observableArrayList(getAllEquipmentTypes());
+    private Double healthBar;
+    private Boolean isInService;
+    ObservableList<String> data = FXCollections.observableArrayList(EquipmentRepository.getAllEquipmentTypes());
 
 
 
@@ -71,23 +76,10 @@ public class EquipmentInput implements EquipmentRepository {
         successMessage.setVisible(false);
         errorMessage.setVisible(false);
         resetErrors();
-//        initializeSearch();
+        initializeSearch();
         equipmentTypeListView.setItems(data);
         setSelectedType();
 
-    }
-
-    private List<String> getAllEquipmentTypes() {
-        List<String> equipmentTypes = new ArrayList<>();
-        Glassware[] glassware = Glassware.values();
-        Miscellaneous[] miscellaneous = Miscellaneous.values();
-        TitranosEquipment[] titranosEquipments = TitranosEquipment.values();
-
-        equipmentTypes.addAll(Arrays.stream(glassware).map(Enum::toString).collect(Collectors.toSet()));
-        equipmentTypes.addAll(Arrays.stream(miscellaneous).map(Enum::toString).collect(Collectors.toSet()));
-        equipmentTypes.addAll(Arrays.stream(titranosEquipments).map(Enum::toString).collect(Collectors.toSet()));
-
-        return equipmentTypes;
     }
 
     private void setSelectedType() {
@@ -98,12 +90,12 @@ public class EquipmentInput implements EquipmentRepository {
 
     }
 
-//    private void initializeSearch() {
-//        equipmentTypeSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-//            FilteredList<String> filteredData = data.filtered(option -> option.getEquipmentType().toLowerCase().contains(newValue.toLowerCase()));
-//            equipmentTypeListView.setItems(filteredData);
-//        });
-//    }
+    private void initializeSearch() {
+        equipmentTypeSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            FilteredList<String> filteredData = data.filtered(option -> option.toLowerCase().contains(newValue.toLowerCase()));
+            equipmentTypeListView.setItems(filteredData);
+        });
+    }
 
     private void resetErrors(){
         Methods.resetErorrs(nameErrorLabel,descErrorLabel,equipmenetErrorLabel);
@@ -118,7 +110,7 @@ public class EquipmentInput implements EquipmentRepository {
             checkForErrors();
             Equipment equipment1 = new Equipment(Methods.capitalizeFirstLetter(equipmentnameTextField.getText()),
                     Methods.capitalizeFirstLetter(equipmenetDescTextField.getText()),
-                    selectedType.getText());
+                    selectedType.getText(), healthBar,isInService);
 
             if (id != null){
                 equipment1.setId((Long) id);
@@ -126,8 +118,9 @@ public class EquipmentInput implements EquipmentRepository {
 
             confirmation(equipment1);
 
-        }catch (IllegalArgumentException e){
-//            ADD LOGGER
+        }catch (IllegalArgumentException | IllegalStringLengthException | InputException e){
+            Main.logger.info("Error while checking information for equipment");
+            Main.logger.error(e.getMessage());
         }
 
 
@@ -142,7 +135,8 @@ public class EquipmentInput implements EquipmentRepository {
                     successMessage.setVisible(true);
                 } catch (Exception e) {
                     errorMessage.setVisible(true);
-                    throw new RuntimeException(e);
+                    Main.logger.info("Error trying to save equipment to DB on frontend");
+                    Main.logger.error(e.getMessage());
                 }
             }
         });
@@ -156,21 +150,17 @@ public class EquipmentInput implements EquipmentRepository {
             return Long.valueOf(equipmentIdLabel.getText());
         }
     }
-    private void checkForErrors() {
-        try {
-            Methods.checkTextField(equipmentnameTextField, nameErrorLabel);
-            Methods.checkTextArea(equipmenetDescTextField, descErrorLabel);
-            Methods.checkSearch(selectedType, equipmenetErrorLabel,equipmentTypeSearch);
-        } catch (InputException e) {
-//            ADD LOGGER
-        }
-
+    private void checkForErrors() throws InputException, IllegalStringLengthException {
+        Methods.checkTextField(equipmentnameTextField, nameErrorLabel);
+        Methods.checkTextArea(equipmenetDescTextField, descErrorLabel);
+        Methods.checkSearch(selectedType, equipmenetErrorLabel,equipmentTypeSearch);
+        Methods.checkStringLength(equipmentnameTextField, nameErrorLabel);
     }
 
 
     public void initialize(long id){
         try {
-            equipment = EquipmentRepository.getEquipmentById(id);
+            this.equipment = EquipmentRepository.getEquipmentById(id);
             equipmentIdLabel.setText(String.valueOf(id));
             equipmentIdLabel.setVisible(false);
             successMessage.setVisible(false);
@@ -180,8 +170,11 @@ public class EquipmentInput implements EquipmentRepository {
             selectedType.setText(String.valueOf(equipment.getType()));
             equipmentInputTitle.setText("Update " + equipment.getName());
             interactionButton.setText("Update");
+            this.healthBar = equipment.getHealthBar();
+            this.isInService = equipment.getInService();
         } catch (Exception e) {
-//            ADD LOGGER
+            Main.logger.info("Error while trying to initialize equipment with ID: " + id);
+            Main.logger.error(e.getMessage());
         }
     }
 

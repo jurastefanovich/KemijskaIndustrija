@@ -2,6 +2,7 @@ package com.example.stefanovic.kemijskaindustrija.Files;
 
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.SerializationRepository;
+import com.example.stefanovic.kemijskaindustrija.Threads.DeserializeFiles;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -23,8 +24,6 @@ public class InventroyController implements SerializationRepository {
     @FXML
     TableColumn<ToSerializable, String> inventoryDateOfChangeTableColumn;
 
-    @FXML
-    TableColumn<ToSerializable, Long> inventoryIdTableColumn;
 
     @FXML
     TableColumn<ToSerializable, String> inventoryInventoryTableColumn;
@@ -34,12 +33,12 @@ public class InventroyController implements SerializationRepository {
 
     @FXML
     void initialize(){
-        inventoryTableView.setItems(FXCollections.observableList(getAllDeserializedChanges()));
-        inventoryIdTableColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getIdOfAlteredProduct()));
+        DeserializeFiles deserializeFiles = new DeserializeFiles();
+        inventoryTableView.setItems(FXCollections.observableList(deserializeFiles.deserialize()));
         inventoryInventoryTableColumn.setCellValueFactory(data -> new SimpleStringProperty(removeBrackets(data.getValue().getGenericMap().values().toString())));
         inventoryDateOfChangeTableColumn.setCellValueFactory(data -> new SimpleStringProperty(parseLocalDateTime(String.valueOf(data.getValue().getGenericMap().keySet()))));
-        inventoryAuthorOfChangeTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEmailOfAuthor()));
-        inventoryObjectChange.setCellValueFactory(data -> new SimpleStringProperty(Methods.capitalizeFirstLetter(data.getValue().getClassName())));
+        inventoryObjectChange.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEmailOfAuthor()));
+        inventoryAuthorOfChangeTableColumn.setCellValueFactory(data -> new SimpleStringProperty(Methods.capitalizeFirstLetter(data.getValue().getClassName())));
     }
 
     private String removeBrackets(String string){
@@ -47,8 +46,8 @@ public class InventroyController implements SerializationRepository {
     }
 
     private String parseLocalDateTime(String dateString){
-        dateString = removeBrackets(dateString);
-        LocalDateTime dateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+        dateString = removeBrackets(dateString).substring(0, 19);
+        LocalDateTime dateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
         String formattedDateTime = dateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
         return formattedDateTime;
     }

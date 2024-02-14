@@ -1,6 +1,9 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.Users;
 
+import com.example.stefanovic.kemijskaindustrija.Authentication.AccessLevel;
 import com.example.stefanovic.kemijskaindustrija.Controllers.Navigation.NavBar;
+import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
+import com.example.stefanovic.kemijskaindustrija.DataBase.DBController;
 import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.User;
@@ -8,17 +11,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
 /**
- * Class is reserved only for the logged in user
+ * Class is reserved only for the logged-in user
  * Other user information is displayed in the Single User Profile class
  */
-public class UserProfile  implements UserRepository {
+public class UserProfile  implements UserRepository, UserFunctionlities {
     NavBar navBar = new NavBar();
     @FXML
     public Button userEditButton;
@@ -44,7 +46,9 @@ public class UserProfile  implements UserRepository {
     private User user;
 
     public void initialize(){
-        setUserInformation(UserRepository.getLoggedInUser());
+        this.user =UserRepository.getLoggedInUser();
+        setUserInformation(this.user);
+//        deleteUserButton.setVisible(!checkIfEditingLoggedInUser(this.user.getId()));
     }
 
 
@@ -55,7 +59,25 @@ public class UserProfile  implements UserRepository {
 
     @FXML
     void deleteUser(){
+        Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to delete this user?", ButtonType.OK, ButtonType.CANCEL);
+        alert.showAndWait().ifPresent(response->{
+            if ( response.getButtonData().equals(ButtonBar.ButtonData.OK_DONE))
+            {
+                try {
+                    if(UserRepository.getLoggedInUser().getAccount().accessLevel().equals(AccessLevel.ADMIN)){
+                        navBar.showLoginScreen();
+                    }
+                    else{
+                        navBar.showUsersList();
+                    }
+                    DBController.deleteEntity(this.user.getId(), "korisnik");
 
+                } catch (Exception e) {
+                    logger.info("Error while trying to delete user on frontend");
+                    logger.error(e.getMessage());
+                }
+            }
+        });
     }
 
     @FXML
@@ -70,7 +92,8 @@ public class UserProfile  implements UserRepository {
             root.getChildren().setAll(parent);
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.info("Exception occurred trying to show user edit view");
+            logger.error(e.getMessage());
         }
     }
 

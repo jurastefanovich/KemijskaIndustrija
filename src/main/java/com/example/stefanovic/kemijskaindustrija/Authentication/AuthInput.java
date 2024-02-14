@@ -9,6 +9,8 @@ import com.example.stefanovic.kemijskaindustrija.Exception.UsernameTakenExceptio
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.User;
 import javafx.scene.control.Label;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -20,21 +22,6 @@ public final class AuthInput {
 
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     private static final Pattern pattern = Pattern.compile(EMAIL_REGEX);
-
-//    Logger logger = LoggerFactory.getLogger(Glavna.class);
-
-//    static boolean checkIfUserIsBanned(String email) throws BlackListException {
-//        try{
-//            List<BlackList> blackLists = DataBaseController.getBlackListedUsers();
-//            if(blackLists.stream().anyMatch(blackList -> blackList.getUser().get().getAccount().email().equals(email))){
-//                throw new BlackListException(AuthMessages.BAN.getMessage());
-//            }
-//        }catch (BlackListException e){
-//            System.out.println("No blacklisted users");
-//        }
-//
-//        return true;
-//    }
 
     public static boolean checkLoginCredetials(Map<String, String> loginCredentails, String email, String password) throws PasswordException, AccountException {
         if(loginCredentails.containsKey(email)){

@@ -1,25 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stefanovic.kemijskaindustrija.Controllers.HomePage.HomePage">
-<!--    <fx:include source="NavBar.fxml" />-->
-   <fx:include source="Sidebar.fxml"/>
-   <AnchorPane layoutX="200.0" layoutY="117.0" prefHeight="367.0" prefWidth="800.0">
+   <fx:include source="Sidebar.fxml" />
+   <AnchorPane layoutX="216.0" layoutY="17.0" prefHeight="560.0" prefWidth="970.0" styleClass="login_background">
       <children>
-         <ImageView  fx:id="chemicalImage" fitHeight="216.0" fitWidth="211.0" layoutX="426.0" layoutY="37.0"  pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="chemicalImage" fitHeight="173.0" fitWidth="177.0" layoutX="214.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@assets/th-1240754052.jpg" />
+               <Image url="@assets/chemical.png" />
             </image>
          </ImageView>
-         <ImageView  fx:id="supplierImage" fitHeight="222.0" fitWidth="200.0" layoutX="128.0" layoutY="34.0"  pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="equipmentImage" fitHeight="321.0" fitWidth="200.0" layoutX="14.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@assets/delivery-truck-icon-vector-21679802-3915140410.jpg" />
+               <Image url="@assets/equipment.png" />
             </image>
          </ImageView>
+         <ImageView fx:id="protocolImage" fitHeight="173.0" fitWidth="177.0" layoutX="387.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/safety_protocol.png" />
+            </image>
+         </ImageView>
+         <ImageView fx:id="serviceImage" fitHeight="173.0" fitWidth="177.0" layoutX="560.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/service.png" />
+            </image>
+         </ImageView>
+         <ImageView fx:id="usersImage" fitHeight="173.0" fitWidth="177.0" layoutX="733.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/users.png" />
+            </image>
+         </ImageView>
+         <Text fill="WHITE" layoutX="47.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Show equipment">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="234.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Show chemicals">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="408.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Show protocols">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="588.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Show services">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="772.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Show users">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Text>
       </children>
    </AnchorPane>
 

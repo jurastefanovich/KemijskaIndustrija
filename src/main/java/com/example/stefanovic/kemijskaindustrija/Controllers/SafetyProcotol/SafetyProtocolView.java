@@ -5,6 +5,7 @@ import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.SafetyProtocolRepository;
 import com.example.stefanovic.kemijskaindustrija.DataBase.SerializationRepository;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocol;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocolStep;
 import javafx.beans.property.SimpleStringProperty;
@@ -69,7 +70,7 @@ public class SafetyProtocolView implements SafetyProtocolRepository {
 
 
         StackPane newRoot = new StackPane();
-        vBox.getChildren().addAll(title,descriptionInput,errorLabel,saveButton);
+        vBox.getChildren().addAll(title,descriptionInput,errorLabel,saveButton, checkBox);
         newRoot.getChildren().addAll(vBox);
 
         newStage.setScene(new Scene(newRoot, 300, 150));
@@ -175,11 +176,12 @@ public class SafetyProtocolView implements SafetyProtocolRepository {
                     if ( response.getButtonData().equals(ButtonBar.ButtonData.YES)) {
                         updateSafetyProcolName(safetyProtocol);
                         viewSafetyProtocolDetails(safetyProtocol.getId());
-                        SerializationRepository.prepareSafetyProtocol();
+                        SerializationRepository.prepareObjectForSerialization(safetyProtocol);
                     }
                 });
             } catch (InputException e) {
-                //Add logger
+                Main.logger.info("Error trying to update protocol name");
+                Main.logger.error(e.getMessage());
             }
         }
     }

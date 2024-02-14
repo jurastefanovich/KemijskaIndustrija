@@ -2,11 +2,14 @@ package com.example.stefanovic.kemijskaindustrija.Model;
 
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-public class Chemical extends Entitet {
+public class Chemical extends Entitet implements Serializable {
+
+    private static final long serialVersionUID = -437278459218234307L;
     private Double quantity;
     private String quantityUnit;
     private String instructions;
@@ -39,8 +42,8 @@ public class Chemical extends Entitet {
 
     @Override
     public String toString() {
-        return getId() + " " + Methods.concatenateWithUnderscore(getName()) + " "
+        return getId() + " " + getName() + " "
                 + quantity + " " +  quantityUnit + " "
-                + Methods.concatenateWithUnderscore(instructions) + " " + dangerLevel;
+                + instructions + " " + dangerLevel;
     }
 }

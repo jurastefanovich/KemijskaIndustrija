@@ -10,6 +10,8 @@ import com.example.stefanovic.kemijskaindustrija.Exception.UsernameTakenExceptio
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
 import com.example.stefanovic.kemijskaindustrija.Model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
 import java.sql.*;
@@ -21,11 +23,7 @@ import java.util.Optional;
 
 public interface UserRepository {
 
-    static User getUserFromLine(String line) {
-        String[] lines = line.split(" ");
-        Account account = new Account(lines[4], lines[5],lines[6],AccessLevel.valueOf(lines[7]));
-        return new User(Long.valueOf(lines[0]), Methods.concatenateWithUnderscore( lines[1]), Methods.concatenateWithUnderscore(lines[2]), LocalDate.parse(lines[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")), account);
-    }
+    Logger logger = LoggerFactory.getLogger(Main.class);
 
     static List<User> getAllUsers(){
         List<User> userList = new ArrayList<>();
@@ -39,7 +37,7 @@ public interface UserRepository {
             }
             con.close();
         } catch (Exception e) {
-//            logger.error("Error getting users from DB!");
+            logger.error("Error getting users from DB!");
         }
         return userList;
     }
@@ -59,8 +57,8 @@ public interface UserRepository {
             builder.setId(id);
             user = builder.build();
         }catch (SQLException e){
-            System.out.println("Error getting user info");
-            System.out.println(e.getMessage());
+            logger.info("Error while trying to get user information from database");
+            logger.error(e.getMessage());
         }
         return user;
     }
@@ -78,7 +76,7 @@ public interface UserRepository {
             }
             con.close();
         } catch (Exception e) {
-//            logger.error("Error getting single user with ID: " + userID);
+            logger.error("Error getting single user with ID: " + userID);
         }
         return Optional.empty();
     }
@@ -103,7 +101,9 @@ public interface UserRepository {
 
     }
 
-    static boolean isUser(){return getLoggedInUser().getAccount().accessLevel() == AccessLevel.USER;}
+    static boolean isUser() throws NullPointerException{
+        return getLoggedInUser().getAccount().accessLevel() == AccessLevel.USER;
+    }
     static boolean isAdmin(){
         return !isUser();
     }
@@ -121,9 +121,9 @@ public interface UserRepository {
             con.close();
 
         }catch (AccountException e) {
-//            logger.error(e.getMessage());
+            logger.error(e.getMessage());
         } catch (Exception e ) {
-//            logger.error(DataBaseMessages.ERROR_GETTING_SINGLE_USER.getMessage());
+            logger.error(DataBaseMessages.ERROR_GETTING_SINGLE_USER.getMessage());
         }
         return loggedInUser;
     }
@@ -133,19 +133,15 @@ public interface UserRepository {
      * @param username username we want to check
      * @param user_id id of the user we want to exclude from the search
      */
-    static void checkIfUsernamCanBeEdited(String username, Long user_id) throws UsernameTakenException{
+    static void checkIfUsernamCanBeEdited(String username, Long user_id) throws Exception {
         String sqlQuery = "SELECT * FROM KORISNIK WHERE username = ? AND id <> ?";
-        try{
-            Connection connection = DBController.connectToDatabase();
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setString(1,username);
-            preparedStatement.setLong(2,user_id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
-                throw new UsernameTakenException(AuthMessages.USERNAME_TAKEN.getMessage());
-            }
-        }catch (Exception e) {
-            throw new RuntimeException(e);
+        Connection connection = DBController.connectToDatabase();
+        PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+        preparedStatement.setString(1,username);
+        preparedStatement.setLong(2,user_id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()){
+            throw new UsernameTakenException(AuthMessages.USERNAME_TAKEN.getMessage());
         }
     }
 
@@ -166,7 +162,8 @@ public interface UserRepository {
                 throw new EmailException(AuthMessages.EMAIL_TAKEN.getMessage());
             }
         }catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying checking if an email can be edited");
+            logger.error(e.getMessage());
         }
     }
 
@@ -185,13 +182,13 @@ public interface UserRepository {
 
             pstmt.executeUpdate();
             con.close();
-            SerializationRepository.writeToTxtFile(Main.USERS_FILE, user);
+            SerializationRepository.prepareObjectForSerialization(user);
         } catch (RuntimeException e){
-            System.out.println("error serializing to file + " + e.getMessage());
-            e.printStackTrace();
+            logger.info("Error while trying serialize user to file");
+            logger.error(e.getMessage());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new AccountException(DataBaseMessages.ERROR_CREATING_ACCOUNT.getMessage());
+            logger.info("Error while trying to create a new account");
+            logger.error(e.getMessage());
 
         }
     }
@@ -204,7 +201,9 @@ public interface UserRepository {
             ResultSet rs = preparedStatement.executeQuery();
             return rs.next();
         }catch (Exception e){
-            throw new RuntimeException(e);
+            logger.info("Error while trying to see if a user is present in a database");
+            logger.error(e.getMessage());
+            return false;
         }
     }
 
@@ -231,11 +230,10 @@ public interface UserRepository {
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
-            //ADD logger -> error updating user information for user
-//            throw new RuntimeException(e);
+            logger.info("Error while trying to update user information");
+            logger.error(e.getMessage());
         }
 
-        SerializationRepository.writeToTxtFile(Main.USERS_FILE, user);
     }
 
 

@@ -2,6 +2,7 @@ package com.example.stefanovic.kemijskaindustrija.Controllers.Chemical;
 
 import com.example.stefanovic.kemijskaindustrija.Controllers.Equipment.EquipmentDetails;
 import com.example.stefanovic.kemijskaindustrija.DataBase.ChemicalRepository;
+import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Chemical;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
@@ -31,23 +32,19 @@ public class ChemicalScene implements ChemicalRepository {
     public TableView<Chemical> chemicalTableView;
 
     @FXML
-    public ComboBox<BigDecimal> dangerLevelComboBox;
-    @FXML
     public TextField searchByNameTextField;
     @FXML
     public TableColumn<Chemical, BigDecimal> chemicalDangerLevelTableColumn;
     @FXML
     public TableColumn<Chemical, String> chemicalNameTableColumn;
-    @FXML
-    public TableColumn<Chemical, String> chemicalSupplierTableColumn;
 
     private List<Chemical> allChemicals;
 
     @FXML
     void filterChemicalsList() {
-        var filtrirano = allChemicals.stream()
-                .filter(chemical -> chemical.getDangerLevel().equals(dangerLevelComboBox.getValue()))
-                .filter(chemical -> chemical.getName().contains(searchByNameTextField.getText())).toList();
+        var filtrirano = allChemicals.stream().filter(chemical -> chemical.getName().toLowerCase()
+                .contains(searchByNameTextField.getText().toLowerCase()))
+                .toList();
         setTableView(filtrirano);
     }
 
@@ -66,8 +63,7 @@ public class ChemicalScene implements ChemicalRepository {
 
     private void viewChemicalDetails(){
         chemicalTableView.setOnMouseClicked(event ->{
-            //Add && UserRepository.isAdmin()
-            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 ){
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && UserRepository.isAdmin()){
                 Chemical chemical = chemicalTableView.getSelectionModel().getSelectedItem();
                 if (chemical != null ){
                     try {
@@ -78,9 +74,8 @@ public class ChemicalScene implements ChemicalRepository {
                         root.getChildren().clear();
                         root.getChildren().setAll(parent);
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        logger.error("Error occurred while trying to open chemical " + e.getMessage());
                     }
-
                 }
             }
         });

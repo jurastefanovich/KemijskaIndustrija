@@ -3,6 +3,7 @@ module com.example.stefanovic.kemijskaindustrija {
     requires javafx.fxml;
     requires java.sql;
     requires org.slf4j;
+    requires org.controlsfx.controls;
 
 
     exports com.example.stefanovic.kemijskaindustrija.Main;

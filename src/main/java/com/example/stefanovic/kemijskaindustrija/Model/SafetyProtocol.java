@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SafetyProtocol  extends Entitet{
+public class SafetyProtocol  extends Entitet implements Serializable{
     private static final long serialVersionUID = -2602443921783658828L;
     List<SafetyProtocolStep> steps = new ArrayList<>();
 

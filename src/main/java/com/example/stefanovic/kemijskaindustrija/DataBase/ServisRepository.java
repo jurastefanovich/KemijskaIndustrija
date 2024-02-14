@@ -6,6 +6,8 @@ import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Chemical;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
 import com.example.stefanovic.kemijskaindustrija.Model.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -14,14 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ServisRepository extends EquipmentRepository{
+    Logger logger = LoggerFactory.getLogger(Main.class);
 
-    static Service getServiceFromLine(String line) {
-        String[] lines = line.split(" ");
-        Equipment equipment = EquipmentRepository.getEquipmentById(Long.parseLong(lines[3]));
-        return new Service(Long.parseLong(lines[0]), lines[1], lines[2],equipment, LocalDate.parse(lines[4], DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-    }
-
-    default List<Service> getAllServices(){
+    static List<Service> getAllServices(){
         List<Service> services = new ArrayList<>();
         try {
             Connection connection = DBController.connectToDatabase();
@@ -35,29 +32,37 @@ public interface ServisRepository extends EquipmentRepository{
 
             connection.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to get all service from database");
+            logger.error(e.getMessage());
         }
 
         return services;
     }
 
-    default Service getServiceInfo(ResultSet rs) throws Exception {
+    static Service getServiceInfo(ResultSet rs)  {
         Service service = new Service();
-        service.setId(rs.getLong("id"));
-        service.setTitle(rs.getString("title"));
-        service.setDescription(rs.getString("description"));
-        service.setDateOfService(rs.getDate("date_of_service").toLocalDate());
-        Equipment equipment = EquipmentRepository.getEquipmentById(rs.getLong("equipment_id"));
-        service.setEquipment(equipment);
+        try {
+            service.setId(rs.getLong("id"));
+            service.setTitle(rs.getString("title"));
+            service.setDescription(rs.getString("description"));
+            service.setDateOfService(rs.getDate("date_of_service").toLocalDate());
+            Equipment equipment = EquipmentRepository.getEquipmentById(rs.getLong("equipment_id"));
+            service.setEquipment(equipment);
+        } catch (SQLException e) {
+            logger.info("Error while trying to get service information from result set");
+            logger.error(e.getMessage());
+        }
+
         return service;
     }
 
-    default void saveService(Service service) throws Exception {
+    default void saveService(Service service) throws ServiceBookedForDateException {
+        Equipment equipment = service.getEquipment();
         if (service.getId() != null){
-            SerializationRepository.writeToTxtFile(Main.SERVICES_FILE, getServiceById(service.getId()));
+            SerializationRepository.prepareObjectForSerialization(getServiceById(service.getId()));
             updateService(service);
-            SerializationRepository.writeToTxtFile(Main.SERVICES_FILE, service);
-            SerializationRepository.prepareServiceForSerialization();
+            SerializationRepository.prepareObjectForSerialization(service);
+            saveToDatabase(equipment);
         }
         else{
             if(isDateIsBooked(service.getDateOfService()))
@@ -65,7 +70,9 @@ public interface ServisRepository extends EquipmentRepository{
                 throw new ServiceBookedForDateException("Termin rezerviran, izaberite drugi");
             }
             saveNewService(service);
-            SerializationRepository.writeToTxtFile(Main.SERVICES_FILE, service);
+            SerializationRepository.prepareObjectForSerialization(service);
+            equipment.setInService(true);
+            saveToDatabase(equipment);
         }
     }
 
@@ -82,7 +89,8 @@ public interface ServisRepository extends EquipmentRepository{
             }
             connection.close();
         } catch (Exception e) {
-            //ADD LOGGER
+            logger.info("Error while trying to get service by id: " + id);
+            logger.error(e.getMessage());
         }
         return service;
     }
@@ -96,12 +104,13 @@ public interface ServisRepository extends EquipmentRepository{
             ResultSet rs = preparedStatement.executeQuery();
             return rs.next();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to see if a date is booked");
+            logger.error(e.getMessage());
+            return false;
         }
-
     }
 
-    default void updateService(Service service) throws SQLException {
+    default void updateService(Service service) {
         String sql = "UPDATE service SET title = ?, description = ?, date_of_service = ?, equipment_id = ? WHERE id = ?";
         try {
             Connection connection = DBController.connectToDatabase();
@@ -114,10 +123,9 @@ public interface ServisRepository extends EquipmentRepository{
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to update service");
+            logger.error(e.getMessage());
         }
-
-
     }
 
     private static void saveNewService(Service service) {
@@ -132,10 +140,9 @@ public interface ServisRepository extends EquipmentRepository{
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to save new service to database");
+            logger.error(e.getMessage());
         }
-
-
     }
 
 }

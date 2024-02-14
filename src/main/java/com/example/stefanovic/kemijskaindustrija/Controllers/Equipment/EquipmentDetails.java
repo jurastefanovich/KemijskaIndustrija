@@ -14,10 +14,13 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class EquipmentDetails implements EquipmentRepository {
+    Logger logger = LoggerFactory.getLogger(Main.class);
 
     NavBar navBar = new NavBar();
     @FXML
@@ -50,7 +53,8 @@ public class EquipmentDetails implements EquipmentRepository {
             root.getChildren().clear();
             root.getChildren().setAll(parent);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to go to edit equipment view");
+            logger.error(e.getMessage());
         }
     }
 
@@ -67,7 +71,8 @@ public class EquipmentDetails implements EquipmentRepository {
             equipmentDescriptionText.setText(equipment.getDescription());
             equipmentTypeText.setText(String.valueOf(equipment.getType()));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.info("Error while trying to initialize equipment with ID: " + id);
+            logger.error(e.getMessage());
         }
     }
 
@@ -80,7 +85,8 @@ public class EquipmentDetails implements EquipmentRepository {
                 try {
                    deleteEquipmentFromDB(Long.parseLong(equipmentIdText.getText()));
                 } catch (Exception e) {
-//                    ADD LOGGER                    throw new RuntimeException(e);
+                    logger.info("Error while trying to delete equipment on frontend");
+                    logger.error(e.getMessage());
                 }
                 goToEquipmentListView();
             }

@@ -3,13 +3,17 @@ package com.example.stefanovic.kemijskaindustrija.Controllers.Chemical;
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.ChemicalRepository;
 import com.example.stefanovic.kemijskaindustrija.Exception.ChemicalInputFormatException;
+import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Exception.SaveToDataBaseException;
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Chemical;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -17,6 +21,7 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public class ChemicalInput implements ChemicalRepository {
+    Logger logger = LoggerFactory.getLogger(Main.class);
 
     @FXML
     public AnchorPane chemicalErrorFeedback;
@@ -104,6 +109,8 @@ public class ChemicalInput implements ChemicalRepository {
         catch (ChemicalInputFormatException e) {
             nameErrorLabel.setText(e.getMessage());
             chemicalNameTextField.setStyle("-fx-border-color: red;");
+        } catch (IllegalStringLengthException | InputException e) {
+            logger.error("Error occurred while inputting a new chemical " + e.getMessage());
         }
 
     }
@@ -124,28 +131,27 @@ public class ChemicalInput implements ChemicalRepository {
 
     }
 
-    private void checkForErrors()  {
-        try {
-            Methods.checkTextField(chemicalNameTextField, nameErrorLabel);
-            Methods.checkTextField(quantityTextField, quanitityErrorLabel);
-            Methods.checkTextField(quantityUnitTextField, quantityUnitErrorLabel);
-            Methods.checkComboBox(dangerLevelComboBox, dangerLevelErrorLabel);
-        } catch (InputException e) {
-            //dodat logger
-        }
+    private void checkForErrors() throws InputException, IllegalStringLengthException {
+        Methods.checkTextField(chemicalNameTextField, nameErrorLabel);
+        Methods.checkTextField(quantityTextField, quanitityErrorLabel);
+        Methods.checkTextField(quantityUnitTextField, quantityUnitErrorLabel);
+        Methods.checkComboBox(dangerLevelComboBox, dangerLevelErrorLabel);
+        Methods.checkStringLength(chemicalNameTextField, nameErrorLabel);
     }
 
 
     public void initialize(Long id) {
         this.id = id;
         Chemical chemical = getChemicalById(id);
+        String dangerLevel = String.valueOf(chemical.getDangerLevel());
         saveButton.setText("Update");
         title.setText("Update information for " + chemical.getName());
         chemicalNameTextField.setText(chemical.getName());
         quantityTextField.setText(String.valueOf(chemical.getQuantity()));
         quantityUnitTextField.setText(chemical.getQuantityUnit());
         instructionsTextField.setText(chemical.getInstructions());
-        dangerLevelComboBox.setPromptText(String.valueOf(chemical.getDangerLevel()));
+        dangerLevelComboBox.setPromptText(dangerLevel);
+        dangerLevelComboBox.setValue(dangerLevel);
         this.dangerLevel = chemical.getDangerLevel();
     }
 

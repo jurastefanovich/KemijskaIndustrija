@@ -1,27 +1,26 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.utils;
 
+import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Class designed to hold a list of general use methods that can be called and used in all classes
  */
 public class Methods {
 
-    public static String concatenateWithUnderscore(String string){
-        String[] split = string.split(" ");
-        return String.join("_", split);
-    }
-    public static String concatenateWithSpaces(String string){
-        String[] split = string.split("_");
-        return String.join(" ", split);
+    public static <T> T getRandomItemFromList(List<T> list){
+        Random random = new Random();
+        int randomIndex = 0;
+        if (!list.isEmpty()){
+            randomIndex = random.nextInt(list.size());
+            return list.get(randomIndex);
+        }
+        return list.get(randomIndex);
     }
 
     /**
@@ -130,5 +129,13 @@ public class Methods {
     public static void addPadding(Control... controls) {
         List<Control> controlList = Arrays.asList(controls);
         controlList.forEach(control -> control.setStyle("-fx-padding: 5px"));
+    }
+
+    public static void checkStringLength(TextField equipmentnameTextField, Label nameErrorLabel) throws IllegalStringLengthException {
+        if (equipmentnameTextField.getText().length() > 40){
+            nameErrorLabel.setText("Text too long");
+            nameErrorLabel.setStyle("-fx-background-color: red;");
+            throw new IllegalStringLengthException("Text too long");
+        }
     }
 }

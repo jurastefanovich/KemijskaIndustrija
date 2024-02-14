@@ -63,7 +63,7 @@ public class UserEdit implements UserRepository, UserFunctionlities{
     void initialize(){
         User loggedInUser = UserRepository.getLoggedInUser();
         resetLabels();
-        setInformation(UserRepository.getLoggedInUser());
+        setInformation(loggedInUser);
         checkIfEditingLoggedInUser(this.user.getId());
     }
 
@@ -130,6 +130,7 @@ public class UserEdit implements UserRepository, UserFunctionlities{
         resetLabels();
         try {
             checkIfFieldAreEmpty();
+
             UserRepository.checkIfEmailCanBeEdited(email, this.user.getId());
             AuthInput.checkEmailAddress(email);
             UserRepository.checkIfUsernamCanBeEdited(userName, this.user.getId());
@@ -147,23 +148,21 @@ public class UserEdit implements UserRepository, UserFunctionlities{
                     Account oldAccount = new Account(optionalUser.get().getAccount().email(), optionalUser.get().getAccount().password(), optionalUser.get().getAccount().userName(),  optionalUser.get().getAccount().accessLevel());
                     User oldUser = new User(optionalUser.get().getId(), optionalUser.get().getName(), optionalUser.get().getLastName(), optionalUser.get().getDateOfBirth(),oldAccount );
 
-                    SerializationRepository.writeToTxtFile(Main.USERS_FILE,oldUser);
+                    SerializationRepository.prepareObjectForSerialization(oldUser);
                     UserRepository.updateUserInformation(updated);
-                    SerializationRepository.writeToTxtFile(Main.USERS_FILE, updated);
-                    SerializationRepository.prepareUserForSerialization();
+                    SerializationRepository.prepareObjectForSerialization(updated);
                 }
             });
 
-        } catch (EmailException e){
-            emailErrorLabel.setText(e.getMessage());
-        }catch (PasswordException e){
-            passwordErrorLabel.setText(e.getMessage());
-        }catch (IllegalAccessLevelChangeException e){
-            accessLevelErrorLabel.setText(e.getMessage());
-        }catch (UsernameTakenException e) {
-            userNameErrorLabel.setText(e.getMessage());
-        }catch (InputException | NullPointerException e) {
-            //Add logger
+        } catch (Exception e) {
+            if (e instanceof PasswordException){passwordErrorLabel.setText(e.getMessage());}
+            if (e instanceof EmailException){emailErrorLabel.setText(e.getMessage());}
+            if (e instanceof UsernameTakenException) {userNameErrorLabel.setText(e.getMessage());}
+            if (e instanceof IllegalAccessLevelChangeException) {   accessLevelErrorLabel.setText(e.getMessage());}
+            else{
+                logger.info("Exception occurred in the user edit view");
+                logger.error(e.getMessage());
+            }
         }
 
     }

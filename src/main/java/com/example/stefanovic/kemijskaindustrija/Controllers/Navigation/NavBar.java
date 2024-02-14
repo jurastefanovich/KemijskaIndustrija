@@ -4,34 +4,54 @@ import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class NavBar {
 
     @FXML
-    private MenuItem AdminView;
-    @FXML
     private Text chemSafeLogo;
+
+    @FXML
+    private Hyperlink inventoryLink;
+
+    @FXML
+    private Hyperlink allUsersLink;
     @FXML
     public void initialize(){
-//        AdminView.setVisible(UserRepository.isAdmin());
+        boolean isAdmin = UserRepository.isAdmin();
         chemSafeLogo.setOnMouseClicked(event -> showHomeScreen());
+        inventoryLink.setVisible(isAdmin);
+        allUsersLink.setVisible(isAdmin);
     }
 
-    public void showSingUpScreen() throws IOException{
-        Main.showScreen("SingUp.fxml");
+    public void showSingUpScreen() {
+        try {
+            Main.showScreen("SingUp.fxml");
+        } catch (IOException e) {
+            Main.logger.info("Error trying to show singup.fxml");
+            Main.logger.error(e.getMessage());
+        }
     }
-    public void showLoginScreen() throws IOException{
-        Main.showScreen("Login.fxml");
+    public void showLoginScreen() {
+        try {
+            Main.showScreen("Login.fxml");
+        } catch (IOException e) {
+            Main.logger.info("Error trying to show login");
+            Main.logger.error(e.getMessage());
+        }
     }
-    public void showForgottenPasswordScreen() throws IOException{
-        Main.showScreen("ForgottenPassword.fxml");
+    public void showForgottenPasswordScreen(){
+        try {
+            Main.showScreen("ForgottenPassword.fxml");
+        } catch (IOException e) {
+            Main.logger.info("Error trying to show ForgottenPassword.fxml");
+            Main.logger.error(e.getMessage());
+        }
     }
 
     public void logout() {
@@ -42,7 +62,8 @@ public class NavBar {
                 try {
                     Main.showScreen("Login.fxml");
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    Main.logger.info("Error trying to log out");
+                    Main.logger.error(e.getMessage());
                 }
             }
         });
@@ -53,8 +74,8 @@ public class NavBar {
         try {
             Main.showScreen("ChemicalScene.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing chem list");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show ChemicalScene.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
 
@@ -62,8 +83,8 @@ public class NavBar {
         try {
             Main.showScreen("Inventory.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing inventory list");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show Inventory.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
 
@@ -71,24 +92,24 @@ public class NavBar {
         try {
             Main.showScreen("UserProfile.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing user profile");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show UserProfile.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
     public void showHomeScreen(){
         try {
             Main.showScreen("HomePage.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing home screen");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show UserProfile.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
     public void showUsersList() {
         try {
             Main.showScreen("UsersScene.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing supplier scene");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show UserProfile.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
 
@@ -96,16 +117,16 @@ public class NavBar {
         try {
             Main.showScreen("UserEdit.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing user edit");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show UserProfile.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
     public void showUserProfile(){
         try {
             Main.showScreen("UserProfile.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing user profile");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show UserProfile.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
 
@@ -113,8 +134,8 @@ public class NavBar {
         try {
             Main.showScreen("ChemicalInput.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing chemical input");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show ChemicalInput.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
 
@@ -125,8 +146,8 @@ public class NavBar {
         try {
             Main.showScreen("ProtocolInput.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing protocol input");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show ProtocolInput.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
 
@@ -134,8 +155,8 @@ public class NavBar {
         try {
             Main.showScreen("ProtocolList.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing protocol list");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show ProtocolList.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
 
@@ -143,8 +164,8 @@ public class NavBar {
         try {
             Main.showScreen("EquipementInput.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing equipment input");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show EquipementInput.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
 
@@ -152,8 +173,8 @@ public class NavBar {
         try {
             Main.showScreen("EquipmentList.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing equipment input");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show EquipmentList.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
 
@@ -161,8 +182,8 @@ public class NavBar {
         try {
             Main.showScreen("ServiceInput.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing service input");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show ServiceInput.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
 
@@ -170,8 +191,8 @@ public class NavBar {
         try {
             Main.showScreen("ServiceList.fxml");
         } catch (IOException e) {
-            System.out.println("Error showing equipment input");
-            throw new RuntimeException(e);
+            Main.logger.info("Error trying to show ServiceList.fxml");
+            Main.logger.error(e.getMessage());
         }
     }
 }
