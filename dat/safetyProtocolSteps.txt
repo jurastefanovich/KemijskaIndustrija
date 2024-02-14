@@ -22,3 +22,15 @@ admin
 108 Otiči do stroja za suženje update false
 11.02.2024, 21:11
 admin
+108 Otiči do stroja za suženje update false
+14.02.2024, 18:33
+admin
+108 Otiči do stroja za suženje update2 false
+14.02.2024, 18:33
+admin
+165 Novi step true
+14.02.2024, 19:23
+admin
+165 Novi step false
+14.02.2024, 19:23
+admin

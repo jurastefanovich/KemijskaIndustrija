@@ -143,13 +143,15 @@ public class ChemicalInput implements ChemicalRepository {
     public void initialize(Long id) {
         this.id = id;
         Chemical chemical = getChemicalById(id);
+        String dangerLevel = String.valueOf(chemical.getDangerLevel());
         saveButton.setText("Update");
         title.setText("Update information for " + chemical.getName());
         chemicalNameTextField.setText(chemical.getName());
         quantityTextField.setText(String.valueOf(chemical.getQuantity()));
         quantityUnitTextField.setText(chemical.getQuantityUnit());
         instructionsTextField.setText(chemical.getInstructions());
-        dangerLevelComboBox.setPromptText(String.valueOf(chemical.getDangerLevel()));
+        dangerLevelComboBox.setPromptText(dangerLevel);
+        dangerLevelComboBox.setValue(dangerLevel);
         this.dangerLevel = chemical.getDangerLevel();
     }
 

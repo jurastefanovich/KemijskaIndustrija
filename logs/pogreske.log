@@ -37,3 +37,235 @@
 2024-02-14 17:06:10,976 User.id= ERROR [JavaFX Application Thread] c.e.s.k.M.Main [DBController.java:55] An error occurred while trying to get account information Cannot invoke "com.example.stefanovic.kemijskaindustrija.Authentication.Account.email()" because the return value of "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" is null
 2024-02-14 17:06:10,976 User.id= ERROR [JavaFX Application Thread] c.e.s.k.M.Main [DBController.java:55] An error occurred while trying to get account information Cannot invoke "com.example.stefanovic.kemijskaindustrija.Authentication.Account.email()" because the return value of "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" is null
 2024-02-14 17:06:10,976 User.id= ERROR [JavaFX Application Thread] c.e.s.k.M.Main [DBController.java:55] An error occurred while trying to get account information Cannot invoke "com.example.stefanovic.kemijskaindustrija.Authentication.Account.email()" because the return value of "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" is null
+2024-02-14 18:27:47,558 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [ChemicalInput.java:113] Error occurred while inputting a new chemical Field is required!
+2024-02-14 18:29:06,135 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentInput.java:133] Error while checking information for equipment
+2024-02-14 18:29:06,135 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentInput.java:134] Field is required!
+2024-02-14 18:29:11,894 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentInput.java:133] Error while checking information for equipment
+2024-02-14 18:29:11,894 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentInput.java:134] Text too long
+2024-02-14 18:31:43,236 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SafetyProtocolInput.java:93] Couldn't save empty protocol steps
+2024-02-14 18:31:47,795 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SafetyProtocolInput.java:93] Couldn't save empty protocol steps
+2024-02-14 18:31:54,811 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SafetyProtocolInput.java:93] Couldn't save empty protocol steps
+2024-02-14 18:31:55,964 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SafetyProtocolInput.java:93] Couldn't save empty protocol steps
+2024-02-14 18:33:02,088 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [SafetyProtocolList.java:59] Error trying to show details of protocol
+2024-02-14 18:33:02,090 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SafetyProtocolList.java:60] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocol.getId()" because "this.safetyProtocol" is null
+2024-02-14 18:34:04,311 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:146] Error while trying checking if a username can be edited
+2024-02-14 18:34:04,312 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:147] Username already taken!
+2024-02-14 18:34:08,543 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:146] Error while trying checking if a username can be edited
+2024-02-14 18:34:08,543 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:147] Username already taken!
+2024-02-14 18:34:11,466 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:146] Error while trying checking if a username can be edited
+2024-02-14 18:34:11,467 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:147] Username already taken!
+2024-02-14 18:34:15,992 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:146] Error while trying checking if a username can be edited
+2024-02-14 18:34:15,992 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:147] Username already taken!
+2024-02-14 18:48:42,618 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentInput.java:133] Error while checking information for equipment
+2024-02-14 18:48:42,620 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentInput.java:134] Field is required!
+2024-02-14 18:48:46,041 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [ServisInput.java:164] Wrong input format in service input
+2024-02-14 18:48:46,041 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [ServisInput.java:165] Field is required!
+2024-02-14 18:48:46,042 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [ServisInput.java:142] Error trying to save to database
+2024-02-14 18:48:46,042 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [ServisInput.java:143] Cannot invoke "String.split(String)" because "value" is null
+2024-02-14 18:48:56,683 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SafetyProtocolInput.java:93] Couldn't save empty protocol steps
+2024-02-14 18:49:00,657 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SafetyProtocolInput.java:93] Couldn't save empty protocol steps
+2024-02-14 18:49:09,281 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SafetyProtocolInput.java:93] Couldn't save empty protocol steps
+2024-02-14 18:51:25,178 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:146] Error while trying checking if a username can be edited
+2024-02-14 18:51:25,181 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:147] Username already taken!
+2024-02-14 19:00:19,629 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:146] Error while trying checking if a username can be edited
+2024-02-14 19:00:19,632 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:147] Username already taken!
+2024-02-14 19:00:49,274 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:146] Error while trying checking if a username can be edited
+2024-02-14 19:00:49,274 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:147] Username already taken!
+2024-02-14 19:00:53,451 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserEdit.java:163] Exception occurred in the user edit view
+2024-02-14 19:00:53,451 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserEdit.java:164] Field is required!
+2024-02-14 19:01:11,657 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:146] Error while trying checking if a username can be edited
+2024-02-14 19:01:11,657 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:147] Username already taken!
+2024-02-14 19:06:49,508 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:146] Error while trying checking if a username can be edited
+2024-02-14 19:06:50,073 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:147] Username already taken!
+2024-02-14 19:09:05,091 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserEdit.java:163] Exception occurred in the user edit view
+2024-02-14 19:09:05,092 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserEdit.java:164] Username already taken!
+2024-02-14 19:09:09,862 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserEdit.java:163] Exception occurred in the user edit view
+2024-02-14 19:09:09,862 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserEdit.java:164] Email not valid
+2024-02-14 19:09:13,000 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserEdit.java:163] Exception occurred in the user edit view
+2024-02-14 19:09:13,001 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserEdit.java:164] Passwords do not match
+2024-02-14 19:48:10,662 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:48:10,664 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:48:11,118 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:48:11,118 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:48:11,470 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:48:11,470 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:48:22,981 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:48:22,981 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:49:08,557 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:49:08,558 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:49:09,821 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:49:09,821 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:49:14,252 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:49:14,253 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:49:16,533 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:49:16,533 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:49:16,908 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:49:16,909 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:49:18,413 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:49:18,414 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:49:18,725 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:49:18,725 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:49:47,975 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:49:47,976 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:49:48,396 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:49:48,397 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:49:48,612 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:98] Error trying to filter an equipment list
+2024-02-14 19:49:48,612 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:50:45,714 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Error trying to filter an equipment list
+2024-02-14 19:50:45,716 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:50:46,097 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Error trying to filter an equipment list
+2024-02-14 19:50:46,097 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:51:12,802 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Error trying to filter an equipment list
+2024-02-14 19:51:12,804 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:51:13,121 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Error trying to filter an equipment list
+2024-02-14 19:51:13,121 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:51:13,321 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Error trying to filter an equipment list
+2024-02-14 19:51:13,321 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:51:48,417 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Error trying to filter an equipment list
+2024-02-14 19:51:48,419 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:51:48,808 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Error trying to filter an equipment list
+2024-02-14 19:51:48,808 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:53:27,678 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Error trying to filter an equipment list
+2024-02-14 19:53:27,680 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:102] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:53:28,053 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Error trying to filter an equipment list
+2024-02-14 19:53:28,053 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:102] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:53:28,285 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Error trying to filter an equipment list
+2024-02-14 19:53:28,285 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:102] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:54:20,734 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Error trying to filter an equipment list
+2024-02-14 19:54:20,735 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:102] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:54:21,133 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Error trying to filter an equipment list
+2024-02-14 19:54:21,133 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:102] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:54:22,541 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Error trying to filter an equipment list
+2024-02-14 19:54:22,541 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:102] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:54:22,820 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Error trying to filter an equipment list
+2024-02-14 19:54:22,821 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:102] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:21,860 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:21,861 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:22,235 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:22,236 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:22,467 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:22,467 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:22,668 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:22,668 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:22,883 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:22,884 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:23,091 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:23,091 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:23,340 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:23,340 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:23,563 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:23,564 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:23,819 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:23,819 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:24,043 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:24,043 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:24,619 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:24,619 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:24,827 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:24,827 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:25,019 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:25,019 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:56:25,235 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Error trying to filter an equipment list
+2024-02-14 19:56:25,236 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:101] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:57:28,276 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Error trying to filter an equipment list
+2024-02-14 19:57:28,277 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:57:28,603 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Error trying to filter an equipment list
+2024-02-14 19:57:28,603 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 19:57:28,811 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:99] Error trying to filter an equipment list
+2024-02-14 19:57:28,811 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [EquipmentList.java:100] Cannot invoke "String.isEmpty()" because "type" is null
+2024-02-14 20:18:18,285 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [ServisInput.java:169] Wrong input format in service input
+2024-02-14 20:18:18,286 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [ServisInput.java:170] Field is required!
+2024-02-14 20:18:18,286 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [ServisInput.java:147] Error trying to save to database
+2024-02-14 20:18:18,286 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [ServisInput.java:148] Cannot invoke "String.split(String)" because "value" is null
+2024-02-14 20:18:22,363 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [ServisInput.java:169] Wrong input format in service input
+2024-02-14 20:18:22,363 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [ServisInput.java:170] Field is required!
+2024-02-14 20:18:22,364 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [ServisInput.java:147] Error trying to save to database
+2024-02-14 20:18:22,364 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [ServisInput.java:148] Cannot invoke "String.split(String)" because "value" is null
+2024-02-14 21:05:19,685 User.id=33 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserProfile.java:74] Error while trying to delete user on frontend
+2024-02-14 21:05:19,686 User.id=33 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserProfile.java:75] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getId()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:05:45,286 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:122] No user has logged in
+2024-02-14 21:05:45,288 User.id= INFO [main] c.e.s.k.M.Main [UserRepository.java:185] Error while trying serialize user to file
+2024-02-14 21:05:45,288 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:186] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:05:56,216 User.id=65 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserProfile.java:79] Error while trying to delete user on frontend
+2024-02-14 21:05:56,217 User.id=65 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserProfile.java:80] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getId()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:08:56,863 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:122] No user has logged in
+2024-02-14 21:08:56,866 User.id= INFO [main] c.e.s.k.M.Main [UserRepository.java:185] Error while trying serialize user to file
+2024-02-14 21:08:56,866 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:186] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:09:35,166 User.id=66 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserProfile.java:74] Error while trying to delete user on frontend
+2024-02-14 21:09:35,168 User.id=66 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserProfile.java:75] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getId()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:09:39,170 User.id=66 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:126] Error trying to show UserProfile.fxml
+2024-02-14 21:09:39,170 User.id=66 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:127] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/UserProfile.fxml
+
+2024-02-14 21:09:42,655 User.id=66 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:126] Error trying to show UserProfile.fxml
+2024-02-14 21:09:42,655 User.id=66 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:127] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/UserProfile.fxml
+
+2024-02-14 21:09:42,956 User.id=66 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:126] Error trying to show UserProfile.fxml
+2024-02-14 21:09:42,957 User.id=66 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:127] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/UserProfile.fxml
+
+2024-02-14 21:10:40,735 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:122] No user has logged in
+2024-02-14 21:10:40,738 User.id= INFO [main] c.e.s.k.M.Main [UserRepository.java:185] Error while trying serialize user to file
+2024-02-14 21:10:40,738 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:186] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:11:01,346 User.id=67 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserProfile.java:75] Error while trying to delete user on frontend
+2024-02-14 21:11:01,348 User.id=67 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserProfile.java:76] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:11:40,223 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:122] No user has logged in
+2024-02-14 21:11:40,225 User.id= INFO [main] c.e.s.k.M.Main [UserRepository.java:185] Error while trying serialize user to file
+2024-02-14 21:11:40,226 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:186] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:15:26,471 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:130] No user has logged in
+2024-02-14 21:15:26,474 User.id= INFO [main] c.e.s.k.M.Main [UserRepository.java:193] Error while trying serialize user to file
+2024-02-14 21:15:26,474 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:194] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:15:40,800 User.id=69 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:108] Error trying to log in
+2024-02-14 21:15:40,801 User.id=69 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserRepository.java:109] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:15:44,804 User.id=69 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:126] Error trying to show UserProfile.fxml
+2024-02-14 21:15:44,804 User.id=69 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:127] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/UserProfile.fxml
+
+2024-02-14 21:15:46,579 User.id=69 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:126] Error trying to show UserProfile.fxml
+2024-02-14 21:15:46,579 User.id=69 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:127] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/UserProfile.fxml
+
+2024-02-14 21:15:49,407 User.id=69 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:126] Error trying to show UserProfile.fxml
+2024-02-14 21:15:49,407 User.id=69 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:127] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/UserProfile.fxml
+
+2024-02-14 21:15:49,831 User.id=69 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:126] Error trying to show UserProfile.fxml
+2024-02-14 21:15:49,831 User.id=69 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:127] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/UserProfile.fxml
+
+2024-02-14 21:15:50,044 User.id=69 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:126] Error trying to show UserProfile.fxml
+2024-02-14 21:15:50,045 User.id=69 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:127] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/UserProfile.fxml
+
+2024-02-14 21:15:50,276 User.id=69 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:126] Error trying to show UserProfile.fxml
+2024-02-14 21:15:50,276 User.id=69 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:127] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/UserProfile.fxml
+
+2024-02-14 21:15:50,485 User.id=69 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:126] Error trying to show UserProfile.fxml
+2024-02-14 21:15:50,486 User.id=69 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:127] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/UserProfile.fxml
+
+2024-02-14 21:15:50,683 User.id=69 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:126] Error trying to show UserProfile.fxml
+2024-02-14 21:15:50,683 User.id=69 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:127] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/UserProfile.fxml
+
+2024-02-14 21:15:50,893 User.id=69 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:126] Error trying to show UserProfile.fxml
+2024-02-14 21:15:50,893 User.id=69 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:127] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/UserProfile.fxml
+
+2024-02-14 21:16:59,678 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 21:16:59,681 User.id= INFO [main] c.e.s.k.M.Main [UserRepository.java:187] Error while trying serialize user to file
+2024-02-14 21:16:59,681 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:188] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:18:45,156 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 21:18:45,158 User.id= INFO [main] c.e.s.k.M.Main [UserRepository.java:187] Error while trying serialize user to file
+2024-02-14 21:18:45,159 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:188] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:20:57,141 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 21:20:57,143 User.id= INFO [main] c.e.s.k.M.Main [UserRepository.java:187] Error while trying serialize user to file
+2024-02-14 21:20:57,143 User.id= ERROR [main] c.e.s.k.M.Main [UserRepository.java:188] Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getAccount()" because the return value of "com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository.getLoggedInUser()" is null
+2024-02-14 21:21:34,124 User.id= ERROR [JavaFX Application Thread] c.e.s.k.M.Main [Login.java:60] Error trying to log in Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getId()" because "korisnik" is null
+2024-02-14 21:21:35,608 User.id= ERROR [JavaFX Application Thread] c.e.s.k.M.Main [Login.java:60] Error trying to log in Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getId()" because "korisnik" is null
+2024-02-14 21:21:36,081 User.id= ERROR [JavaFX Application Thread] c.e.s.k.M.Main [Login.java:60] Error trying to log in Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getId()" because "korisnik" is null
+2024-02-14 21:21:40,624 User.id= ERROR [JavaFX Application Thread] c.e.s.k.M.Main [Login.java:60] Error trying to log in Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getId()" because "korisnik" is null
+2024-02-14 21:21:41,448 User.id= ERROR [JavaFX Application Thread] c.e.s.k.M.Main [Login.java:60] Error trying to log in Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getId()" because "korisnik" is null
+2024-02-14 21:21:41,639 User.id= ERROR [JavaFX Application Thread] c.e.s.k.M.Main [Login.java:60] Error trying to log in Cannot invoke "com.example.stefanovic.kemijskaindustrija.Model.User.getId()" because "korisnik" is null

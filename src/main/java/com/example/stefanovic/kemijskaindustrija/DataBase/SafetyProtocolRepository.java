@@ -186,7 +186,7 @@ public interface SafetyProtocolRepository{
 
     default void updateSafetyProcolName(SafetyProtocol safetyProtocol) {
         SafetyProtocol safetyProtocol1 = getSafetyProtocolByIdWithSteps(safetyProtocol.getId());
-        SerializationRepository.writeToTxtFile(Main.SAFETY_PROTOCOL_FILE, safetyProtocol1);
+        SerializationRepository.prepareObjectForSerialization(safetyProtocol1);
         String sqlQuery = "UPDATE safety_protocol SET name = ? where id =?";
         try {
             Connection connection = DBController.connectToDatabase();
@@ -194,7 +194,7 @@ public interface SafetyProtocolRepository{
             preparedStatement.setString(1, safetyProtocol.getName());
             preparedStatement.setLong(2, safetyProtocol.getId());
             preparedStatement.executeUpdate();
-            SerializationRepository.writeToTxtFile(Main.SAFETY_PROTOCOL_FILE, safetyProtocol);
+            SerializationRepository.prepareObjectForSerialization(safetyProtocol);
         } catch (Exception e) {
             logger.info("Error while trying to update safety protocol name");
             logger.error(e.getMessage());

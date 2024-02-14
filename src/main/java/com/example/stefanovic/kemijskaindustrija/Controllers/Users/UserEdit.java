@@ -63,7 +63,7 @@ public class UserEdit implements UserRepository, UserFunctionlities{
     void initialize(){
         User loggedInUser = UserRepository.getLoggedInUser();
         resetLabels();
-        setInformation(UserRepository.getLoggedInUser());
+        setInformation(loggedInUser);
         checkIfEditingLoggedInUser(this.user.getId());
     }
 
@@ -130,6 +130,7 @@ public class UserEdit implements UserRepository, UserFunctionlities{
         resetLabels();
         try {
             checkIfFieldAreEmpty();
+
             UserRepository.checkIfEmailCanBeEdited(email, this.user.getId());
             AuthInput.checkEmailAddress(email);
             UserRepository.checkIfUsernamCanBeEdited(userName, this.user.getId());
@@ -153,17 +154,15 @@ public class UserEdit implements UserRepository, UserFunctionlities{
                 }
             });
 
-        } catch (EmailException e){
-            emailErrorLabel.setText(e.getMessage());
-        }catch (PasswordException e){
-            passwordErrorLabel.setText(e.getMessage());
-        }catch (IllegalAccessLevelChangeException e){
-            accessLevelErrorLabel.setText(e.getMessage());
-        }catch (UsernameTakenException e) {
-            userNameErrorLabel.setText(e.getMessage());
-        }catch (InputException | NullPointerException e) {
-            logger.info("Exception occurred in the user edit view");
-            logger.error(e.getMessage());
+        } catch (Exception e) {
+            if (e instanceof PasswordException){passwordErrorLabel.setText(e.getMessage());}
+            if (e instanceof EmailException){emailErrorLabel.setText(e.getMessage());}
+            if (e instanceof UsernameTakenException) {userNameErrorLabel.setText(e.getMessage());}
+            if (e instanceof IllegalAccessLevelChangeException) {   accessLevelErrorLabel.setText(e.getMessage());}
+            else{
+                logger.info("Exception occurred in the user edit view");
+                logger.error(e.getMessage());
+            }
         }
 
     }

@@ -1,6 +1,7 @@
 package com.example.stefanovic.kemijskaindustrija.Controllers.Equipment;
 
 import com.example.stefanovic.kemijskaindustrija.DataBase.EquipmentRepository;
+import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
 import javafx.beans.property.SimpleObjectProperty;
@@ -9,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -36,32 +38,33 @@ public class EquipmentList implements EquipmentRepository {
     TableView<Equipment> equipmentTableView;
 
     @FXML
-    TableColumn<Equipment, String > equipmentTypeTC;
+    TableColumn<Equipment, String> equipmentTypeTC;
+
+    @FXML
+    TableColumn<Equipment, Long> equipmentIDTC;
 
     @FXML
     TextField nameTextField;
 
+    @FXML
+    private ComboBox<String> searchEquipmentTypeComboBox;
+
     private List<Equipment> equipment;
     public void initialize(){
-        try {
-            equipment = getAllEquipmenet();
-            equipmentTableView.setItems(FXCollections.observableList(equipment));
-            equipmentNameTC.setCellValueFactory(data->new SimpleStringProperty(data.getValue().getName()));
-            equipmentDescriptionTC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescription()));
-            equipmentTypeTC.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getType())));
-            equipmentHealthTC.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getHealthBar()));
-            showDetails();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-
+        equipment = getAllEquipmenet();
+        equipmentTableView.setItems(FXCollections.observableList(equipment));
+        equipmentNameTC.setCellValueFactory(data->new SimpleStringProperty(data.getValue().getName()));
+        equipmentDescriptionTC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescription()));
+        equipmentTypeTC.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getType())));
+        equipmentHealthTC.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getHealthBar()));
+        equipmentIDTC.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getId()));
+        showDetails();
+        searchEquipmentTypeComboBox.setItems(FXCollections.observableList(EquipmentRepository.getAllEquipmentTypes()));
     }
 
     private void showDetails() {
         equipmentTableView.setOnMouseClicked(event ->{
-            //Add && UserRepository.isAdmin()
-            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 ){
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && UserRepository.isAdmin()){
                 Equipment equipment1 = equipmentTableView.getSelectionModel().getSelectedItem();
                 if (equipment1 != null ){
                     try {
@@ -72,7 +75,8 @@ public class EquipmentList implements EquipmentRepository {
                         root.getChildren().clear();
                         root.getChildren().setAll(parent);
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        Main.logger.info("Error while trying to delete equipment on frontend");
+                        Main.logger.error(e.getMessage());
                     }
 
                 }
@@ -82,16 +86,19 @@ public class EquipmentList implements EquipmentRepository {
 
     @FXML
     public void filterList() {
-        try{
+        try {
+            String type = searchEquipmentTypeComboBox.getValue();
             String name = nameTextField.getText();
-            var nameFiltered = equipment.stream().filter(equipment -> equipment.getName().toLowerCase().contains(name.toLowerCase())).toList();
-            equipmentTableView.setItems(FXCollections.observableList(nameFiltered));
 
-        }catch (NullPointerException e){
+            var equipmentFilter = equipment.stream().filter(equipment ->
+                    (name == null || name.isEmpty() || equipment.getName().toLowerCase().contains(name.toLowerCase())) &&
+                    (type == null || type.isEmpty() || equipment.getType().toString().toLowerCase().equals(type.toLowerCase()))
+            ).toList();
+
+            equipmentTableView.setItems(FXCollections.observableList(equipmentFilter));
+        } catch (NullPointerException e) {
             logger.info("Error trying to filter an equipment list");
             logger.error(e.getMessage());
         }
-
-
     }
 }

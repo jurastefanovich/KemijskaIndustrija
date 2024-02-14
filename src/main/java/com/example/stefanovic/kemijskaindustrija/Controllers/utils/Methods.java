@@ -134,7 +134,7 @@ public class Methods {
     public static void checkStringLength(TextField equipmentnameTextField, Label nameErrorLabel) throws IllegalStringLengthException {
         if (equipmentnameTextField.getText().length() > 40){
             nameErrorLabel.setText("Text too long");
-            nameErrorLabel.setStyle("-fx-border-color: red;");
+            nameErrorLabel.setStyle("-fx-background-color: red;");
             throw new IllegalStringLengthException("Text too long");
         }
     }

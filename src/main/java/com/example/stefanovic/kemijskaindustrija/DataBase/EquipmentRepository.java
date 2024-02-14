@@ -3,12 +3,17 @@ package com.example.stefanovic.kemijskaindustrija.DataBase;
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
+import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.Glassware;
+import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.Miscellaneous;
+import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.TitranosEquipment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public interface EquipmentRepository  {
 
@@ -147,6 +152,18 @@ public interface EquipmentRepository  {
             logger.info("Error while trying to delete equipment entity");
             logger.error(e.getMessage());
         }
+    }
 
+    static List<String> getAllEquipmentTypes() {
+        List<String> equipmentTypes = new ArrayList<>();
+        Glassware[] glassware = Glassware.values();
+        Miscellaneous[] miscellaneous = Miscellaneous.values();
+        TitranosEquipment[] titranosEquipments = TitranosEquipment.values();
+
+        equipmentTypes.addAll(Arrays.stream(glassware).map(Enum::toString).collect(Collectors.toSet()));
+        equipmentTypes.addAll(Arrays.stream(miscellaneous).map(Enum::toString).collect(Collectors.toSet()));
+        equipmentTypes.addAll(Arrays.stream(titranosEquipments).map(Enum::toString).collect(Collectors.toSet()));
+
+        return equipmentTypes;
     }
 }

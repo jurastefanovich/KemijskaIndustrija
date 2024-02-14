@@ -2,6 +2,7 @@ package com.example.stefanovic.kemijskaindustrija.Controllers.Servis;
 
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.CustomComponent.CustomAlert;
+import com.example.stefanovic.kemijskaindustrija.DataBase.DBController;
 import com.example.stefanovic.kemijskaindustrija.DataBase.EquipmentRepository;
 import com.example.stefanovic.kemijskaindustrija.DataBase.ServisRepository;
 import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
@@ -9,6 +10,7 @@ import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Exception.ServiceBookedForDateException;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
+import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocolStep;
 import com.example.stefanovic.kemijskaindustrija.Model.Service;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -57,19 +59,27 @@ public class ServisInput implements EquipmentRepository, ServisRepository {
 
     @FXML
     public Label serviceTitleError;
-
     @FXML
     public TextField serviceTitlenput;
+
+    private Long serviceId;
     DateTimeFormatter customDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        public void initialize(){
+    public void initialize(long id){
+        Service service = getServiceById(id);
+        this.serviceId = id;
+        serviceTitlenput.setText(service.getTitle());
+        serviceDescInput.setText(service.getDescription());
+        serviceDateInput.setValue(service.getDateOfService());
+        serviceEquipmentInput.setPromptText(service.getEquipment().toString());
+        serviceEquipmentInput.setValue(service.getEquipment().toString());
+    }
+
+    public void initialize(){
         removeFeedbacks();
         clearErrors();
-        try {
-            List<Equipment> equipmentList = getAllEquipmenet().stream().filter(equipment -> !equipment.getInService()).toList();
-            serviceEquipmentInput.setItems(FXCollections.observableList(getEquipment(equipmentList)));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        List<Equipment> equipmentList = getAllEquipmenet().stream().filter(equipment -> !equipment.getInService()).toList();
+        serviceEquipmentInput.setItems(FXCollections.observableList(getEquipment(equipmentList)));
+
         serviceDateInput.setConverter(new StringConverter<LocalDate>() {
             @Override
             public String toString(LocalDate localDate) {
@@ -122,9 +132,13 @@ public class ServisInput implements EquipmentRepository, ServisRepository {
                 EquipmentRepository.getEquipmentById(getEquipmentId(serviceEquipmentInput.getValue())),
                 serviceDateInput.getValue());
 
-                CustomAlert alert = new CustomAlert(Alert.AlertType.CONFIRMATION,
-                "Confirm registering new service for date: " + serviceDateInput.getValue(),
-                ButtonType.OK, ButtonType.CANCEL);
+            if (serviceId != null){
+                service.setId(serviceId);
+            }
+
+            CustomAlert alert = new CustomAlert(Alert.AlertType.CONFIRMATION,
+            "Confirm registering new service for date: " + serviceDateInput.getValue(),
+            ButtonType.OK, ButtonType.CANCEL);
 
         alert.showAndWait().ifPresent(response->{
             if ( response.getButtonData().equals(ButtonBar.ButtonData.OK_DONE)){
@@ -164,7 +178,8 @@ public class ServisInput implements EquipmentRepository, ServisRepository {
             logger.info("Wrong input format in service input");
             logger.error(e.getMessage());
         }
-
     }
+
+
 
 }

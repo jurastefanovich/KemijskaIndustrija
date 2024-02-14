@@ -101,7 +101,9 @@ public interface UserRepository {
 
     }
 
-    static boolean isUser(){return getLoggedInUser().getAccount().accessLevel() == AccessLevel.USER;}
+    static boolean isUser() throws NullPointerException{
+        return getLoggedInUser().getAccount().accessLevel() == AccessLevel.USER;
+    }
     static boolean isAdmin(){
         return !isUser();
     }
@@ -131,20 +133,15 @@ public interface UserRepository {
      * @param username username we want to check
      * @param user_id id of the user we want to exclude from the search
      */
-    static void checkIfUsernamCanBeEdited(String username, Long user_id) throws UsernameTakenException{
+    static void checkIfUsernamCanBeEdited(String username, Long user_id) throws Exception {
         String sqlQuery = "SELECT * FROM KORISNIK WHERE username = ? AND id <> ?";
-        try{
-            Connection connection = DBController.connectToDatabase();
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setString(1,username);
-            preparedStatement.setLong(2,user_id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
-                throw new UsernameTakenException(AuthMessages.USERNAME_TAKEN.getMessage());
-            }
-        }catch (Exception e) {
-            logger.info("Error while trying checking if a username can be edited");
-            logger.error(e.getMessage());
+        Connection connection = DBController.connectToDatabase();
+        PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+        preparedStatement.setString(1,username);
+        preparedStatement.setLong(2,user_id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()){
+            throw new UsernameTakenException(AuthMessages.USERNAME_TAKEN.getMessage());
         }
     }
 
@@ -237,7 +234,6 @@ public interface UserRepository {
             logger.error(e.getMessage());
         }
 
-        SerializationRepository.prepareObjectForSerialization(user);
     }
 
 

@@ -35,7 +35,7 @@ public class Main extends Application {
     public static final String USERS_FILE = "dat/userChanges.txt";
     public static final String SERIALIZE_SAFETY_PROTOCOL_STEP = "dat/safetyProtocolStep.dat";
 
-    private static Logger logger = LoggerFactory.getLogger(Main.class);
+    public static Logger logger = LoggerFactory.getLogger(Main.class);
 
     @Override
     public void start(Stage stage) throws IOException {

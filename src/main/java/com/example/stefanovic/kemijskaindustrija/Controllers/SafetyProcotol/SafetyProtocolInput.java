@@ -6,6 +6,7 @@ import com.example.stefanovic.kemijskaindustrija.DataBase.SafetyProtocolReposito
 import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Exception.SaveToDataBaseException;
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocol;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocolStep;
 import javafx.beans.property.SimpleObjectProperty;
@@ -90,7 +91,7 @@ public class SafetyProtocolInput implements SafetyProtocolRepository {
                 }
             });
         } catch (InputException | IllegalStringLengthException e) {
-            logger.error("Couldn't save empty protocol steps");
+            Main.logger.error("Couldn't save empty protocol steps");
         }
     }
     private void resetErrors(){

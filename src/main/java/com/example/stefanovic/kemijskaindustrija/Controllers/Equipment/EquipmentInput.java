@@ -4,12 +4,14 @@ import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.DataBase.EquipmentRepository;
 import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
 import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.Glassware;
 import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.Miscellaneous;
 import com.example.stefanovic.kemijskaindustrija.Model.EquipmentTypes.TitranosEquipment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -63,7 +65,7 @@ public class EquipmentInput implements EquipmentRepository {
     private Equipment equipment;
     private Double healthBar;
     private Boolean isInService;
-    ObservableList<String> data = FXCollections.observableArrayList(getAllEquipmentTypes());
+    ObservableList<String> data = FXCollections.observableArrayList(EquipmentRepository.getAllEquipmentTypes());
 
 
 
@@ -74,23 +76,10 @@ public class EquipmentInput implements EquipmentRepository {
         successMessage.setVisible(false);
         errorMessage.setVisible(false);
         resetErrors();
-//        initializeSearch();
+        initializeSearch();
         equipmentTypeListView.setItems(data);
         setSelectedType();
 
-    }
-
-    private List<String> getAllEquipmentTypes() {
-        List<String> equipmentTypes = new ArrayList<>();
-        Glassware[] glassware = Glassware.values();
-        Miscellaneous[] miscellaneous = Miscellaneous.values();
-        TitranosEquipment[] titranosEquipments = TitranosEquipment.values();
-
-        equipmentTypes.addAll(Arrays.stream(glassware).map(Enum::toString).collect(Collectors.toSet()));
-        equipmentTypes.addAll(Arrays.stream(miscellaneous).map(Enum::toString).collect(Collectors.toSet()));
-        equipmentTypes.addAll(Arrays.stream(titranosEquipments).map(Enum::toString).collect(Collectors.toSet()));
-
-        return equipmentTypes;
     }
 
     private void setSelectedType() {
@@ -101,12 +90,12 @@ public class EquipmentInput implements EquipmentRepository {
 
     }
 
-//    private void initializeSearch() {
-//        equipmentTypeSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-//            FilteredList<String> filteredData = data.filtered(option -> option.getEquipmentType().toLowerCase().contains(newValue.toLowerCase()));
-//            equipmentTypeListView.setItems(filteredData);
-//        });
-//    }
+    private void initializeSearch() {
+        equipmentTypeSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            FilteredList<String> filteredData = data.filtered(option -> option.toLowerCase().contains(newValue.toLowerCase()));
+            equipmentTypeListView.setItems(filteredData);
+        });
+    }
 
     private void resetErrors(){
         Methods.resetErorrs(nameErrorLabel,descErrorLabel,equipmenetErrorLabel);
@@ -130,8 +119,8 @@ public class EquipmentInput implements EquipmentRepository {
             confirmation(equipment1);
 
         }catch (IllegalArgumentException | IllegalStringLengthException | InputException e){
-            logger.info("Error while checking information for equipment");
-            logger.error(e.getMessage());
+            Main.logger.info("Error while checking information for equipment");
+            Main.logger.error(e.getMessage());
         }
 
 
@@ -146,8 +135,8 @@ public class EquipmentInput implements EquipmentRepository {
                     successMessage.setVisible(true);
                 } catch (Exception e) {
                     errorMessage.setVisible(true);
-                    logger.info("Error trying to save equipment to DB on frontend");
-                    logger.error(e.getMessage());
+                    Main.logger.info("Error trying to save equipment to DB on frontend");
+                    Main.logger.error(e.getMessage());
                 }
             }
         });
@@ -184,8 +173,8 @@ public class EquipmentInput implements EquipmentRepository {
             this.healthBar = equipment.getHealthBar();
             this.isInService = equipment.getInService();
         } catch (Exception e) {
-            logger.info("Error while trying to initialize equipment with ID: " + id);
-            logger.error(e.getMessage());
+            Main.logger.info("Error while trying to initialize equipment with ID: " + id);
+            Main.logger.error(e.getMessage());
         }
     }
 
