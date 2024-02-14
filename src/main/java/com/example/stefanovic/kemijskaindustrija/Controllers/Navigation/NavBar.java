@@ -4,10 +4,7 @@ import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,16 +12,21 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 public class NavBar {
-    Logger logger = LoggerFactory.getLogger(Main.class);
 
     @FXML
-    private MenuItem AdminView;
-    @FXML
     private Text chemSafeLogo;
+
+    @FXML
+    private Hyperlink inventoryLink;
+
+    @FXML
+    private Hyperlink allUsersLink;
     @FXML
     public void initialize(){
-//        AdminView.setVisible(UserRepository.isAdmin());
+        boolean isAdmin = UserRepository.isAdmin();
         chemSafeLogo.setOnMouseClicked(event -> showHomeScreen());
+        inventoryLink.setVisible(isAdmin);
+        allUsersLink.setVisible(isAdmin);
     }
 
     public void showSingUpScreen() {

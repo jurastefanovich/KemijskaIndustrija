@@ -284,3 +284,268 @@
 2024-02-14 21:38:36,252 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
 2024-02-14 21:38:41,034 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
 2024-02-14 21:38:41,244 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:25:00,080 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:100] Error trying to show UserProfile.fxml
+2024-02-14 22:25:00,081 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:101] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Sidebar.fxml
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/HomePage.fxml:11
+
+2024-02-14 22:25:01,195 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:100] Error trying to show UserProfile.fxml
+2024-02-14 22:25:01,195 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:101] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Sidebar.fxml
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/HomePage.fxml:11
+
+2024-02-14 22:25:02,003 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:100] Error trying to show UserProfile.fxml
+2024-02-14 22:25:02,003 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:101] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Sidebar.fxml
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/HomePage.fxml:11
+
+2024-02-14 22:25:02,368 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:100] Error trying to show UserProfile.fxml
+2024-02-14 22:25:02,369 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:101] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Sidebar.fxml
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/HomePage.fxml:11
+
+2024-02-14 22:25:15,018 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:100] Error trying to show UserProfile.fxml
+2024-02-14 22:25:15,020 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:101] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Sidebar.fxml
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/HomePage.fxml:11
+
+2024-02-14 22:25:19,419 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [Login.java:61] Error trying to log in Wrong password
+2024-02-14 22:25:23,676 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:100] Error trying to show UserProfile.fxml
+2024-02-14 22:25:23,676 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:101] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Sidebar.fxml
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/HomePage.fxml:11
+
+2024-02-14 22:27:14,744 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:27:14,972 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:27:44,007 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:27:44,226 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:27:47,088 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:27:47,301 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:27:50,257 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:27:50,469 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:27:53,506 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:27:53,719 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:10,244 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:10,460 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:13,105 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:13,320 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:14,617 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:14,830 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:16,932 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:17,145 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:24,653 User.id=74 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:83] Error trying to show Inventory.fxml
+2024-02-14 22:28:24,654 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:84] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Inventory.fxml
+
+2024-02-14 22:28:26,612 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:26,829 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:28,176 User.id=74 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:83] Error trying to show Inventory.fxml
+2024-02-14 22:28:28,177 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:84] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Inventory.fxml
+
+2024-02-14 22:28:28,849 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:29,062 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:29,282 User.id=74 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:83] Error trying to show Inventory.fxml
+2024-02-14 22:28:29,282 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:84] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Inventory.fxml
+
+2024-02-14 22:28:40,057 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:83] Error trying to show Inventory.fxml
+2024-02-14 22:28:40,058 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:84] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Inventory.fxml
+
+2024-02-14 22:28:41,457 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:41,679 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:44,025 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:44,245 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:45,465 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:45,686 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:47,074 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:47,349 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:49,109 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:49,346 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:50,283 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:50,518 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:51,986 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:83] Error trying to show Inventory.fxml
+2024-02-14 22:28:51,987 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:84] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Inventory.fxml
+
+2024-02-14 22:28:52,707 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:83] Error trying to show Inventory.fxml
+2024-02-14 22:28:52,708 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:84] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Inventory.fxml
+
+2024-02-14 22:28:52,928 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:53,138 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:53,361 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:83] Error trying to show Inventory.fxml
+2024-02-14 22:28:53,361 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:84] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Inventory.fxml
+
+2024-02-14 22:28:53,594 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:53,810 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:54,027 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:83] Error trying to show Inventory.fxml
+2024-02-14 22:28:54,027 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:84] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Inventory.fxml
+
+2024-02-14 22:28:59,729 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:28:59,969 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:29:07,826 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:29:08,049 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:29:08,588 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:83] Error trying to show Inventory.fxml
+2024-02-14 22:29:08,588 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:84] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Inventory.fxml
+
+2024-02-14 22:29:09,124 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:29:09,339 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:29:09,578 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:83] Error trying to show Inventory.fxml
+2024-02-14 22:29:09,578 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:84] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Inventory.fxml
+
+2024-02-14 22:29:09,805 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:83] Error trying to show Inventory.fxml
+2024-02-14 22:29:09,805 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:84] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Inventory.fxml
+
+2024-02-14 22:29:10,241 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:29:10,458 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:29:32,360 User.id=73 INFO [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:83] Error trying to show Inventory.fxml
+2024-02-14 22:29:32,362 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [NavBar.java:84] 
+/Z:/Java_Projects/KemijskaIndustraija/KemijskaIndustrija/target/classes/com/example/stefanovic/kemijskaindustrija/Main/Inventory.fxml
+
+2024-02-14 22:34:50,717 User.id= ERROR [JavaFX Application Thread] c.e.s.k.M.Main [Login.java:61] Error trying to log in Wrong password
+2024-02-14 22:36:39,969 User.id=74 INFO [JavaFX Application Thread] c.e.s.k.M.Main [UserEdit.java:163] Exception occurred in the user edit view
+2024-02-14 22:36:39,970 User.id=74 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [UserEdit.java:164] Username already taken!
+2024-02-14 22:37:09,102 User.id=73 ERROR [JavaFX Application Thread] c.e.s.k.M.Main [ChemicalInput.java:113] Error occurred while inputting a new chemical Field is required!
+2024-02-14 22:46:00,847 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:00,849 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:00,858 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:00,859 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:02,641 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:02,642 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:02,649 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:02,649 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:04,153 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:04,154 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:04,164 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:04,164 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:16,519 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:16,520 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:16,532 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:16,532 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:29,211 User.id= ERROR [pool-6-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:29,212 User.id= ERROR [pool-6-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:29,218 User.id= ERROR [pool-6-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:29,218 User.id= ERROR [pool-6-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:47,021 User.id= ERROR [pool-7-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:47,021 User.id= ERROR [pool-7-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:47,030 User.id= ERROR [pool-7-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:47,030 User.id= ERROR [pool-7-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:54,784 User.id= ERROR [pool-8-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:54,785 User.id= ERROR [pool-8-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:54,795 User.id= ERROR [pool-8-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:54,796 User.id= ERROR [pool-8-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:57,931 User.id= ERROR [pool-9-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:57,931 User.id= ERROR [pool-9-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:46:57,939 User.id= ERROR [pool-9-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:46:57,940 User.id= ERROR [pool-9-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:47:01,618 User.id= ERROR [pool-10-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:47:01,618 User.id= ERROR [pool-10-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:47:01,626 User.id= ERROR [pool-10-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:47:01,627 User.id= ERROR [pool-10-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:47:36,296 User.id= ERROR [pool-13-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:47:36,297 User.id= ERROR [pool-13-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:47:36,304 User.id= ERROR [pool-13-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:47:36,304 User.id= ERROR [pool-13-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:00,838 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:00,838 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:00,845 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:00,845 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:02,637 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:02,637 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:02,643 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:02,643 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:04,148 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:04,148 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:04,155 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:04,155 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:07,258 User.id= ERROR [pool-14-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:07,258 User.id= ERROR [pool-14-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:07,264 User.id= ERROR [pool-14-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:07,264 User.id= ERROR [pool-14-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:16,514 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:16,514 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:16,521 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:16,522 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:29,200 User.id= ERROR [pool-6-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:29,201 User.id= ERROR [pool-6-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:29,209 User.id= ERROR [pool-6-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:29,209 User.id= ERROR [pool-6-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:47,021 User.id= ERROR [pool-7-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:47,021 User.id= ERROR [pool-7-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:47,027 User.id= ERROR [pool-7-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:47,027 User.id= ERROR [pool-7-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:54,775 User.id= ERROR [pool-8-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:54,775 User.id= ERROR [pool-8-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:54,783 User.id= ERROR [pool-8-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:54,783 User.id= ERROR [pool-8-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:57,927 User.id= ERROR [pool-9-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:57,927 User.id= ERROR [pool-9-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:48:57,934 User.id= ERROR [pool-9-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:48:57,934 User.id= ERROR [pool-9-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:49:01,613 User.id= ERROR [pool-10-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:49:01,613 User.id= ERROR [pool-10-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:49:01,619 User.id= ERROR [pool-10-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:49:01,620 User.id= ERROR [pool-10-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:49:23,767 User.id= ERROR [pool-15-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:49:23,768 User.id= ERROR [pool-15-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:49:23,775 User.id= ERROR [pool-15-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:49:23,776 User.id= ERROR [pool-15-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:49:37,258 User.id= ERROR [pool-16-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:49:37,259 User.id= ERROR [pool-16-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:49:37,264 User.id= ERROR [pool-16-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:49:37,265 User.id= ERROR [pool-16-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:51:25,971 User.id= ERROR [pool-17-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:51:25,972 User.id= ERROR [pool-17-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:51:25,979 User.id= ERROR [pool-17-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:51:25,980 User.id= ERROR [pool-17-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:51:46,916 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:51:46,918 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:51:46,928 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:51:46,928 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:51:55,216 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:51:55,216 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:51:55,224 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:51:55,224 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:51:57,544 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:51:57,544 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:51:57,553 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:51:57,554 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:52:03,969 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:52:03,969 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:52:03,977 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:52:03,977 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:52:03,985 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:52:03,986 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:52:03,994 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:52:03,994 User.id= ERROR [pool-5-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:53:46,918 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:53:46,919 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:53:46,925 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:53:46,926 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:53:46,932 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:53:46,932 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:53:46,938 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:53:46,939 User.id= ERROR [pool-2-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:53:55,213 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:53:55,214 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:53:55,220 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:53:55,220 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:53:55,226 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:53:55,226 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:53:55,233 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:53:55,234 User.id= ERROR [pool-3-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:53:57,533 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:53:57,534 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:53:57,541 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:53:57,541 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:53:57,549 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:53:57,549 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
+2024-02-14 22:53:57,557 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [UserRepository.java:124] No user has logged in
+2024-02-14 22:53:57,557 User.id= ERROR [pool-4-thread-1] c.e.s.k.M.Main [SerializationRepository.java:73] Error trying to serialize
