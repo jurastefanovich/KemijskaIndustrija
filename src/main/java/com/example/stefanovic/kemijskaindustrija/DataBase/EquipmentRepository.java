@@ -3,19 +3,16 @@ package com.example.stefanovic.kemijskaindustrija.DataBase;
 import com.example.stefanovic.kemijskaindustrija.Controllers.utils.Methods;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public interface EquipmentRepository  {
-    static Equipment getEquipmentFromLine(String line) {
-        String[] lines = line.split(" ");
 
-        return new Equipment(Long.valueOf(lines[0]), Methods.concatenateWithSpaces(lines[1]),
-                Methods.concatenateWithSpaces(lines[2]), lines[3],
-                Double.valueOf(lines[4]), Boolean.valueOf(lines[5]));
-    }
+    Logger logger = LoggerFactory.getLogger(Main.class);
 
     static Equipment getEquipmentById(long id) {
         Equipment equipment = null;
@@ -29,7 +26,8 @@ public interface EquipmentRepository  {
             }
             con.close();
         } catch (Exception e) {
-            //ADD LOGGER DataBaseMessages.EQUIPMENT_ID_DB_ERROR.getMessage();
+            logger.info("Error while trying to get equipment by ID: " + id + " from database");
+            logger.error(e.getMessage());
         }
         return equipment;
     }
@@ -46,24 +44,31 @@ public interface EquipmentRepository  {
             }
             connection.close();
         } catch (Exception e) {
-            //ADD LOGGER
-            e.printStackTrace();
+            logger.info("Error while trying to get equipment list from database");
+            logger.error(e.getMessage());
         }
 
         return chemicalList;
     }
-    static Equipment getEquipmentInfo(ResultSet rs) throws SQLException {
-        Long id = rs.getLong("id");
-        String name = rs.getString("name");
-        String description = rs.getString("description");
-        String type = rs.getString("type");
-        Double health = rs.getDouble("health");
-        Boolean isInService = rs.getBoolean("is_in_service");
-        Equipment equipment = new Equipment(id, name, description, type,health,isInService);
+    static Equipment getEquipmentInfo(ResultSet rs) {
+        Equipment equipment = null;
+        try {
+            Long id = rs.getLong("id");
+            String name = rs.getString("name");
+            String description = rs.getString("description");
+            String type = rs.getString("type");
+            Double health = rs.getDouble("health");
+            Boolean isInService = rs.getBoolean("is_in_service");
+            equipment = new Equipment(id, name, description, type,health,isInService);
 
-        if (equipment.getHealthBar() == null){
-            equipment.setHealthBar(100.0);
+            if (equipment.getHealthBar() == null){
+                equipment.setHealthBar(100.0);
+            }
+        } catch (SQLException e) {
+            logger.info("Error while trying to get equipment list from database");
+            logger.error(e.getMessage());
         }
+
         return equipment;
     }
 
@@ -93,7 +98,8 @@ public interface EquipmentRepository  {
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to update equipment entity");
+            logger.error(e.getMessage());
         }
 
     }
@@ -107,29 +113,40 @@ public interface EquipmentRepository  {
             stmt.executeUpdate();
             connection.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to save equipment entity");
+            logger.error(e.getMessage());
         }
     }
-    private static void exequteEquipmentQuerry(PreparedStatement stmt, Equipment equipment) throws SQLException{
-        stmt.setString(1, equipment.getName());
-        stmt.setString(2, equipment.getDescription());
-        stmt.setString(3, String.valueOf(equipment.getType()));
-        stmt.setDouble(4, 100.0);
-
+    private static void exequteEquipmentQuerry(PreparedStatement stmt, Equipment equipment) {
+        try {
+            stmt.setString(1, equipment.getName());
+            stmt.setString(2, equipment.getDescription());
+            stmt.setString(3, String.valueOf(equipment.getType()));
+            stmt.setDouble(4, 100.0);
+        } catch (SQLException e) {
+            logger.info("Error while trying to execute equipment entity query");
+            logger.error(e.getMessage());
+        }
     }
 
-    default void deleteEquipmentFromDB(long equipmentId) throws Exception {
-        Connection connection = DBController.connectToDatabase();
-        PreparedStatement deleteService = connection.prepareStatement("DELETE FROM service WHERE EQUIPMENT_ID = ?");
-        PreparedStatement deleteEquipment = connection.prepareStatement("DELETE FROM equipment WHERE ID = ?");
-        connection.setAutoCommit(false);
+    default void deleteEquipmentFromDB(long equipmentId)  {
+        try {
+            Connection connection = DBController.connectToDatabase();
+            PreparedStatement deleteService = connection.prepareStatement("DELETE FROM service WHERE EQUIPMENT_ID = ?");
+            PreparedStatement deleteEquipment = connection.prepareStatement("DELETE FROM equipment WHERE ID = ?");
+            connection.setAutoCommit(false);
 
-        deleteService.setLong(1, equipmentId);
-        deleteService.executeUpdate();
+            deleteService.setLong(1, equipmentId);
+            deleteService.executeUpdate();
 
-        deleteEquipment.setLong(1, equipmentId);
-        deleteEquipment.executeUpdate();
+            deleteEquipment.setLong(1, equipmentId);
+            deleteEquipment.executeUpdate();
 
-        connection.commit();
+            connection.commit();
+        } catch (Exception e) {
+            logger.info("Error while trying to delete equipment entity");
+            logger.error(e.getMessage());
+        }
+
     }
 }

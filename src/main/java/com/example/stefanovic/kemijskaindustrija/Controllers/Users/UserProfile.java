@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 /**
- * Class is reserved only for the logged in user
+ * Class is reserved only for the logged-in user
  * Other user information is displayed in the Single User Profile class
  */
 public class UserProfile  implements UserRepository {
@@ -70,7 +70,8 @@ public class UserProfile  implements UserRepository {
             root.getChildren().setAll(parent);
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.info("Exception occurred trying to show user edit view");
+            logger.error(e.getMessage());
         }
     }
 

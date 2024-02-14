@@ -7,6 +7,8 @@ import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Address;
 import com.example.stefanovic.kemijskaindustrija.Model.Chemical;
 import com.example.stefanovic.kemijskaindustrija.Threads.SerializeFiles;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -21,13 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface ChemicalRepository extends DataBaseRepository{
-
-//    static Chemical getChemicalObject(String line) {
-//        String[] split = line.split(" ");
-//        return new Chemical(Long.parseLong(split[0]), Methods.concatenateWithSpaces(split[1]),
-//                Double.valueOf(split[2]),split[3],split[4],
-//                new BigDecimal(split[5]));
-//    }
+    Logger logger = LoggerFactory.getLogger(Main.class);
 
     default   Chemical getChemicalById(Long chem_id){
         Chemical chemical = null;
@@ -43,7 +39,8 @@ public interface ChemicalRepository extends DataBaseRepository{
 
             connection.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to get chemical by id " + chem_id + " from database");
+            logger.error(e.getMessage());
         }
 
         return chemical;
@@ -64,7 +61,8 @@ public interface ChemicalRepository extends DataBaseRepository{
 
             connection.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to get chemical list from database");
+            logger.error(e.getMessage());
         }
         return chemicalList;
     }
@@ -80,7 +78,8 @@ public interface ChemicalRepository extends DataBaseRepository{
             BigDecimal danger_level = BigDecimal.valueOf(rs.getDouble("danger_level"));
             chemical = new Chemical(id,name,quantity,quantity_unit,instructions,danger_level);
         }catch (SQLException e){
-            System.out.println(e.getMessage());
+            logger.info("Error while trying to get chemical information  from database");
+            logger.error(e.getMessage());
         }
         return chemical;
     }
@@ -114,7 +113,8 @@ public interface ChemicalRepository extends DataBaseRepository{
             stmt.executeUpdate();
             connection.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to save chemical entity to database");
+            logger.error(e.getMessage());
         }
     }
 
@@ -128,7 +128,8 @@ public interface ChemicalRepository extends DataBaseRepository{
             preparedStatement.executeUpdate();
             con.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to update chemical entity");
+            logger.error(e.getMessage());
         }
     }
 
@@ -140,7 +141,8 @@ public interface ChemicalRepository extends DataBaseRepository{
             stmt.setString(4, chemical.getInstructions());
             stmt.setDouble(5, chemical.getDangerLevel().doubleValue());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to execute chemical query");
+            logger.error(e.getMessage());
         }
     }
 

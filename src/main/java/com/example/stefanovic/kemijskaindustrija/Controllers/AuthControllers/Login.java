@@ -45,7 +45,6 @@ public final class Login extends Credentials implements AuthRepository {
         User korisnik = findUserByEmail(email, getUserList());
         Methods.resetErorrs(emailErrorLabel,passwordErrorLabel);
         try {
-//            AuthInput.checkIfUserIsBanned(email);
             if(AuthInput.checkLoginCredetials(getLoginCredentialMap(),email,pass)){
                 MDC.put("userId", String.valueOf(korisnik.getId()));
                 if(UserRepository.isAdmin()){

@@ -85,7 +85,8 @@ public class UsersScene implements UserRepository {
                     root.getChildren().setAll(parent);
 
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        logger.info("Exception occurred trying to view user profile");
+                        logger.error(e.getMessage());
                     }
 
                 }

@@ -88,7 +88,8 @@ public class EquipmentList implements EquipmentRepository {
             equipmentTableView.setItems(FXCollections.observableList(nameFiltered));
 
         }catch (NullPointerException e){
-            //
+            logger.info("Error trying to filter an equipment list");
+            logger.error(e.getMessage());
         }
 
 

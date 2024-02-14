@@ -179,7 +179,8 @@ public class SafetyProtocolView implements SafetyProtocolRepository {
                     }
                 });
             } catch (InputException e) {
-                //Add logger
+                logger.info("Error trying to update protocol name");
+                logger.error(e.getMessage());
             }
         }
     }

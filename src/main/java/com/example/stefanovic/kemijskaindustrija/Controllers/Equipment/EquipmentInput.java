@@ -130,7 +130,8 @@ public class EquipmentInput implements EquipmentRepository {
             confirmation(equipment1);
 
         }catch (IllegalArgumentException | IllegalStringLengthException | InputException e){
-//            ADD LOGGER
+            logger.info("Error while checking information for equipment");
+            logger.error(e.getMessage());
         }
 
 
@@ -145,7 +146,8 @@ public class EquipmentInput implements EquipmentRepository {
                     successMessage.setVisible(true);
                 } catch (Exception e) {
                     errorMessage.setVisible(true);
-                    throw new RuntimeException(e);
+                    logger.info("Error trying to save equipment to DB on frontend");
+                    logger.error(e.getMessage());
                 }
             }
         });
@@ -182,7 +184,8 @@ public class EquipmentInput implements EquipmentRepository {
             this.healthBar = equipment.getHealthBar();
             this.isInService = equipment.getInService();
         } catch (Exception e) {
-//            ADD LOGGER
+            logger.info("Error while trying to initialize equipment with ID: " + id);
+            logger.error(e.getMessage());
         }
     }
 

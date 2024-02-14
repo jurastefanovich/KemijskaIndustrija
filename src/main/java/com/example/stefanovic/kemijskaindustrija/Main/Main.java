@@ -27,15 +27,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Main extends Application {
-//    public static final String CHEMICALS_FILE = "dat/chemicals.txt";
-//    public static final String EQUIPMENT_FILE = "dat/equipment.txt";
-//    public static final String SERVICES_FILE = "dat/services.txt";
-//    public static final String SERIALIZE_CHEMICAL = "dat/chemical.dat";
-//    public static final String SERIALIZE_EQUIPMENT = "dat/equipment.dat";
-//    public static final String SERIALIZE_SERVICE = "dat/service.dat";
-//    public static final String SERIALIZE_SAFETY_PROTOCOL = "dat/safetyProtocol.dat";
-//    public static final String USERS_SERIAL_FILE = "dat/serializedUsers.dat";
-
     private static Stage mainStage;
     public static final String LOGIN_FILE = "dat/login.txt";
     public static final String SAFETY_PROTOCOL_FILE = "dat/safetyProtocols.txt";
@@ -46,7 +37,6 @@ public class Main extends Application {
 
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
-
     @Override
     public void start(Stage stage) throws IOException {
         mainStage = stage;
@@ -56,13 +46,6 @@ public class Main extends Application {
         stage.setTitle("Kemijska Industrija");
         stage.setScene(scene);
         stage.show();
-
-
-
-
-
-
-
     }
     public static void showScreen(String screenPath) throws IOException{
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource(screenPath)));
@@ -70,11 +53,11 @@ public class Main extends Application {
         getMainStage().setScene(scene);
         getMainStage().show();
 
-        var healthBarThread = new Timeline(new KeyFrame(Duration.seconds(15), e-> Platform.runLater(new EquipmentHealthbarThread())));
+        var healthBarThread = new Timeline(new KeyFrame(Duration.seconds(30), e-> Platform.runLater(new EquipmentHealthbarThread())));
         healthBarThread.setCycleCount(Timeline.INDEFINITE);
         healthBarThread.play();
 
-        var serviceThread = new Timeline(new KeyFrame(Duration.seconds(30), e-> Platform.runLater(new ServiceThread())));
+        var serviceThread = new Timeline(new KeyFrame(Duration.seconds(100), e-> Platform.runLater(new ServiceThread())));
         serviceThread.setCycleCount(Timeline.INDEFINITE);
         serviceThread.play();
 

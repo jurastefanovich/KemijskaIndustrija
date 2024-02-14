@@ -9,10 +9,13 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class NavBar {
+    Logger logger = LoggerFactory.getLogger(Main.class);
 
     @FXML
     private MenuItem AdminView;
@@ -42,7 +45,8 @@ public class NavBar {
                 try {
                     Main.showScreen("Login.fxml");
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    logger.info("Error trying to log out");
+                    logger.error(e.getMessage());
                 }
             }
         });

@@ -78,7 +78,7 @@ public class ChemicalScene implements ChemicalRepository {
                         root.getChildren().clear();
                         root.getChildren().setAll(parent);
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        logger.error("Error occurred while trying to open chemical " + e.getMessage());
                     }
 
                 }

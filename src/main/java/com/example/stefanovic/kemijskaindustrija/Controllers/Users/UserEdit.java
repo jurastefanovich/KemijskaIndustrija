@@ -162,7 +162,8 @@ public class UserEdit implements UserRepository, UserFunctionlities{
         }catch (UsernameTakenException e) {
             userNameErrorLabel.setText(e.getMessage());
         }catch (InputException | NullPointerException e) {
-            //Add logger
+            logger.info("Exception occurred in the user edit view");
+            logger.error(e.getMessage());
         }
 
     }

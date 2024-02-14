@@ -3,6 +3,8 @@ package com.example.stefanovic.kemijskaindustrija.DataBase;
 import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocol;
 import com.example.stefanovic.kemijskaindustrija.Model.SafetyProtocolStep;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,17 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 public interface SafetyProtocolRepository{
-
-
-    static SafetyProtocol getSafetyProtocolFromString(String line) {
-        String[] lines = line.split(" ");
-        String[] name = new String[lines.length-1];
-        for(int i = 1; i< lines.length;i++){
-            name[i-1] = lines[i];
-        }
-        String concatenatedString = String.join(" ", name);
-        return  new SafetyProtocol(Long.valueOf(lines[0]), concatenatedString);
-    }
+    Logger logger = LoggerFactory.getLogger(Main.class);
 
     static SafetyProtocolStep getSafetyProtocolStepFromString(String line) {
         String[] lines = line.split(" ");
@@ -38,13 +30,14 @@ public interface SafetyProtocolRepository{
         try (Connection connection = DBController.connectToDatabase()) {
             safetyProtocol = fetchSafetyProtocolWithSteps(connection, protocolId);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.info("Error while trying to fetch safety protocol with safety protocol steps");
+            logger.error(e.getMessage());
         }
 
         return safetyProtocol;
     }
 
-    private SafetyProtocol fetchSafetyProtocolWithSteps(Connection connection, long protocolId) throws SQLException {
+    private SafetyProtocol fetchSafetyProtocolWithSteps(Connection connection, long protocolId)  {
         SafetyProtocol safetyProtocol = null;
 
         String selectQuery = "SELECT * FROM safety_protocol p JOIN safety_protocol_step s ON p.id = s.safety_protocol_id WHERE p.id = ?";
@@ -67,6 +60,9 @@ public interface SafetyProtocolRepository{
                     safetyProtocol.addProtocolStep(step);
                 }
             }
+        } catch (SQLException e) {
+            logger.info("Error while trying to fetch safety protocol with safety protocol steps");
+            logger.error(e.getMessage());
         }
 
         return safetyProtocol;
@@ -86,7 +82,8 @@ public interface SafetyProtocolRepository{
             }
             connection.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to get all safety protocols from database");
+            logger.error(e.getMessage());
         }
 
         return safetyProtocols;
@@ -100,7 +97,8 @@ public interface SafetyProtocolRepository{
             safetyProtocol = new SafetyProtocol(id,name,safetyProtocolSteps);
 
         }catch (SQLException e){
-            //
+            logger.info("Error while trying to fetch safety protocol info from result set");
+            logger.error(e.getMessage());
         }
         return safetyProtocol;
     }
@@ -117,7 +115,8 @@ public interface SafetyProtocolRepository{
             }
             connection.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to fetch safety protocol with ID: " + id);
+            logger.error(e.getMessage());
         }
         return safetyProtocol;
     }
@@ -136,7 +135,8 @@ public interface SafetyProtocolRepository{
             }
             connection.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to fetch safety protocol steps where protocol ID is: "+ id);
+            logger.error(e.getMessage());
         }
 
         return safetyProtocolSteps;
@@ -150,8 +150,8 @@ public interface SafetyProtocolRepository{
             Boolean isCritical = resultSet.getBoolean("is_critical");
             return new SafetyProtocolStep(id,desc,isCritical);
         }catch (SQLException e){
-            e.printStackTrace();
-            //ADD LOGGER
+            logger.info("Error while trying to fetch safety protocol steps");
+            logger.error(e.getMessage());
         }
         return safetyProtocolStep;
     }
@@ -171,14 +171,15 @@ public interface SafetyProtocolRepository{
                     safetyProtocol.setId((long) safetyProtocolId);
                     saveSafetyProtocolSteps(connection, safetyProtocol);
                 } else {
-                    //ADD LOGGER failed to get generated keys for safety_protocols
+                    logger.error("Failed to generate keys for safety protocol");
                 }
             }
 
             connection.commit();
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to fetch safety protocol from database");
+            logger.error(e.getMessage());
         }
 
     }
@@ -195,13 +196,12 @@ public interface SafetyProtocolRepository{
             preparedStatement.executeUpdate();
             SerializationRepository.writeToTxtFile(Main.SAFETY_PROTOCOL_FILE, safetyProtocol);
         } catch (Exception e) {
-//            throw new RuntimeException(e);
-            //Add logger
-            System.err.println(e.getMessage());
+            logger.info("Error while trying to update safety protocol name");
+            logger.error(e.getMessage());
         }
     }
 
-    private void saveSafetyProtocolSteps(Connection connection, SafetyProtocol safetyProtocol) throws SQLException {
+    private void saveSafetyProtocolSteps(Connection connection, SafetyProtocol safetyProtocol)  {
         String insertStepQuery = "INSERT INTO safety_protocol_step (safety_protocol_id, description, is_critical) VALUES (?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertStepQuery)) {
             for (SafetyProtocolStep step : safetyProtocol.getSteps()) {
@@ -211,7 +211,9 @@ public interface SafetyProtocolRepository{
                 preparedStatement.addBatch();
             }
             preparedStatement.executeBatch();
-        }
+        } catch (SQLException e) {
+            logger.info("Error while trying to save safety protocol");
+            logger.error(e.getMessage());        }
     }
 
     default void addNewSafetyProtocolStep(String desc, boolean isCritical, Long safetyProtocolId){
@@ -224,17 +226,18 @@ public interface SafetyProtocolRepository{
             preparedStatement.setBoolean(3,isCritical);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
-            //ADD LOGGER
-            throw new RuntimeException(e);
+            logger.info("Error while trying to add new safety protocol steps");
+            logger.error(e.getMessage());
         }
 
     }
 
-    private static void exequteSafetyProtocolQuerry(PreparedStatement stmt, SafetyProtocol safetyProtocol) throws RuntimeException{
+    private static void exequteSafetyProtocolQuerry(PreparedStatement stmt, SafetyProtocol safetyProtocol){
         try {
             stmt.setString(1, safetyProtocol.getName());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to execute safety protocol query");
+            logger.error(e.getMessage());
         }
 
     }
@@ -246,7 +249,8 @@ public interface SafetyProtocolRepository{
             deleteSafetyProtocol(connection, protocolId);
             connection.commit();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.info("Error while trying to remove safety protocol with ID: " + protocolId);
+            logger.error(e.getMessage());
         }
     }
 
@@ -263,8 +267,8 @@ public interface SafetyProtocolRepository{
             preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            //ADD LOGGER
+            logger.info("Error while trying to remove single safety protocol step with ID: " + protocolId);
+            logger.error(e.getMessage());
         }
 
     }
@@ -275,19 +279,24 @@ public interface SafetyProtocolRepository{
      * @param protocolId
      * @throws SQLException
      */
-    private void deleteSafetyProtocolSteps(Connection connection, long protocolId) throws SQLException {
+    private void deleteSafetyProtocolSteps(Connection connection, long protocolId)  {
         String deleteStepsQuery = "DELETE FROM safety_protocol_step WHERE safety_protocol_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(deleteStepsQuery)) {
             preparedStatement.setLong(1, protocolId);
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            logger.info("Error while trying to remove safety protocol steps from safety protocol with ID: " + protocolId);
+            logger.error(e.getMessage());
         }
     }
 
-    private void deleteSafetyProtocol(Connection connection, long protocolId) throws SQLException {
-        String deleteProtocolQuery = "DELETE FROM safety_protocol WHERE id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(deleteProtocolQuery)) {
+    private void deleteSafetyProtocol(Connection connection, long protocolId)  {
+        try (PreparedStatement preparedStatement = connection.prepareStatement( "DELETE FROM safety_protocol WHERE id = ?")) {
             preparedStatement.setLong(1, protocolId);
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            logger.info("Error while trying to remove safety protocol with ID: " + protocolId);
+            logger.error(e.getMessage());
         }
     }
 
@@ -307,7 +316,8 @@ public interface SafetyProtocolRepository{
             SerializationRepository.writeToTxtFile(Main.SAFETY_PROTOCOL_STEP_FILE, new SafetyProtocolStep(id, description, isCritical));
 
         }catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.info("Error while trying to update safety protocol step with ID: " + id);
+            logger.error(e.getMessage());
         }
     }
 

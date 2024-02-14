@@ -88,6 +88,7 @@ public class ChemicalView implements ChemicalRepository, UserRepository {
     }
 
     public void initialize(long chemical_id){
+        boolean is_admin = UserRepository.isAdmin();
         chemical = getChemicalById(chemical_id);
         chemicalIdLabel.setText(String.valueOf(chemical.getId()));
         chemicalInstructionsLabel.setText(chemical.getInstructions());
@@ -95,8 +96,8 @@ public class ChemicalView implements ChemicalRepository, UserRepository {
         chemicalQuantityUnitLabel.setText(chemical.getQuantityUnit());
         chemicalNameLabel.setText(chemical.getName());
         exequteBarChart(chemical);
-//        deleteButton.setVisible(UserRepository.isAdmin());
-//        editButton.setVisible(UserRepository.isAdmin());
+//        deleteButton.setVisible(is_admin);
+//        editButton.setVisible(is_admin);
     }
 
     private void exequteBarChart(Chemical chemical){

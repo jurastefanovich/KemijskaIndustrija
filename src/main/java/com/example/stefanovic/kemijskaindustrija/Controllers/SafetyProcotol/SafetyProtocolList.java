@@ -11,11 +11,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
 
 public class SafetyProtocolList implements SafetyProtocolRepository {
+    Logger logger = LoggerFactory.getLogger(Main.class);
+
     @FXML
     public AnchorPane root;
     @FXML
@@ -52,7 +56,8 @@ public class SafetyProtocolList implements SafetyProtocolRepository {
                         root.getChildren().clear();
                         root.getChildren().setAll(parent);
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        logger.info("Error trying to show details of protocol");
+                        logger.error(e.getMessage());
                     }
 
                 }

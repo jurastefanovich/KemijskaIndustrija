@@ -5,7 +5,7 @@ import com.example.stefanovic.kemijskaindustrija.DataBase.UserRepository;
 public interface UserFunctionlities {
 
     /**
-     * Method checks if the logged in user is viewing their own profile
+     * Method checks if the logged-in user is viewing their own profile
      * @param viewedUserId id of the user profile being viewed
      * @return boolean
      */

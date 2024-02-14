@@ -6,11 +6,14 @@ import com.example.stefanovic.kemijskaindustrija.Exception.ChemicalInputFormatEx
 import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Exception.SaveToDataBaseException;
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Chemical;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -18,6 +21,7 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public class ChemicalInput implements ChemicalRepository {
+    Logger logger = LoggerFactory.getLogger(Main.class);
 
     @FXML
     public AnchorPane chemicalErrorFeedback;
@@ -106,7 +110,7 @@ public class ChemicalInput implements ChemicalRepository {
             nameErrorLabel.setText(e.getMessage());
             chemicalNameTextField.setStyle("-fx-border-color: red;");
         } catch (IllegalStringLengthException | InputException e) {
-            //ADD LOGGER
+            logger.error("Error occurred while inputting a new chemical " + e.getMessage());
         }
 
     }
@@ -133,7 +137,6 @@ public class ChemicalInput implements ChemicalRepository {
         Methods.checkTextField(quantityUnitTextField, quantityUnitErrorLabel);
         Methods.checkComboBox(dangerLevelComboBox, dangerLevelErrorLabel);
         Methods.checkStringLength(chemicalNameTextField, nameErrorLabel);
-
     }
 
 

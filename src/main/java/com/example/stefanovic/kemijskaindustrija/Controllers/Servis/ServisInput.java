@@ -7,6 +7,7 @@ import com.example.stefanovic.kemijskaindustrija.DataBase.ServisRepository;
 import com.example.stefanovic.kemijskaindustrija.Exception.IllegalStringLengthException;
 import com.example.stefanovic.kemijskaindustrija.Exception.InputException;
 import com.example.stefanovic.kemijskaindustrija.Exception.ServiceBookedForDateException;
+import com.example.stefanovic.kemijskaindustrija.Main.Main;
 import com.example.stefanovic.kemijskaindustrija.Model.Equipment;
 import com.example.stefanovic.kemijskaindustrija.Model.Service;
 import javafx.collections.FXCollections;
@@ -14,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.StringConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -23,6 +26,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ServisInput implements EquipmentRepository, ServisRepository {
+    Logger logger = LoggerFactory.getLogger(Main.class);
 
     @FXML
     public AnchorPane feedbackErrorMessage;
@@ -75,21 +79,23 @@ public class ServisInput implements EquipmentRepository, ServisRepository {
                    }
                }catch (DateTimeParseException e){
                    serviceDateError.setText("Date needs to be in format DD/MM/YYYY");
+                    logger.info("Wrong date parsing in service input");
+                    logger.error(e.getMessage());
                }
                 return null;
             }
 
             @Override
             public LocalDate fromString(String s) {
-
                 try{
-                       if (s != null && !s.isEmpty()) {
-                           return LocalDate.parse(s, customDateFormat);
-                       }
+                   if (s != null && !s.isEmpty()) {
+                       return LocalDate.parse(s, customDateFormat);
+                   }
                    }catch (DateTimeParseException e){
                        serviceDateError.setText("Date needs to be in format DD/MM/YYYY");
+                        logger.info("Wrong date parsing in service input");
+                        logger.error(e.getMessage());
                    }
-
                 return null;
             }
         });
@@ -125,19 +131,16 @@ public class ServisInput implements EquipmentRepository, ServisRepository {
                 try {
                     saveService(service);
                     feedbackSuccessMessage.setVisible(true);
-                } catch (Exception e) {
-                    if (e instanceof ServiceBookedForDateException){
+                } catch (ServiceBookedForDateException e) {
                         serviceDateError.setText(e.getMessage());
                         serviceDateInput.setStyle("-fx-border-color: red;");
-                    }else{
-                        feedbackErrorMessage.setVisible(true);
-                        throw new RuntimeException(e);
-                    }
                 }
             }
         });
         } catch (Exception e) {
-            e.getMessage();
+            feedbackErrorMessage.setVisible(true);
+            logger.info("Error trying to save to database");
+            logger.error(e.getMessage());
         }
     }
 
@@ -158,7 +161,8 @@ public class ServisInput implements EquipmentRepository, ServisRepository {
             Methods.checkComboBox(serviceEquipmentInput, serviceEquipmentError);
             Methods.checkStringLength(serviceTitlenput, serviceTitleError);
         } catch (InputException | IllegalStringLengthException e) {
-            //ADD LOGGER
+            logger.info("Wrong input format in service input");
+            logger.error(e.getMessage());
         }
 
     }

@@ -51,12 +51,12 @@ public class DBController implements UserRepository, Hashing{
                     bf.write(user.getAccount().email() + '\n');
                     String password = Hashing.hashPassword(user.getAccount().password());
                     bf.write(password+ '\n');
-                } catch (IOException | NoSuchAlgorithmException e) {
-                    throw new RuntimeException(e);
+                } catch (IOException | NoSuchAlgorithmException | NullPointerException e) {
+                    logger.error("An error occurred while trying to get account information " + e.getMessage());
                 }
             });
         }catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("An error occurred while trying to rewrite all accounts to file " + e.getMessage());
         }
     }
 

@@ -90,7 +90,7 @@ public class SafetyProtocolInput implements SafetyProtocolRepository {
                 }
             });
         } catch (InputException | IllegalStringLengthException e) {
-            //ADD LOGGER -> couldn't save empty protocol steps
+            logger.error("Couldn't save empty protocol steps");
         }
     }
     private void resetErrors(){
