@@ -63,11 +63,15 @@ public interface SerializationRepository {
     }
 
     static <T> void prepareObjectForSerialization(T object){
-        SerializeFiles serializeFiles = new SerializeFiles();
-        Map<LocalDateTime, T> map = new HashMap<>();
-        map.put(LocalDateTime.now(), object);
-        ToSerializable toSerializable = new ToSerializable<>(map, UserRepository.getLoggedInUser().getAccount().email(), object.getClass().getSimpleName());
-        serializeFiles.serialize(toSerializable);
+       try{
+           SerializeFiles serializeFiles = new SerializeFiles();
+           Map<LocalDateTime, T> map = new HashMap<>();
+           map.put(LocalDateTime.now(), object);
+           ToSerializable toSerializable = new ToSerializable<>(map, UserRepository.getLoggedInUser().getAccount().email(), object.getClass().getSimpleName());
+           serializeFiles.serialize(toSerializable);
+       }catch (Exception e){
+           Main.logger.error("Error trying to serialize");
+       }
     }
 
     static void prepareSafetyProtocolStep(){

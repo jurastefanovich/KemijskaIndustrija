@@ -15,10 +15,12 @@ public class SerializeFiles implements Runnable, SerializationRepository {
 
     }
 
-    public static synchronized void serialize(ToSerializable serializableList){
-        DeserializeFiles deserializeFiles = new DeserializeFiles();
-        toSerializableList = deserializeFiles.deserialize();
-        toSerializableList.add(serializableList);
-        SerializationRepository.serializeToFile(toSerializableList, Main.SERIALIZED_CHANGES);
+    public static  void serialize(ToSerializable serializableList){
+        synchronized(toSerializableList){
+            DeserializeFiles deserializeFiles = new DeserializeFiles();
+            toSerializableList = deserializeFiles.deserialize();
+            toSerializableList.add(serializableList);
+            SerializationRepository.serializeToFile(toSerializableList, Main.SERIALIZED_CHANGES);
+        }
     }
 }

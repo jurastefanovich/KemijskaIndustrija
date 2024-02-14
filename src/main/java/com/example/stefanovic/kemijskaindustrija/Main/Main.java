@@ -25,6 +25,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class Main extends Application {
     private static Stage mainStage;
@@ -53,15 +55,13 @@ public class Main extends Application {
         getMainStage().setScene(scene);
         getMainStage().show();
 
-        var healthBarThread = new Timeline(new KeyFrame(Duration.seconds(30), e-> Platform.runLater(new EquipmentHealthbarThread())));
+        var healthBarThread = new Timeline(new KeyFrame(Duration.minutes(1), e-> Platform.runLater(new EquipmentHealthbarThread())));
         healthBarThread.setCycleCount(Timeline.INDEFINITE);
         healthBarThread.play();
 
-        var serviceThread = new Timeline(new KeyFrame(Duration.seconds(100), e-> Platform.runLater(new ServiceThread())));
+        var serviceThread = new Timeline(new KeyFrame(Duration.minutes(3), e-> Platform.runLater(new ServiceThread())));
         serviceThread.setCycleCount(Timeline.INDEFINITE);
         serviceThread.play();
-
-
     }
 
 

@@ -47,18 +47,18 @@ public final class Login extends Credentials implements AuthRepository {
         try {
             if(AuthInput.checkLoginCredetials(getLoginCredentialMap(),email,pass)){
                 MDC.put("userId", String.valueOf(korisnik.getId()));
-                if(UserRepository.isAdmin()){
-                    navBar.showHomeScreen();
-                }else{
-                    navBar.showHomeScreen();
-                }
+                navBar.showHomeScreen();
             }
-        } catch (PasswordException | AccountException e) {
+        } catch (Exception e) {
             if(e instanceof PasswordException) {
                 passwordErrorLabel.setText(((PasswordException) e).getMessage());
             }
-            else {
+            if(e instanceof AccountException) {
                 emailErrorLabel.setText(e.getMessage());
+            }
+            else{
+                passwordErrorLabel.setText("Please make sure your account exists before trying to log in");
+                Main.logger.error("Error trying to log in " + e.getMessage());
             }
         }
     }
